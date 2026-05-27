@@ -272,8 +272,9 @@ section {
 }
 
 .card-icon img {
-    width: 320px;
-    /* Adjusted fixed sprite size */
+    width: 360px;
+    /* Precise 3x container width for sprite alignment */
+    height: auto;
 }
 
 /* --- Method (Bubbles) --- */
