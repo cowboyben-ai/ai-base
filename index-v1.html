@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI素養養成課程 - 讓 AI 成為孩子的創作夥伴</title>
+    <meta name="description" content="專為小學生打造的 AI 素養課程，透過 Artifact 創作與 LobeHub 互動教學，培養孩子表達、創作與判斷的能力。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Outfit:wght@400;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-light: #818cf8;
+            --secondary: #ec4899;
+            --accent: #f59e0b;
+            --bg: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --gradient: linear-gradient(135deg, #6366f1 0%, #ec4899 100%);
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', 'Outfit', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 900;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* --- Header --- */
+        header {
+            padding: 1.5rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .cta-button {
+            background: var(--gradient);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.4);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            padding: 10rem 0 6rem;
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            min-height: 90vh;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero-image {
+            flex: 1;
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 2rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border);
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-dim);
+            margin-bottom: 2.5rem;
+            max-width: 500px;
+        }
+
+        /* --- Insight Section --- */
+        .insight {
+            padding: 8rem 0;
+            background: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.05) 0%, transparent 70%);
+        }
+
+        .insight-card {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 2rem;
+            padding: 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .insight-card::before {
+            content: "“";
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            font-size: 8rem;
+            font-family: serif;
+            color: var(--primary);
+            opacity: 0.2;
+        }
+
+        .insight h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .insight blockquote {
+            font-size: 1.5rem;
+            font-style: italic;
+            margin-bottom: 2rem;
+            color: #fff;
+        }
+
+        .insight-source {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+        }
+
+        /* --- Abilities Section --- */
+        .sections {
+            padding: 8rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .ability-card {
+            padding: 3rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .ability-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+        }
+
+        .ability-card img {
+            width: 120px;
+            margin-bottom: 2rem;
+        }
+
+        .ability-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* --- Teaching Section --- */
+        .teaching {
+            padding: 8rem 0;
+            display: flex;
+            align-items: center;
+            gap: 6rem;
+        }
+
+        .teaching-content {
+            flex: 1;
+        }
+
+        .teaching-visual {
+            flex: 1.2;
+            background: var(--glass);
+            border-radius: 2rem;
+            border: 1px solid var(--border);
+            padding: 2rem;
+            position: relative;
+        }
+
+        .step-list {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 1rem;
+            border-left: 4px solid var(--primary);
+        }
+
+        .step-num {
+            font-weight: 900;
+            font-size: 1.25rem;
+            color: var(--primary);
+        }
+
+        /* --- Programs Section --- */
+        .programs {
+            padding: 8rem 0;
+        }
+
+        .split-programs {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .program-card {
+            flex: 1;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, transparent 100%);
+            border: 1px solid var(--border);
+            border-radius: 2.5rem;
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .program-card.featured {
+            border: 2px solid var(--secondary);
+            box-shadow: 0 0 40px rgba(236, 72, 153, 0.1);
+            position: relative;
+        }
+
+        .badge {
+            position: absolute;
+            top: -1rem;
+            right: 2rem;
+            background: var(--secondary);
+            padding: 0.5rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 800;
+            font-size: 0.8rem;
+        }
+
+        .program-card h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .program-card ul {
+            list-style: none;
+            margin-bottom: 3rem;
+        }
+
+        .program-card li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--text-dim);
+        }
+
+        .program-card li::before {
+            content: "✓";
+            color: var(--primary-light);
+            font-weight: 900;
+        }
+
+        /* --- Footer --- */
+        footer {
+            padding: 6rem 0 3rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        .final-cta {
+            margin-bottom: 4rem;
+        }
+
+        .final-cta h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .copyright {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        /* --- Animations --- */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            animation: fadeIn 1s ease forwards;
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 1024px) {
+
+            .hero,
+            .teaching,
+            .split-programs {
+                flex-direction: column;
+            }
+
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">AI Lite-Academy</div>
+                <a href="#booking" class="cta-button">立即預約體驗課</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero -->
+        <section class="hero container animate">
+            <div class="hero-content">
+                <h1>讓 AI 成為孩子的<br>創作夥伴</h1>
+                <p>不是讓 AI 代替孩子思考，而是讓孩子學會用 AI 表達想法、完成創作，並做出自己的判斷。</p>
+                <div style="display: flex; gap: 1rem;">
+                    <a href="#programs" class="cta-button" style="background: white; color: var(--bg);">探索課程</a>
+                    <a href="#trial" class="cta-button">1 小時體驗課</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="file:///Users/ai_manager/.gemini/antigravity/brain/52611ac4-2729-4263-b995-e173cf033f78/hero_classroom_ai_png_1779868149224.png"
+                    alt="孩子與 AI 協作">
+            </div>
+        </section>
+
+        <!-- Insight -->
+        <section class="insight container animate" style="animation-delay: 0.2s">
+            <div class="insight-card">
+                <h2>面對 AI 浪潮，我們需要真正的教育變革</h2>
+                <blockquote>「哪些職位會被 AI 取代？哪些職位會被『會用 AI 的人』取代？這不是教學改革，是就業生存問題。」</blockquote>
+                <div class="insight-source">— 蔣濛 (Mung Chiang), 普渡大學校長, 2025年11月</div>
+            </div>
+        </section>
+
+        <!-- Abilities -->
+        <section class="sections container animate" style="animation-delay: 0.4s">
+            <div class="section-header">
+                <h2>培養孩子的三個核心能力</h2>
+                <p>從創作開始，培養孩子真正能帶著走的 AI 素養</p>
+            </div>
+            <div class="grid-3">
+                <div class="ability-card">
+                    <img src="file:///Users/ai_manager/.gemini/antigravity/brain/52611ac4-2729-4263-b995-e173cf033f78/creative_cycle_icons_png_1779868258496.png"
+                        style="object-fit: none; object-position: -20px -20px; width: 100px; height: 100px;" alt="表達想法">
+                    <h3>用 AI 表達想法</h3>
+                    <p>把腦中的點子說清楚，轉化成文字、圖像或故事。</p>
+                </div>
+                <div class="ability-card">
+                    <img src="file:///Users/ai_manager/.gemini/antigravity/brain/52611ac4-2729-4263-b995-e173cf033f78/creative_cycle_icons_png_1779868258496.png"
+                        style="object-fit: none; object-position: -180px -20px; width: 100px; height: 100px;"
+                        alt="完成創作">
+                    <h3>用 AI 完成創作</h3>
+                    <p>透過 AI 輔助發想、整理、修改，讓想法成真。</p>
+                </div>
+                <div class="ability-card">
+                    <img src="file:///Users/ai_manager/.gemini/antigravity/brain/52611ac4-2729-4263-b995-e173cf033f78/creative_cycle_icons_png_1779868258496.png"
+                        style="object-fit: none; object-position: -340px -20px; width: 100px; height: 100px;"
+                        alt="檢查判斷">
+                    <h3>用 AI 檢查與判斷</h3>
+                    <p>學會檢查錯誤、比較結果，保有獨立思考主權。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Teaching Method -->
+        <section class="teaching container animate" style="animation-delay: 0.6s">
+            <div class="teaching-visual">
+                <img src="file:///Users/ai_manager/.gemini/antigravity/brain/52611ac4-2729-4263-b995-e173cf033f78/cute_monster_pet_png_1779868233274.png"
+                    alt="AI 創作的作品" style="width: 100%; border-radius: 1.5rem;">
+            </div>
+            <div class="teaching-content">
+                <h2>我們怎麼教：用 Artifact 創作</h2>
+                <p>不先背語法，而是從「我想做什麼」開始。我們利用 LobeHub 互動教學，帶領孩子經歷完整的六步創作循環：</p>
+                <div class="step-list">
+                    <div class="step-item"><span class="step-num">01</span> 提問：把想法整理成清楚的問題</div>
+                    <div class="step-item"><span class="step-num">02</span> 生成：使用 AI 協作激發創意</div>
+                    <div class="step-item"><span class="step-num">03</span> 檢查：判斷回應是否符合目標</div>
+                    <div class="step-item"><span class="step-num">04</span> 修改：根據自我意識調整內容</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Programs -->
+        <section id="programs" class="programs container animate">
+            <div class="section-header">
+                <h2>課程方案</h2>
+                <p>陪伴孩子踏出 AI 創作的第一步</p>
+            </div>
+            <div class="split-programs">
+                <!-- Program 1 -->
+                <div id="trial" class="program-card featured">
+                    <div class="badge">最受歡迎</div>
+                    <div>
+                        <h3>1 小時體驗課</h3>
+                        <p style="margin-bottom: 2rem;">一起創建一隻怪獸寵物！</p>
+                        <ul>
+                            <li>發想獨家怪獸設定</li>
+                            <li>AI 輔助創意描述練習</li>
+                            <li>完成專屬怪獸作品</li>
+                            <li>初步理解 AI 提示語</li>
+                        </ul>
+                    </div>
+                    <a href="#" class="cta-button" style="text-align: center;">立即報名體驗</a>
+                </div>
+                <!-- Program 2 -->
+                <div class="program-card">
+                    <div>
+                        <h3>週末假日班 (16堂)</h3>
+                        <p style="margin-bottom: 2rem;">孩子玩不夠嗎？深入 AI 旅程</p>
+                        <ul>
+                            <li>16 堂系統化創作任務</li>
+                            <li>角色、故事與世界觀建構</li>
+                            <li>圖像與文字整合實戰</li>
+                            <li>發表與表達自信訓練</li>
+                            <li>AI 使用觀念與反思</li>
+                        </ul>
+                    </div>
+                    <a href="#" class="cta-button"
+                        style="background: transparent; border: 1px solid var(--primary); text-align: center;">了解更多</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="booking" class="container">
+        <div class="final-cta">
+            <h2>準備好讓孩子驚艷世界了嗎？</h2>
+            <p style="color: var(--text-dim); margin-bottom: 3rem;">讓孩子在小班陪伴中，完成自己的第一段 AI 創作旅程。</p>
+            <a href="#" class="cta-button" style="font-size: 1.5rem; padding: 1.5rem 3rem;">立即預約面試/體驗課</a>
+        </div>
+        <div class="copyright">
+            &copy; 2026 AI Lite-Academy. All rights reserved.
+        </div>
+    </footer>
+
+</body>
+
+</html>
