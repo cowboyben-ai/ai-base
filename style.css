@@ -370,6 +370,58 @@ section {
     color: var(--text-dim);
 }
 
+/* --- Artifact Link Cards --- */
+.artifact-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+}
+
+.artifact-link-card {
+    background: var(--surface);
+    padding: 2rem;
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 800;
+    text-align: center;
+    box-shadow: var(--shadow-soft);
+    border: 3px solid transparent;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.artifact-link-card:hover {
+    transform: translateY(-10px) scale(1.05);
+    border-color: var(--primary);
+    box-shadow: 0 15px 30px rgba(66, 191, 245, 0.2);
+}
+
+.artifact-link-card::before {
+    content: "🎮";
+    font-size: 2.5rem;
+}
+
+.artifact-link-card.joke::before {
+    content: "🤖";
+}
+
+.artifact-link-card.calc::before {
+    content: "🧮";
+}
+
+.artifact-link-card.game::before {
+    content: "🕹️";
+}
+
+.artifact-link-card.island::before {
+    content: "🏝️";
+}
+
 /* --- Tools (LobeHub) --- */
 .tools {
     background: var(--primary);
