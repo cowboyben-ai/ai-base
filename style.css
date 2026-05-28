@@ -497,6 +497,11 @@ footer h2 {
     font-size: 3rem;
 }
 
+footer p {
+    margin: 2rem 0;
+    color: rgba(255, 255, 255, 0.7);
+}
+
 .copyright {
     margin-top: 4rem;
     opacity: 0.5;
