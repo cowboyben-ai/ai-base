@@ -1,47 +1,53 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
+
 <head>
-<!-- skill:chrome -->
-<style>
-/* Credit line — bottom-right */
-.design-ui-credit {
-  position: fixed;
-  bottom: 12px;
-  right: 12px;
-  font: 11px/1 system-ui, sans-serif;
-  color: rgba(128,128,128,0.5);
-  pointer-events: none;
-  z-index: 2147483647;
-  transition: opacity 0.4s ease;
-  user-select: none;
-  letter-spacing: 0.02em;
-}
+  <!-- skill:chrome -->
+  <style>
+    /* Credit line — bottom-right */
+    .design-ui-credit {
+      position: fixed;
+      bottom: 12px;
+      right: 12px;
+      font: 11px/1 system-ui, sans-serif;
+      color: rgba(128, 128, 128, 0.5);
+      pointer-events: none;
+      z-index: 2147483647;
+      transition: opacity 0.4s ease;
+      user-select: none;
+      letter-spacing: 0.02em;
+    }
 
-/* Hide chrome on touch devices */
-@media (hover: none) {
-  .design-ui-credit { display: none; }
-}
+    /* Hide chrome on touch devices */
+    @media (hover: none) {
+      .design-ui-credit {
+        display: none;
+      }
+    }
 
-/* Print fixes */
-@media print {
-  * {
-    transition: none !important;
-    animation: none !important;
-    box-shadow: none !important;
-  }
-  body {
-    print-color-adjust: exact;
-    -webkit-print-color-adjust: exact;
-  }
-  .design-ui-credit { display: none !important; }
-}
+    /* Print fixes */
+    @media print {
+      * {
+        transition: none !important;
+        animation: none !important;
+        box-shadow: none !important;
+      }
 
-</style>
-<script>
-(function () {
-    // Chrome UI (hover devices only): credit badge with idle-fade.
-    // Deferred until body exists since the script may run in <head>.
-    function initChromeUI() {
+      body {
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+
+      .design-ui-credit {
+        display: none !important;
+      }
+    }
+  </style>
+  <script>
+    (function () {
+      // Chrome UI (hover devices only): credit badge with idle-fade.
+      // Deferred until body exists since the script may run in <head>.
+      function initChromeUI() {
         if (!matchMedia('(hover: hover)').matches) return;
 
         var credit = document.createElement('div');
@@ -54,736 +60,2005 @@
         var fade = function (out) { credit.style.opacity = out ? '0' : ''; };
         fade(true);
         var show = function () {
-            fade(false);
-            clearTimeout(timer);
-            timer = setTimeout(function () { fade(true); }, 3000);
+          fade(false);
+          clearTimeout(timer);
+          timer = setTimeout(function () { fade(true); }, 3000);
         };
         document.addEventListener('mousemove', show);
         show();
-    }
-    if (document.readyState === 'loading') {
+      }
+      if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initChromeUI);
-    } else {
+      } else {
         initChromeUI();
+      }
+    })();
+
+  </script>
+  <!-- /skill:chrome -->
+  <!-- skill:libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js"
+    integrity="sha384-XcdcwHqIPULERb2yDEM4R0XaQKU3YnDsrTmjACBZyfdVVqjh6xQ4/DCMd7XLcA6Y"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.383.0/dist/umd/lucide.min.js"
+    integrity="sha384-wHFvAtjmgnkA2PJcMsDaCgdipf7X7YV44X/igbLHpvGiq6T5/PvFKl93grpvtbQT"
+    crossorigin="anonymous"></script>
+  <script>document.addEventListener("DOMContentLoaded", () => lucide.createIcons())</script>
+  <!-- /skill:libraries -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>身心靈療癒事業 · 營運報表管理系統 FY2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: oklch(97.5% 0.008 60);
+      --surface: oklch(99.4% 0.005 60);
+      --surface-2: oklch(95.4% 0.011 58);
+      --ink: oklch(27% 0.028 350);
+      --ink-soft: oklch(44% 0.022 350);
+      --muted: oklch(57% 0.016 352);
+      --line: oklch(89% 0.013 52);
+      --line-soft: oklch(92.5% 0.010 55);
+      --primary: oklch(40% 0.105 358);
+      --primary-2: oklch(52% 0.105 6);
+      --accent: oklch(63% 0.132 47);
+      --gold: oklch(71% 0.098 76);
+      --positive: oklch(55% 0.098 158);
+      --warning: oklch(67% 0.118 66);
+      --info: oklch(53% 0.072 242);
+
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --space-12: 48px;
+      --space-16: 64px;
+      --r: 4px;
+      --r-lg: 8px;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --shadow-sm: 0 1px 2px oklch(30% 0.03 350 / 0.05), 0 2px 8px oklch(30% 0.03 350 / 0.04);
+      --shadow-md: 0 4px 24px oklch(30% 0.04 350 / 0.08);
     }
-})();
 
-</script>
-<!-- /skill:chrome -->
-<!-- skill:libraries -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js" integrity="sha384-XcdcwHqIPULERb2yDEM4R0XaQKU3YnDsrTmjACBZyfdVVqjh6xQ4/DCMd7XLcA6Y" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/lucide@0.383.0/dist/umd/lucide.min.js" integrity="sha384-wHFvAtjmgnkA2PJcMsDaCgdipf7X7YV44X/igbLHpvGiq6T5/PvFKl93grpvtbQT" crossorigin="anonymous"></script>
-<script>document.addEventListener("DOMContentLoaded",()=>lucide.createIcons())</script>
-<!-- /skill:libraries -->
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>身心靈療癒事業 · 營運報表管理系統 FY2026</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
-<style>
-:root{
-  --bg: oklch(97.5% 0.008 60);
-  --surface: oklch(99.4% 0.005 60);
-  --surface-2: oklch(95.4% 0.011 58);
-  --ink: oklch(27% 0.028 350);
-  --ink-soft: oklch(44% 0.022 350);
-  --muted: oklch(57% 0.016 352);
-  --line: oklch(89% 0.013 52);
-  --line-soft: oklch(92.5% 0.010 55);
-  --primary: oklch(40% 0.105 358);
-  --primary-2: oklch(52% 0.105 6);
-  --accent: oklch(63% 0.132 47);
-  --gold: oklch(71% 0.098 76);
-  --positive: oklch(55% 0.098 158);
-  --warning: oklch(67% 0.118 66);
-  --info: oklch(53% 0.072 242);
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
 
-  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
-  --space-6: 24px; --space-8: 32px; --space-12: 48px; --space-16: 64px;
-  --r: 4px; --r-lg: 8px;
-  --ease: cubic-bezier(0.22,1,0.36,1);
-  --shadow-sm: 0 1px 2px oklch(30% 0.03 350 / 0.05), 0 2px 8px oklch(30% 0.03 350 / 0.04);
-  --shadow-md: 0 4px 24px oklch(30% 0.04 350 / 0.08);
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-body{
-  font-family:"Noto Sans TC",system-ui,sans-serif;
-  background:var(--bg); color:var(--ink);
-  font-weight:400; line-height:1.6;
-  font-feature-settings:"tnum" 0;
-}
-.wrap{max-width:1240px; margin:0 auto; padding:0 var(--space-6)}
-h1,h2,h3,h4{font-family:"Noto Serif TC",serif; font-weight:600; line-height:1.25; text-wrap:balance; letter-spacing:.01em}
-.num{font-variant-numeric:tabular-nums; font-feature-settings:"tnum"}
-.eyebrow{
-  font-size:.7rem; letter-spacing:.16em; text-transform:uppercase;
-  color:var(--accent); font-weight:700;
-}
-.sec-no{font-family:"Noto Serif TC",serif; color:var(--accent); font-weight:500}
+    html {
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility
+    }
 
-/* ---------- Masthead ---------- */
-.masthead{
-  border-bottom:1.5px solid var(--ink);
-  padding:var(--space-12) 0 var(--space-6);
-  margin-bottom:var(--space-8);
-}
-.mast-top{display:flex; justify-content:space-between; align-items:flex-start; gap:var(--space-6); flex-wrap:wrap}
-.mast-brand{display:flex; align-items:center; gap:var(--space-3); color:var(--muted); font-size:.78rem; letter-spacing:.1em; text-transform:uppercase; font-weight:500}
-.seal{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--accent);display:grid;place-items:center;color:var(--accent)}
-.mast-meta{text-align:right; font-size:.78rem; color:var(--muted); line-height:1.5}
-.mast-meta b{color:var(--ink-soft); font-weight:600}
-.masthead h1{font-size:clamp(2rem,4.4vw,3.1rem); margin:var(--space-6) 0 var(--space-3); color:var(--ink); font-weight:700}
-.masthead .role{font-size:1.05rem; color:var(--primary); font-weight:500; font-family:"Noto Serif TC",serif}
-.mast-line{display:flex; gap:var(--space-6); flex-wrap:wrap; margin-top:var(--space-4); padding-top:var(--space-4); border-top:1px solid var(--line); color:var(--ink-soft); font-size:.86rem}
-.mast-line span{display:flex; align-items:center; gap:6px}
-.mast-line i{width:15px;height:15px;color:var(--accent)}
+    body {
+      font-family: "Noto Sans TC", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      font-weight: 400;
+      line-height: 1.6;
+      font-feature-settings: "tnum" 0;
+    }
 
-/* ---------- Blueprint band ---------- */
-.blueprint{display:grid; grid-template-columns:1.15fr 1fr; gap:var(--space-8); margin-bottom:var(--space-16)}
-.brands{display:flex; flex-direction:column; gap:var(--space-4)}
-.brand-row{
-  border:1px solid var(--line); border-radius:var(--r-lg); padding:var(--space-6);
-  background:var(--surface); display:grid; grid-template-columns:auto 1fr; gap:var(--space-4) var(--space-6);
-  align-items:center; transition:border-color .3s var(--ease), box-shadow .3s var(--ease);
-}
-.brand-row:hover{border-color:var(--accent); box-shadow:var(--shadow-sm)}
-.brand-mark{width:48px;height:48px;border-radius:var(--r);display:grid;place-items:center;font-family:"Noto Serif TC";font-size:1.5rem;font-weight:700;color:var(--surface)}
-.brand-mark.a{background:var(--primary)}
-.brand-mark.b{background:var(--accent)}
-.brand-name{font-family:"Noto Serif TC"; font-size:1.2rem; font-weight:600; color:var(--ink)}
-.brand-tag{font-size:.78rem; color:var(--muted)}
-.brand-stats{grid-column:1/-1; display:grid; grid-template-columns:repeat(3,1fr); gap:var(--space-4); padding-top:var(--space-4); border-top:1px dashed var(--line)}
-.bstat .v{font-family:"Noto Serif TC"; font-size:1.35rem; font-weight:600; color:var(--ink)}
-.bstat .l{font-size:.72rem; color:var(--muted); letter-spacing:.04em}
-.bstat .v small{font-size:.7rem; color:var(--muted); font-weight:400}
+    .wrap {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 var(--space-6)
+    }
 
-.pricing h3{font-size:1.05rem; margin-bottom:var(--space-4); color:var(--ink)}
-.pricing-card{background:var(--primary); color:oklch(95% 0.02 60); border-radius:var(--r-lg); padding:var(--space-6); margin-bottom:var(--space-4)}
-.pricing-card .lead{font-family:"Noto Serif TC"; font-size:1.5rem; font-weight:600; line-height:1.3; margin-bottom:var(--space-3)}
-.pricing-card p{font-size:.86rem; color:oklch(88% 0.02 60); line-height:1.7}
-.pricing-card .kv{display:flex; justify-content:space-between; padding:var(--space-2) 0; border-top:1px solid oklch(60% 0.06 5 / .35); font-size:.84rem; margin-top:var(--space-3)}
-.pricing-card .kv:first-of-type{border-top:none}
-.pricing-card .kv b{font-family:"Noto Serif TC"; font-weight:600}
-.collab{display:flex; flex-wrap:wrap; gap:var(--space-2)}
-.chip{font-size:.74rem; padding:5px 11px; border:1px solid var(--line); border-radius:100px; color:var(--ink-soft); background:var(--surface)}
-.chip i{width:12px;height:12px;vertical-align:-2px;margin-right:4px;color:var(--accent)}
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: "Noto Serif TC", serif;
+      font-weight: 600;
+      line-height: 1.25;
+      text-wrap: balance;
+      letter-spacing: .01em
+    }
 
-/* ---------- Section frame ---------- */
-section{margin-bottom:var(--space-16)}
-.sec-head{display:flex; align-items:baseline; gap:var(--space-4); margin-bottom:var(--space-6); padding-bottom:var(--space-3); border-bottom:1px solid var(--line)}
-.sec-head h2{font-size:1.5rem; color:var(--ink)}
-.sec-head .sub{font-size:.82rem; color:var(--muted); margin-left:auto; max-width:38ch; text-align:right; line-height:1.45}
+    .num {
+      font-variant-numeric: tabular-nums;
+      font-feature-settings: "tnum"
+    }
 
-/* ---------- Budget table ---------- */
-.budget-grid{display:grid; grid-template-columns:1fr 1fr; gap:var(--space-8)}
-.ledger{width:100%; border-collapse:collapse; font-size:.9rem}
-.ledger caption{text-align:left; font-family:"Noto Serif TC"; font-weight:600; font-size:1rem; color:var(--ink); padding-bottom:var(--space-3); display:flex; justify-content:space-between; align-items:baseline}
-.ledger caption span{font-size:.74rem; color:var(--muted); font-weight:400; font-family:"Noto Sans TC"; letter-spacing:.04em}
-.ledger th{text-align:left; font-size:.7rem; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); font-weight:600; padding:0 0 var(--space-2); border-bottom:1px solid var(--line)}
-.ledger th.r,.ledger td.r{text-align:right}
-.ledger td{padding:11px 0; border-bottom:1px solid var(--line-soft); color:var(--ink-soft)}
-.ledger tr:hover td{color:var(--ink)}
-.ledger .amt{font-variant-numeric:tabular-nums; color:var(--ink); font-weight:500}
-.ledger .pct{font-variant-numeric:tabular-nums; color:var(--muted); font-size:.82rem; width:64px}
-.ledger .bar-cell{width:34%}
-.minibar{height:6px; border-radius:3px; background:var(--surface-2); overflow:hidden}
-.minibar>i{display:block;height:100%;border-radius:3px}
-.ledger tfoot td{padding-top:var(--space-3); border-top:1.5px solid var(--ink); border-bottom:none; font-family:"Noto Serif TC"; font-weight:600; color:var(--ink); font-size:1rem}
-.gop-band{grid-column:1/-1; display:grid; grid-template-columns:repeat(4,1fr); gap:var(--space-6); margin-top:var(--space-4); padding:var(--space-6); background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg)}
-.gop-band .item .v{font-family:"Noto Serif TC"; font-size:1.7rem; font-weight:600; color:var(--ink)}
-.gop-band .item .v.good{color:var(--positive)}
-.gop-band .item .l{font-size:.74rem; color:var(--muted); letter-spacing:.03em}
-.gop-band .item .d{font-size:.74rem; margin-top:2px; font-weight:500}
-.up{color:var(--positive)} .down{color:var(--accent)}
+    .eyebrow {
+      font-size: .7rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 700;
+    }
 
-/* ---------- KPI / Triad ---------- */
-.triad{display:grid; grid-template-columns:repeat(3,1fr); gap:var(--space-6)}
-.dept{border:1px solid var(--line); border-radius:var(--r-lg); background:var(--surface); overflow:hidden}
-.dept-head{padding:var(--space-4) var(--space-6); display:flex; align-items:center; gap:var(--space-3); border-bottom:1px solid var(--line); background:var(--surface-2)}
-.dept-head .dot{width:9px;height:9px;border-radius:50%}
-.dept-head h4{font-size:.98rem; color:var(--ink)}
-.dept-head .owner{margin-left:auto; font-size:.72rem; color:var(--muted)}
-.dept-body{padding:var(--space-4) var(--space-6) var(--space-6)}
-.kpi{padding:var(--space-3) 0; border-bottom:1px solid var(--line-soft)}
-.kpi:last-child{border-bottom:none}
-.kpi-top{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6px}
-.kpi-name{font-size:.82rem; color:var(--ink-soft)}
-.kpi-val{font-family:"Noto Serif TC"; font-size:1.05rem; font-weight:600; color:var(--ink)}
-.kpi-val small{font-size:.72rem; color:var(--muted); font-weight:400; font-family:"Noto Sans TC"}
-.track{height:6px; border-radius:3px; background:var(--surface-2); position:relative; overflow:hidden}
-.track>i{display:block; height:100%; border-radius:3px; background:var(--primary)}
-.kpi-foot{display:flex; justify-content:space-between; margin-top:5px; font-size:.7rem; color:var(--muted)}
-.kpi-foot b{font-variant-numeric:tabular-nums; font-weight:600}
+    .sec-no {
+      font-family: "Noto Serif TC", serif;
+      color: var(--accent);
+      font-weight: 500
+    }
 
-/* ---------- Allocation ---------- */
-.alloc{display:flex; flex-direction:column; gap:var(--space-1)}
-.alloc-row{display:grid; grid-template-columns:1.4fr 2.2fr auto; gap:var(--space-6); align-items:center; padding:var(--space-4) var(--space-3); border-bottom:1px solid var(--line-soft); transition:background .25s var(--ease)}
-.alloc-row:hover{background:var(--surface)}
-.alloc-name{font-weight:500; color:var(--ink); font-size:.95rem}
-.alloc-name span{display:block; font-size:.74rem; color:var(--muted); font-weight:400; margin-top:1px}
-.alloc-bar{position:relative; height:30px; background:var(--surface-2); border-radius:var(--r)}
-.alloc-bar>i{position:absolute; left:0; top:0; bottom:0; border-radius:var(--r); background:linear-gradient(90deg,var(--primary),var(--primary-2))}
-.alloc-bar .tgt{position:absolute; top:-4px; bottom:-4px; width:2px; background:var(--ink); z-index:2}
-.alloc-bar .tgt::after{content:"目標"; position:absolute; top:-15px; left:50%; transform:translateX(-50%); font-size:.6rem; color:var(--muted); white-space:nowrap}
-.alloc-fig{text-align:right; min-width:120px}
-.alloc-fig .a{font-family:"Noto Serif TC"; font-weight:600; color:var(--ink); font-size:1rem; font-variant-numeric:tabular-nums}
-.alloc-fig .p{font-size:.74rem; font-variant-numeric:tabular-nums}
+    /* ---------- Masthead ---------- */
+    .masthead {
+      border-bottom: 1.5px solid var(--ink);
+      padding: var(--space-12) 0 var(--space-6);
+      margin-bottom: var(--space-8);
+    }
 
-/* ---------- Analysis ---------- */
-.analysis{display:grid; grid-template-columns:1.5fr 1fr; gap:var(--space-8)}
-.panel{border:1px solid var(--line); border-radius:var(--r-lg); background:var(--surface); padding:var(--space-6)}
-.panel h4{font-size:.96rem; color:var(--ink); margin-bottom:var(--space-4); display:flex; justify-content:space-between; align-items:baseline}
-.panel h4 span{font-size:.72rem; color:var(--muted); font-weight:400; font-family:"Noto Sans TC"}
-.chart-box{position:relative; height:240px}
-.chart-box.sm{height:210px}
-.opmetrics{display:grid; grid-template-columns:repeat(3,1fr); gap:var(--space-4); margin-top:var(--space-6)}
-.opm{padding:var(--space-4); border:1px solid var(--line); border-radius:var(--r); background:var(--surface)}
-.opm .v{font-family:"Noto Serif TC"; font-size:1.5rem; font-weight:600; color:var(--ink); font-variant-numeric:tabular-nums}
-.opm .l{font-size:.72rem; color:var(--muted)}
-.opm .d{font-size:.72rem; font-weight:600; margin-top:2px}
+    .mast-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: var(--space-6);
+      flex-wrap: wrap
+    }
 
-/* quarterly */
-.q-wrap{display:grid; grid-template-columns:1.4fr 1fr; gap:var(--space-8)}
-.ytd-card{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); padding:var(--space-6); display:flex; flex-direction:column; justify-content:center}
-.ytd-big{font-family:"Noto Serif TC"; font-size:3rem; font-weight:700; color:var(--positive); line-height:1; font-variant-numeric:tabular-nums}
-.ytd-card .lab{font-size:.8rem; color:var(--muted); margin-top:var(--space-2)}
-.ytd-rows{margin-top:var(--space-6); border-top:1px solid var(--line); padding-top:var(--space-4)}
-.ytd-line{display:flex; justify-content:space-between; padding:7px 0; font-size:.86rem; color:var(--ink-soft)}
-.ytd-line b{font-variant-numeric:tabular-nums; color:var(--ink); font-weight:600; font-family:"Noto Serif TC"}
+    .mast-brand {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      color: var(--muted);
+      font-size: .78rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      font-weight: 500
+    }
 
-/* programs */
-.programs{display:grid; grid-template-columns:repeat(3,1fr); gap:var(--space-6)}
-.prog{border:1px solid var(--line); border-radius:var(--r-lg); overflow:hidden; background:var(--surface); display:flex; flex-direction:column}
-.prog-banner{padding:var(--space-6); color:oklch(96% 0.015 60); position:relative; min-height:118px; display:flex; flex-direction:column; justify-content:flex-end}
-.prog-banner.p1{background:linear-gradient(150deg, oklch(38% 0.10 358), oklch(46% 0.11 12))}
-.prog-banner.p2{background:linear-gradient(150deg, oklch(56% 0.13 45), oklch(48% 0.12 35))}
-.prog-banner.p3{background:linear-gradient(150deg, oklch(46% 0.09 200), oklch(40% 0.10 240))}
-.prog-banner .tag{position:absolute; top:var(--space-4); left:var(--space-6); font-size:.66rem; letter-spacing:.12em; text-transform:uppercase; opacity:.85}
-.prog-banner h4{font-size:1.2rem; font-weight:600; color:inherit}
-.prog-banner .brand-of{font-size:.74rem; opacity:.85; margin-top:2px}
-.prog-body{padding:var(--space-6); flex:1}
-.prog-stat{display:flex; justify-content:space-between; align-items:baseline; padding:var(--space-3) 0; border-bottom:1px solid var(--line-soft)}
-.prog-stat:last-child{border-bottom:none}
-.prog-stat .l{font-size:.8rem; color:var(--muted)}
-.prog-stat .v{font-family:"Noto Serif TC"; font-weight:600; color:var(--ink); font-variant-numeric:tabular-nums}
-.prog-rev{background:var(--surface-2); padding:var(--space-3) var(--space-6); display:flex; justify-content:space-between; align-items:center}
-.prog-rev .l{font-size:.74rem; color:var(--ink-soft)}
-.prog-rev .v{font-family:"Noto Serif TC"; font-size:1.25rem; font-weight:700; color:var(--primary); font-variant-numeric:tabular-nums}
+    .seal {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 1.5px solid var(--accent);
+      display: grid;
+      place-items: center;
+      color: var(--accent)
+    }
 
-/* approval */
-.approval{display:grid; grid-template-columns:1.5fr 1fr; gap:var(--space-8)}
-.flow{display:flex; flex-direction:column; gap:var(--space-2)}
-.flow-row{display:grid; grid-template-columns:auto 1fr auto auto; gap:var(--space-4); align-items:center; padding:var(--space-4); border:1px solid var(--line); border-radius:var(--r-lg); background:var(--surface); transition:border-color .25s var(--ease)}
-.flow-row:hover{border-color:var(--accent)}
-.flow-ic{width:34px;height:34px;border-radius:var(--r);display:grid;place-items:center;background:var(--surface-2);color:var(--ink-soft)}
-.flow-ic i{width:17px;height:17px}
-.flow-name{font-weight:500; color:var(--ink); font-size:.92rem}
-.flow-name span{display:block; font-size:.74rem; color:var(--muted); font-weight:400}
-.flow-amt{font-family:"Noto Serif TC"; font-weight:600; color:var(--ink); font-variant-numeric:tabular-nums; font-size:.95rem}
-.badge{font-size:.72rem; font-weight:600; padding:4px 11px; border-radius:100px; white-space:nowrap}
-.badge.ok{background:oklch(55% 0.098 158 / .14); color:oklch(42% 0.09 158)}
-.badge.rev{background:oklch(67% 0.118 66 / .16); color:oklch(50% 0.11 60)}
-.badge.pend{background:var(--surface-2); color:var(--muted)}
-.capex-note{background:var(--surface); border:1px dashed var(--accent); border-radius:var(--r-lg); padding:var(--space-6)}
-.capex-note .eyebrow{margin-bottom:var(--space-3)}
-.capex-note h4{font-size:1.05rem; margin-bottom:var(--space-2); color:var(--ink)}
-.capex-note p{font-size:.84rem; color:var(--ink-soft); line-height:1.7}
-.capex-note .big{font-family:"Noto Serif TC"; font-size:1.9rem; font-weight:700; color:var(--accent); margin-top:var(--space-3); font-variant-numeric:tabular-nums}
+    .mast-meta {
+      text-align: right;
+      font-size: .78rem;
+      color: var(--muted);
+      line-height: 1.5
+    }
 
-/* P&L */
-.pl{width:100%; border-collapse:collapse; font-size:.94rem}
-.pl th{text-align:left; font-size:.7rem; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); font-weight:600; padding:0 var(--space-4) var(--space-3); border-bottom:1.5px solid var(--ink)}
-.pl th.r,.pl td.r{text-align:right; font-variant-numeric:tabular-nums}
-.pl td{padding:13px var(--space-4); border-bottom:1px solid var(--line-soft); color:var(--ink-soft)}
-.pl .label b{color:var(--ink); font-weight:500}
-.pl .label small{color:var(--muted); font-weight:400; margin-left:6px; font-size:.78rem}
-.pl tr.total td{background:var(--surface-2); font-weight:600}
-.pl tr.total td b{color:var(--ink); font-family:"Noto Serif TC"}
-.pl tr.grand td{border-top:1.5px solid var(--ink); border-bottom:none; padding-top:var(--space-4)}
-.pl tr.grand td b{font-family:"Noto Serif TC"; font-size:1.15rem; color:var(--primary)}
-.pl .amt{color:var(--ink); font-weight:500}
-.pl .margin{color:var(--muted); font-size:.84rem; width:80px}
+    .mast-meta b {
+      color: var(--ink-soft);
+      font-weight: 600
+    }
 
-/* footer */
-.foot{border-top:1.5px solid var(--ink); padding:var(--space-6) 0 var(--space-16); display:flex; justify-content:space-between; flex-wrap:wrap; gap:var(--space-4); color:var(--muted); font-size:.76rem}
-.foot .legend{display:flex; gap:var(--space-6); flex-wrap:wrap}
-.foot .legend span{display:flex; align-items:center; gap:6px}
-.dotlg{width:9px;height:9px;border-radius:2px;display:inline-block}
+    .masthead h1 {
+      font-size: clamp(2rem, 4.4vw, 3.1rem);
+      margin: var(--space-6) 0 var(--space-3);
+      color: var(--ink);
+      font-weight: 700
+    }
 
-/* entrance */
-.reveal{opacity:0; transform:translateY(14px); animation:rise .7s var(--ease) forwards; animation-delay:calc(var(--i,0)*70ms)}
-@keyframes rise{to{opacity:1; transform:none}}
-@media (prefers-reduced-motion:reduce){.reveal{animation:none; opacity:1; transform:none}}
+    .masthead .role {
+      font-size: 1.05rem;
+      color: var(--primary);
+      font-weight: 500;
+      font-family: "Noto Serif TC", serif
+    }
 
-/* responsive */
-@media (max-width:980px){
-  .blueprint,.budget-grid,.analysis,.q-wrap,.approval{grid-template-columns:1fr}
-  .triad,.programs{grid-template-columns:1fr}
-  .gop-band{grid-template-columns:repeat(2,1fr)}
-}
-@media (max-width:560px){
-  .wrap{padding:0 var(--space-4)}
-  .brand-stats,.opmetrics{grid-template-columns:1fr 1fr}
-  .gop-band{grid-template-columns:1fr 1fr}
-  .alloc-row{grid-template-columns:1fr auto; gap:var(--space-3)}
-  .alloc-bar{display:none}
-  .mast-meta{text-align:left}
-}
-</style>
+    .mast-line {
+      display: flex;
+      gap: var(--space-6);
+      flex-wrap: wrap;
+      margin-top: var(--space-4);
+      padding-top: var(--space-4);
+      border-top: 1px solid var(--line);
+      color: var(--ink-soft);
+      font-size: .86rem
+    }
+
+    .mast-line span {
+      display: flex;
+      align-items: center;
+      gap: 6px
+    }
+
+    .mast-line i {
+      width: 15px;
+      height: 15px;
+      color: var(--accent)
+    }
+
+    /* ---------- Blueprint band ---------- */
+    .blueprint {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: var(--space-8);
+      margin-bottom: var(--space-16)
+    }
+
+    .brands {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4)
+    }
+
+    .brand-row {
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: var(--space-6);
+      background: var(--surface);
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: var(--space-4) var(--space-6);
+      align-items: center;
+      transition: border-color .3s var(--ease), box-shadow .3s var(--ease);
+    }
+
+    .brand-row:hover {
+      border-color: var(--accent);
+      box-shadow: var(--shadow-sm)
+    }
+
+    .brand-mark {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--r);
+      display: grid;
+      place-items: center;
+      font-family: "Noto Serif TC";
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--surface)
+    }
+
+    .brand-mark.a {
+      background: var(--primary)
+    }
+
+    .brand-mark.b {
+      background: var(--accent)
+    }
+
+    .brand-name {
+      font-family: "Noto Serif TC";
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--ink)
+    }
+
+    .brand-tag {
+      font-size: .78rem;
+      color: var(--muted)
+    }
+
+    .brand-stats {
+      grid-column: 1/-1;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-4);
+      padding-top: var(--space-4);
+      border-top: 1px dashed var(--line)
+    }
+
+    .bstat .v {
+      font-family: "Noto Serif TC";
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--ink)
+    }
+
+    .bstat .l {
+      font-size: .72rem;
+      color: var(--muted);
+      letter-spacing: .04em
+    }
+
+    .bstat .v small {
+      font-size: .7rem;
+      color: var(--muted);
+      font-weight: 400
+    }
+
+    .pricing h3 {
+      font-size: 1.05rem;
+      margin-bottom: var(--space-4);
+      color: var(--ink)
+    }
+
+    .pricing-card {
+      background: var(--primary);
+      color: oklch(95% 0.02 60);
+      border-radius: var(--r-lg);
+      padding: var(--space-6);
+      margin-bottom: var(--space-4)
+    }
+
+    .pricing-card .lead {
+      font-family: "Noto Serif TC";
+      font-size: 1.5rem;
+      font-weight: 600;
+      line-height: 1.3;
+      margin-bottom: var(--space-3)
+    }
+
+    .pricing-card p {
+      font-size: .86rem;
+      color: oklch(88% 0.02 60);
+      line-height: 1.7
+    }
+
+    .pricing-card .kv {
+      display: flex;
+      justify-content: space-between;
+      padding: var(--space-2) 0;
+      border-top: 1px solid oklch(60% 0.06 5 / .35);
+      font-size: .84rem;
+      margin-top: var(--space-3)
+    }
+
+    .pricing-card .kv:first-of-type {
+      border-top: none
+    }
+
+    .pricing-card .kv b {
+      font-family: "Noto Serif TC";
+      font-weight: 600
+    }
+
+    .collab {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2)
+    }
+
+    .chip {
+      font-size: .74rem;
+      padding: 5px 11px;
+      border: 1px solid var(--line);
+      border-radius: 100px;
+      color: var(--ink-soft);
+      background: var(--surface)
+    }
+
+    .chip i {
+      width: 12px;
+      height: 12px;
+      vertical-align: -2px;
+      margin-right: 4px;
+      color: var(--accent)
+    }
+
+    /* ---------- Section frame ---------- */
+    section {
+      margin-bottom: var(--space-16)
+    }
+
+    .sec-head {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-4);
+      margin-bottom: var(--space-6);
+      padding-bottom: var(--space-3);
+      border-bottom: 1px solid var(--line)
+    }
+
+    .sec-head h2 {
+      font-size: 1.5rem;
+      color: var(--ink)
+    }
+
+    .sec-head .sub {
+      font-size: .82rem;
+      color: var(--muted);
+      margin-left: auto;
+      max-width: 38ch;
+      text-align: right;
+      line-height: 1.45
+    }
+
+    /* ---------- Budget table ---------- */
+    .budget-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-8)
+    }
+
+    .ledger {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .9rem
+    }
+
+    .ledger caption {
+      text-align: left;
+      font-family: "Noto Serif TC";
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--ink);
+      padding-bottom: var(--space-3);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline
+    }
+
+    .ledger caption span {
+      font-size: .74rem;
+      color: var(--muted);
+      font-weight: 400;
+      font-family: "Noto Sans TC";
+      letter-spacing: .04em
+    }
+
+    .ledger th {
+      text-align: left;
+      font-size: .7rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 600;
+      padding: 0 0 var(--space-2);
+      border-bottom: 1px solid var(--line)
+    }
+
+    .ledger th.r,
+    .ledger td.r {
+      text-align: right
+    }
+
+    .ledger td {
+      padding: 11px 0;
+      border-bottom: 1px solid var(--line-soft);
+      color: var(--ink-soft)
+    }
+
+    .ledger tr:hover td {
+      color: var(--ink)
+    }
+
+    .ledger .amt {
+      font-variant-numeric: tabular-nums;
+      color: var(--ink);
+      font-weight: 500
+    }
+
+    .ledger .pct {
+      font-variant-numeric: tabular-nums;
+      color: var(--muted);
+      font-size: .82rem;
+      width: 64px
+    }
+
+    .ledger .bar-cell {
+      width: 34%
+    }
+
+    .minibar {
+      height: 6px;
+      border-radius: 3px;
+      background: var(--surface-2);
+      overflow: hidden
+    }
+
+    .minibar>i {
+      display: block;
+      height: 100%;
+      border-radius: 3px
+    }
+
+    .ledger tfoot td {
+      padding-top: var(--space-3);
+      border-top: 1.5px solid var(--ink);
+      border-bottom: none;
+      font-family: "Noto Serif TC";
+      font-weight: 600;
+      color: var(--ink);
+      font-size: 1rem
+    }
+
+    .gop-band {
+      grid-column: 1/-1;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-6);
+      margin-top: var(--space-4);
+      padding: var(--space-6);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg)
+    }
+
+    .gop-band .item .v {
+      font-family: "Noto Serif TC";
+      font-size: 1.7rem;
+      font-weight: 600;
+      color: var(--ink)
+    }
+
+    .gop-band .item .v.good {
+      color: var(--positive)
+    }
+
+    .gop-band .item .l {
+      font-size: .74rem;
+      color: var(--muted);
+      letter-spacing: .03em
+    }
+
+    .gop-band .item .d {
+      font-size: .74rem;
+      margin-top: 2px;
+      font-weight: 500
+    }
+
+    .up {
+      color: var(--positive)
+    }
+
+    .down {
+      color: var(--accent)
+    }
+
+    /* ---------- KPI / Triad ---------- */
+    .triad {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-6)
+    }
+
+    .dept {
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      background: var(--surface);
+      overflow: hidden
+    }
+
+    .dept-head {
+      padding: var(--space-4) var(--space-6);
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      border-bottom: 1px solid var(--line);
+      background: var(--surface-2)
+    }
+
+    .dept-head .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%
+    }
+
+    .dept-head h4 {
+      font-size: .98rem;
+      color: var(--ink)
+    }
+
+    .dept-head .owner {
+      margin-left: auto;
+      font-size: .72rem;
+      color: var(--muted)
+    }
+
+    .dept-body {
+      padding: var(--space-4) var(--space-6) var(--space-6)
+    }
+
+    .kpi {
+      padding: var(--space-3) 0;
+      border-bottom: 1px solid var(--line-soft)
+    }
+
+    .kpi:last-child {
+      border-bottom: none
+    }
+
+    .kpi-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 6px
+    }
+
+    .kpi-name {
+      font-size: .82rem;
+      color: var(--ink-soft)
+    }
+
+    .kpi-val {
+      font-family: "Noto Serif TC";
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--ink)
+    }
+
+    .kpi-val small {
+      font-size: .72rem;
+      color: var(--muted);
+      font-weight: 400;
+      font-family: "Noto Sans TC"
+    }
+
+    .track {
+      height: 6px;
+      border-radius: 3px;
+      background: var(--surface-2);
+      position: relative;
+      overflow: hidden
+    }
+
+    .track>i {
+      display: block;
+      height: 100%;
+      border-radius: 3px;
+      background: var(--primary)
+    }
+
+    .kpi-foot {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 5px;
+      font-size: .7rem;
+      color: var(--muted)
+    }
+
+    .kpi-foot b {
+      font-variant-numeric: tabular-nums;
+      font-weight: 600
+    }
+
+    /* ---------- Allocation ---------- */
+    .alloc {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1)
+    }
+
+    .alloc-row {
+      display: grid;
+      grid-template-columns: 1.4fr 2.2fr auto;
+      gap: var(--space-6);
+      align-items: center;
+      padding: var(--space-4) var(--space-3);
+      border-bottom: 1px solid var(--line-soft);
+      transition: background .25s var(--ease)
+    }
+
+    .alloc-row:hover {
+      background: var(--surface)
+    }
+
+    .alloc-name {
+      font-weight: 500;
+      color: var(--ink);
+      font-size: .95rem
+    }
+
+    .alloc-name span {
+      display: block;
+      font-size: .74rem;
+      color: var(--muted);
+      font-weight: 400;
+      margin-top: 1px
+    }
+
+    .alloc-bar {
+      position: relative;
+      height: 30px;
+      background: var(--surface-2);
+      border-radius: var(--r)
+    }
+
+    .alloc-bar>i {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      border-radius: var(--r);
+      background: linear-gradient(90deg, var(--primary), var(--primary-2))
+    }
+
+    .alloc-bar .tgt {
+      position: absolute;
+      top: -4px;
+      bottom: -4px;
+      width: 2px;
+      background: var(--ink);
+      z-index: 2
+    }
+
+    .alloc-bar .tgt::after {
+      content: "目標";
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: .6rem;
+      color: var(--muted);
+      white-space: nowrap
+    }
+
+    .alloc-fig {
+      text-align: right;
+      min-width: 120px
+    }
+
+    .alloc-fig .a {
+      font-family: "Noto Serif TC";
+      font-weight: 600;
+      color: var(--ink);
+      font-size: 1rem;
+      font-variant-numeric: tabular-nums
+    }
+
+    .alloc-fig .p {
+      font-size: .74rem;
+      font-variant-numeric: tabular-nums
+    }
+
+    /* ---------- Analysis ---------- */
+    .analysis {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: var(--space-8)
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      background: var(--surface);
+      padding: var(--space-6)
+    }
+
+    .panel h4 {
+      font-size: .96rem;
+      color: var(--ink);
+      margin-bottom: var(--space-4);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline
+    }
+
+    .panel h4 span {
+      font-size: .72rem;
+      color: var(--muted);
+      font-weight: 400;
+      font-family: "Noto Sans TC"
+    }
+
+    .chart-box {
+      position: relative;
+      height: 240px
+    }
+
+    .chart-box.sm {
+      height: 210px
+    }
+
+    .opmetrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-4);
+      margin-top: var(--space-6)
+    }
+
+    .opm {
+      padding: var(--space-4);
+      border: 1px solid var(--line);
+      border-radius: var(--r);
+      background: var(--surface)
+    }
+
+    .opm .v {
+      font-family: "Noto Serif TC";
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--ink);
+      font-variant-numeric: tabular-nums
+    }
+
+    .opm .l {
+      font-size: .72rem;
+      color: var(--muted)
+    }
+
+    .opm .d {
+      font-size: .72rem;
+      font-weight: 600;
+      margin-top: 2px
+    }
+
+    /* quarterly */
+    .q-wrap {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: var(--space-8)
+    }
+
+    .ytd-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: var(--space-6);
+      display: flex;
+      flex-direction: column;
+      justify-content: center
+    }
+
+    .ytd-big {
+      font-family: "Noto Serif TC";
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--positive);
+      line-height: 1;
+      font-variant-numeric: tabular-nums
+    }
+
+    .ytd-card .lab {
+      font-size: .8rem;
+      color: var(--muted);
+      margin-top: var(--space-2)
+    }
+
+    .ytd-rows {
+      margin-top: var(--space-6);
+      border-top: 1px solid var(--line);
+      padding-top: var(--space-4)
+    }
+
+    .ytd-line {
+      display: flex;
+      justify-content: space-between;
+      padding: 7px 0;
+      font-size: .86rem;
+      color: var(--ink-soft)
+    }
+
+    .ytd-line b {
+      font-variant-numeric: tabular-nums;
+      color: var(--ink);
+      font-weight: 600;
+      font-family: "Noto Serif TC"
+    }
+
+    /* programs */
+    .programs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-6)
+    }
+
+    .prog {
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      background: var(--surface);
+      display: flex;
+      flex-direction: column
+    }
+
+    .prog-banner {
+      padding: var(--space-6);
+      color: oklch(96% 0.015 60);
+      position: relative;
+      min-height: 118px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end
+    }
+
+    .prog-banner.p1 {
+      background: linear-gradient(150deg, oklch(38% 0.10 358), oklch(46% 0.11 12))
+    }
+
+    .prog-banner.p2 {
+      background: linear-gradient(150deg, oklch(56% 0.13 45), oklch(48% 0.12 35))
+    }
+
+    .prog-banner.p3 {
+      background: linear-gradient(150deg, oklch(46% 0.09 200), oklch(40% 0.10 240))
+    }
+
+    .prog-banner .tag {
+      position: absolute;
+      top: var(--space-4);
+      left: var(--space-6);
+      font-size: .66rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      opacity: .85
+    }
+
+    .prog-banner h4 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: inherit
+    }
+
+    .prog-banner .brand-of {
+      font-size: .74rem;
+      opacity: .85;
+      margin-top: 2px
+    }
+
+    .prog-body {
+      padding: var(--space-6);
+      flex: 1
+    }
+
+    .prog-stat {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: var(--space-3) 0;
+      border-bottom: 1px solid var(--line-soft)
+    }
+
+    .prog-stat:last-child {
+      border-bottom: none
+    }
+
+    .prog-stat .l {
+      font-size: .8rem;
+      color: var(--muted)
+    }
+
+    .prog-stat .v {
+      font-family: "Noto Serif TC";
+      font-weight: 600;
+      color: var(--ink);
+      font-variant-numeric: tabular-nums
+    }
+
+    .prog-rev {
+      background: var(--surface-2);
+      padding: var(--space-3) var(--space-6);
+      display: flex;
+      justify-content: space-between;
+      align-items: center
+    }
+
+    .prog-rev .l {
+      font-size: .74rem;
+      color: var(--ink-soft)
+    }
+
+    .prog-rev .v {
+      font-family: "Noto Serif TC";
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary);
+      font-variant-numeric: tabular-nums
+    }
+
+    /* approval */
+    .approval {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: var(--space-8)
+    }
+
+    .flow {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2)
+    }
+
+    .flow-row {
+      display: grid;
+      grid-template-columns: auto 1fr auto auto;
+      gap: var(--space-4);
+      align-items: center;
+      padding: var(--space-4);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      background: var(--surface);
+      transition: border-color .25s var(--ease)
+    }
+
+    .flow-row:hover {
+      border-color: var(--accent)
+    }
+
+    .flow-ic {
+      width: 34px;
+      height: 34px;
+      border-radius: var(--r);
+      display: grid;
+      place-items: center;
+      background: var(--surface-2);
+      color: var(--ink-soft)
+    }
+
+    .flow-ic i {
+      width: 17px;
+      height: 17px
+    }
+
+    .flow-name {
+      font-weight: 500;
+      color: var(--ink);
+      font-size: .92rem
+    }
+
+    .flow-name span {
+      display: block;
+      font-size: .74rem;
+      color: var(--muted);
+      font-weight: 400
+    }
+
+    .flow-amt {
+      font-family: "Noto Serif TC";
+      font-weight: 600;
+      color: var(--ink);
+      font-variant-numeric: tabular-nums;
+      font-size: .95rem
+    }
+
+    .badge {
+      font-size: .72rem;
+      font-weight: 600;
+      padding: 4px 11px;
+      border-radius: 100px;
+      white-space: nowrap
+    }
+
+    .badge.ok {
+      background: oklch(55% 0.098 158 / .14);
+      color: oklch(42% 0.09 158)
+    }
+
+    .badge.rev {
+      background: oklch(67% 0.118 66 / .16);
+      color: oklch(50% 0.11 60)
+    }
+
+    .badge.pend {
+      background: var(--surface-2);
+      color: var(--muted)
+    }
+
+    .capex-note {
+      background: var(--surface);
+      border: 1px dashed var(--accent);
+      border-radius: var(--r-lg);
+      padding: var(--space-6)
+    }
+
+    .capex-note .eyebrow {
+      margin-bottom: var(--space-3)
+    }
+
+    .capex-note h4 {
+      font-size: 1.05rem;
+      margin-bottom: var(--space-2);
+      color: var(--ink)
+    }
+
+    .capex-note p {
+      font-size: .84rem;
+      color: var(--ink-soft);
+      line-height: 1.7
+    }
+
+    .capex-note .big {
+      font-family: "Noto Serif TC";
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-top: var(--space-3);
+      font-variant-numeric: tabular-nums
+    }
+
+    /* P&L */
+    .pl {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .94rem
+    }
+
+    .pl th {
+      text-align: left;
+      font-size: .7rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 600;
+      padding: 0 var(--space-4) var(--space-3);
+      border-bottom: 1.5px solid var(--ink)
+    }
+
+    .pl th.r,
+    .pl td.r {
+      text-align: right;
+      font-variant-numeric: tabular-nums
+    }
+
+    .pl td {
+      padding: 13px var(--space-4);
+      border-bottom: 1px solid var(--line-soft);
+      color: var(--ink-soft)
+    }
+
+    .pl .label b {
+      color: var(--ink);
+      font-weight: 500
+    }
+
+    .pl .label small {
+      color: var(--muted);
+      font-weight: 400;
+      margin-left: 6px;
+      font-size: .78rem
+    }
+
+    .pl tr.total td {
+      background: var(--surface-2);
+      font-weight: 600
+    }
+
+    .pl tr.total td b {
+      color: var(--ink);
+      font-family: "Noto Serif TC"
+    }
+
+    .pl tr.grand td {
+      border-top: 1.5px solid var(--ink);
+      border-bottom: none;
+      padding-top: var(--space-4)
+    }
+
+    .pl tr.grand td b {
+      font-family: "Noto Serif TC";
+      font-size: 1.15rem;
+      color: var(--primary)
+    }
+
+    .pl .amt {
+      color: var(--ink);
+      font-weight: 500
+    }
+
+    .pl .margin {
+      color: var(--muted);
+      font-size: .84rem;
+      width: 80px
+    }
+
+    /* footer */
+    .foot {
+      border-top: 1.5px solid var(--ink);
+      padding: var(--space-6) 0 var(--space-16);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--space-4);
+      color: var(--muted);
+      font-size: .76rem
+    }
+
+    .foot .legend {
+      display: flex;
+      gap: var(--space-6);
+      flex-wrap: wrap
+    }
+
+    .foot .legend span {
+      display: flex;
+      align-items: center;
+      gap: 6px
+    }
+
+    .dotlg {
+      width: 9px;
+      height: 9px;
+      border-radius: 2px;
+      display: inline-block
+    }
+
+    /* entrance */
+    .reveal {
+      opacity: 0;
+      transform: translateY(14px);
+      animation: rise .7s var(--ease) forwards;
+      animation-delay: calc(var(--i, 0)*70ms)
+    }
+
+    @keyframes rise {
+      to {
+        opacity: 1;
+        transform: none
+      }
+    }
+
+    @media (prefers-reduced-motion:reduce) {
+      .reveal {
+        animation: none;
+        opacity: 1;
+        transform: none
+      }
+    }
+
+    /* responsive */
+    @media (max-width:980px) {
+
+      .blueprint,
+      .budget-grid,
+      .analysis,
+      .q-wrap,
+      .approval {
+        grid-template-columns: 1fr
+      }
+
+      .triad,
+      .programs {
+        grid-template-columns: 1fr
+      }
+
+      .gop-band {
+        grid-template-columns: repeat(2, 1fr)
+      }
+    }
+
+    @media (max-width:560px) {
+      .wrap {
+        padding: 0 var(--space-4)
+      }
+
+      .brand-stats,
+      .opmetrics {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .gop-band {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .alloc-row {
+        grid-template-columns: 1fr auto;
+        gap: var(--space-3)
+      }
+
+      .alloc-bar {
+        display: none
+      }
+
+      .mast-meta {
+        text-align: left
+      }
+    }
+  </style>
 </head>
+
 <body>
-<div class="wrap">
+  <div class="wrap">
 
-  <!-- ===== MASTHEAD ===== -->
-  <header class="masthead reveal" style="--i:0">
-    <div class="mast-top">
-      <div class="mast-brand">
-        <span class="seal"><i data-lucide="lotus" style="width:16px;height:16px"></i></span>
-        SANARA HEALING COLLECTION · 療癒事業群
-      </div>
-      <div class="mast-meta">
-        財務年度 <b>FY2026</b> · 全年預算與營運報表<br>
-        幣別 <b>新台幣 NT$</b> · 報表基準 <b>2026/06/22</b><br>
-        核閱層級 <b>事業群總監 → 財務長 → 執行長</b>
-      </div>
-    </div>
-    <h1>身心靈療癒事業 · 營運報表管理系統</h1>
-    <div class="role">業務總監儀表板 · 兩館 233 間客房營收成果共同負責</div>
-    <div class="mast-line">
-      <span><i data-lucide="map"></i> 療癒事業藍圖</span>
-      <span><i data-lucide="route"></i> 深度療癒通路</span>
-      <span><i data-lucide="triangle"></i> 商務三角組合 Triad</span>
-      <span><i data-lucide="sparkles"></i> 主導療癒活動</span>
-    </div>
-  </header>
-
-  <!-- ===== BLUEPRINT ===== -->
-  <section class="blueprint reveal" style="--i:1">
-    <div>
-      <p class="eyebrow" style="margin-bottom:var(--space-4)">療癒事業藍圖 · 兩大品牌</p>
-      <div class="brands">
-        <div class="brand-row">
-          <div class="brand-mark a">山</div>
-          <div>
-            <div class="brand-name">山形閣 Yamagata-kaku</div>
-            <div class="brand-tag">山林溫泉療癒旅宿 · 深眠與修復定位</div>
-          </div>
-          <div class="brand-stats">
-            <div class="bstat"><div class="v num">128 <small>間</small></div><div class="l">客房數</div></div>
-            <div class="bstat"><div class="v num">12,800</div><div class="l">平均房價 ADR</div></div>
-            <div class="bstat"><div class="v num">71.0%</div><div class="l">住房率 OCC</div></div>
-          </div>
+    <!-- ===== MASTHEAD ===== -->
+    <header class="masthead reveal" style="--i:0">
+      <div class="mast-top">
+        <div class="mast-brand">
+          <span class="seal"><i data-lucide="lotus" style="width:16px;height:16px"></i></span>
+          療癒事業群 - 提報：商務總監 翁培修 - Hugo · 2026/06/28
         </div>
-        <div class="brand-row">
-          <div class="brand-mark b">A</div>
-          <div>
-            <div class="brand-name">AVATA 都會療癒所</div>
-            <div class="brand-tag">都會型身心靈方案旅宿 · 企業福祉樞紐</div>
-          </div>
-          <div class="brand-stats">
-            <div class="bstat"><div class="v num">105 <small>間</small></div><div class="l">客房數</div></div>
-            <div class="bstat"><div class="v num">9,600</div><div class="l">平均房價 ADR</div></div>
-            <div class="bstat"><div class="v num">69.0%</div><div class="l">住房率 OCC</div></div>
-          </div>
+        <div class="mast-meta">
+          財務年度 <b>FY2026</b> · 全年預算與營運報表<br>
+          幣別 <b>新台幣 NT$</b> · 報表基準 <b>2026/06/22</b><br>
+          核閱層級 <b>事業群總監 → 財務長 → 執行長</b>
         </div>
       </div>
-      <div class="collab" style="margin-top:var(--space-6)">
-        <span class="chip"><i data-lucide="user-round"></i>身心靈導師聯盟</span>
-        <span class="chip"><i data-lucide="building-2"></i>企業福祉計畫</span>
-        <span class="chip"><i data-lucide="graduation-cap"></i>商學院 EMBA 合作</span>
-        <span class="chip"><i data-lucide="globe"></i>高端療癒平台</span>
+      <h1>身心靈療癒事業 · 營運報表管理系統</h1>
+      <div class="role">業務總監儀表板 · 兩館 233 間客房營收成果共同負責</div>
+      <div class="mast-line">
+        <span><i data-lucide="map"></i> 療癒事業藍圖</span>
+        <span><i data-lucide="route"></i> 深度療癒通路</span>
+        <span><i data-lucide="triangle"></i> 商務三角組合 Triad</span>
+        <span><i data-lucide="sparkles"></i> 主導療癒活動</span>
       </div>
-    </div>
-    <div class="pricing">
-      <h3>房價策略與品牌合作</h3>
-      <div class="pricing-card">
-        <div class="lead">分層收益定價，<br>淡旺季 18% 浮動帶</div>
-        <p>山形閣以「深眠房型」為旗艦，旺季加價上限 +22%；AVATA 綁定企業福祉長約鎖定基礎住房率，浮動空間留給散客升級。</p>
-        <div class="kv"><span>綜合平均房價 ADR</span><b class="num">NT$ 11,380</b></div>
-        <div class="kv"><span>綜合住房率 OCC</span><b class="num">70.1%</b></div>
-        <div class="kv"><span>綜合 RevPAR</span><b class="num">NT$ 7,978</b></div>
-      </div>
-    </div>
-  </section>
+    </header>
 
-  <!-- ===== 01 BUDGET & COST ===== -->
-  <section class="reveal" style="--i:2">
-    <div class="sec-head">
-      <span class="sec-no">01</span>
-      <h2>預算編製與成本控管</h2>
-      <span class="sub">全年營收與成本結構，毛營業利益 GOP 為核心控管指標</span>
-    </div>
-    <div class="budget-grid">
-      <table class="ledger">
-        <caption>營收預算 <span>FY2026 · NT$ 百萬</span></caption>
-        <thead><tr><th>營收科目</th><th class="bar-cell"></th><th class="r">金額</th><th class="r">佔比</th></tr></thead>
+    <!-- ===== BLUEPRINT ===== -->
+    <section class="blueprint reveal" style="--i:1">
+      <div>
+        <p class="eyebrow" style="margin-bottom:var(--space-4)">療癒事業藍圖 · 兩大品牌</p>
+        <div class="brands">
+          <div class="brand-row">
+            <div class="brand-mark a">山</div>
+            <div>
+              <div class="brand-name">山形閣 Yamagata-kaku</div>
+              <div class="brand-tag">山林溫泉療癒旅宿 · 深眠與修復定位</div>
+            </div>
+            <div class="brand-stats">
+              <div class="bstat">
+                <div class="v num">128 <small>間</small></div>
+                <div class="l">客房數</div>
+              </div>
+              <div class="bstat">
+                <div class="v num">12,800</div>
+                <div class="l">平均房價 ADR</div>
+              </div>
+              <div class="bstat">
+                <div class="v num">71.0%</div>
+                <div class="l">住房率 OCC</div>
+              </div>
+            </div>
+          </div>
+          <div class="brand-row">
+            <div class="brand-mark b">A</div>
+            <div>
+              <div class="brand-name">AVATA 都會療癒所</div>
+              <div class="brand-tag">都會型身心靈方案旅宿 · 企業福祉樞紐</div>
+            </div>
+            <div class="brand-stats">
+              <div class="bstat">
+                <div class="v num">105 <small>間</small></div>
+                <div class="l">客房數</div>
+              </div>
+              <div class="bstat">
+                <div class="v num">9,600</div>
+                <div class="l">平均房價 ADR</div>
+              </div>
+              <div class="bstat">
+                <div class="v num">69.0%</div>
+                <div class="l">住房率 OCC</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="collab" style="margin-top:var(--space-6)">
+          <span class="chip"><i data-lucide="user-round"></i>身心靈導師聯盟</span>
+          <span class="chip"><i data-lucide="building-2"></i>企業福祉計畫</span>
+          <span class="chip"><i data-lucide="graduation-cap"></i>商學院 EMBA 合作</span>
+          <span class="chip"><i data-lucide="globe"></i>高端療癒平台</span>
+        </div>
+      </div>
+      <div class="pricing">
+        <h3>房價策略與品牌合作</h3>
+        <div class="pricing-card">
+          <div class="lead">分層收益定價，<br>淡旺季 18% 浮動帶</div>
+          <p>山形閣以「深眠房型」為旗艦，旺季加價上限 +22%；AVATA 綁定企業福祉長約鎖定基礎住房率，浮動空間留給散客升級。</p>
+          <div class="kv"><span>綜合平均房價 ADR</span><b class="num">NT$ 11,380</b></div>
+          <div class="kv"><span>綜合住房率 OCC</span><b class="num">70.1%</b></div>
+          <div class="kv"><span>綜合 RevPAR</span><b class="num">NT$ 7,978</b></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 01 BUDGET & COST ===== -->
+    <section class="reveal" style="--i:2">
+      <div class="sec-head">
+        <span class="sec-no">01</span>
+        <h2>預算編製與成本控管</h2>
+        <span class="sub">全年營收與成本結構，毛營業利益 GOP 為核心控管指標</span>
+      </div>
+      <div class="budget-grid">
+        <table class="ledger">
+          <caption>營收預算 <span>FY2026 · NT$ 百萬</span></caption>
+          <thead>
+            <tr>
+              <th>營收科目</th>
+              <th class="bar-cell"></th>
+              <th class="r">金額</th>
+              <th class="r">佔比</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>客房營收 兩館合計</td>
+              <td class="bar-cell">
+                <div class="minibar"><i style="width:100%;background:var(--primary)"></i></div>
+              </td>
+              <td class="r amt">678.5</td>
+              <td class="r pct">67.3%</td>
+            </tr>
+            <tr>
+              <td>深眠餐飲 山形閣</td>
+              <td class="bar-cell">
+                <div class="minibar"><i style="width:14.5%;background:var(--accent)"></i></div>
+              </td>
+              <td class="r amt">98.2</td>
+              <td class="r pct">9.7%</td>
+            </tr>
+            <tr>
+              <td>療癒 SPA 與療程</td>
+              <td class="bar-cell">
+                <div class="minibar"><i style="width:10.5%;background:var(--accent)"></i></div>
+              </td>
+              <td class="r amt">71.3</td>
+              <td class="r pct">7.1%</td>
+            </tr>
+            <tr>
+              <td>修復週末套裝</td>
+              <td class="bar-cell">
+                <div class="minibar"><i style="width:9.2%;background:var(--accent)"></i></div>
+              </td>
+              <td class="r amt">62.4</td>
+              <td class="r pct">6.2%</td>
+            </tr>
+            <tr>
+              <td>AVATA 療癒方案</td>
+              <td class="bar-cell">
+                <div class="minibar"><i style="width:8.0%;background:var(--accent)"></i></div>
+              </td>
+              <td class="r amt">54.1</td>
+              <td class="r pct">5.4%</td>
+            </tr>
+            <tr>
+              <td>企業福祉合約</td>
+              <td class="bar-cell">
+                <div class="minibar"><i style="width:6.5%;background:var(--gold)"></i></div>
+              </td>
+              <td class="r amt">43.8</td>
+              <td class="r pct">4.3%</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td>營收合計</td>
+              <td></td>
+              <td class="r">1,008.3</td>
+              <td class="r">100%</td>
+            </tr>
+          </tfoot>
+        </table>
+
+        <table class="ledger">
+          <caption>成本與費用預算 <span>佔營收比 · NT$ 百萬</span></caption>
+          <thead>
+            <tr>
+              <th>成本科目</th>
+              <th class="bar-cell"></th>
+              <th class="r">金額</th>
+              <th class="r">佔比</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>人事成本</td>
+              <td class="bar-cell">
+                <div class="minibar"><i style="width:100%;background:var(--primary)"></i></div>
+              </td>
+              <td class="r amt">292.4</td>
+              <td class="r pct">29.0%</td>
+            </tr>
+            <tr>
+              <td>餐飲與療癒物料</td>
+              <td class="bar-cell">
+                <div class="minibar"><i style="width:40.5%;background:var(--primary-2)"></i></div>
+              </td>
+              <td class="r amt">118.5</td>
+              <td class="r pct">11.8%</td>
+            </tr>
+            <tr>
+              <td>行銷與通路推廣</td>
+              <td class="bar-cell">
+                <div class="minibar"><i style="width:29%;background:var(--primary-2)"></i></div>
+              </td>
+              <td class="r amt">84.7</td>
+              <td class="r pct">8.4%</td>
+            </tr>
+            <tr>
+              <td>物業與能源</td>
+              <td class="bar-cell">
+                <div class="minibar"><i style="width:26%;background:var(--primary-2)"></i></div>
+              </td>
+              <td class="r amt">76.2</td>
+              <td class="r pct">7.6%</td>
+            </tr>
+            <tr>
+              <td>夥伴佣金與分潤</td>
+              <td class="bar-cell">
+                <div class="minibar"><i style="width:20%;background:var(--accent)"></i></div>
+              </td>
+              <td class="r amt">58.3</td>
+              <td class="r pct">5.8%</td>
+            </tr>
+            <tr>
+              <td>管理與行政 G&A</td>
+              <td class="bar-cell">
+                <div class="minibar"><i style="width:17%;background:var(--accent)"></i></div>
+              </td>
+              <td class="r amt">49.8</td>
+              <td class="r pct">4.9%</td>
+            </tr>
+            <tr>
+              <td>導師與課程外包</td>
+              <td class="bar-cell">
+                <div class="minibar"><i style="width:14.2%;background:var(--accent)"></i></div>
+              </td>
+              <td class="r amt">41.6</td>
+              <td class="r pct">4.1%</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td>成本合計</td>
+              <td></td>
+              <td class="r">721.5</td>
+              <td class="r">71.6%</td>
+            </tr>
+          </tfoot>
+        </table>
+
+        <div class="gop-band">
+          <div class="item">
+            <div class="v num">1,008.3</div>
+            <div class="l">營收合計 NT$ 百萬</div>
+            <div class="d up">▲ 11.2% YoY</div>
+          </div>
+          <div class="item">
+            <div class="v num">721.5</div>
+            <div class="l">成本合計 NT$ 百萬</div>
+            <div class="d down">▲ 9.8% YoY</div>
+          </div>
+          <div class="item">
+            <div class="v good num">286.8</div>
+            <div class="l">毛營業利益 GOP</div>
+            <div class="d up">▲ 15.0% YoY</div>
+          </div>
+          <div class="item">
+            <div class="v num">28.4%</div>
+            <div class="l">GOP 利潤率</div>
+            <div class="d up">▲ 0.9pt YoY</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 02 DEPT KPI / TRIAD ===== -->
+    <section class="reveal" style="--i:3">
+      <div class="sec-head">
+        <span class="sec-no">02</span>
+        <h2>部門績效目標管理</h2>
+        <span class="sub">商務三角組合 Triad：業務、數位行銷、營收管理共擔 233 房營收</span>
+      </div>
+      <div class="triad">
+        <div class="dept">
+          <div class="dept-head"><span class="dot" style="background:var(--primary)"></span>
+            <h4>療癒業務</h4><span class="owner">本職 · 業務總監</span>
+          </div>
+          <div class="dept-body">
+            <div class="kpi">
+              <div class="kpi-top"><span class="kpi-name">新增通路夥伴</span><span class="kpi-val num">21<small> /
+                    24</small></span></div>
+              <div class="track"><i style="width:87.5%"></i></div>
+              <div class="kpi-foot"><span>達成率</span><b class="num">87.5%</b></div>
+            </div>
+            <div class="kpi">
+              <div class="kpi-top"><span class="kpi-name">企業福祉簽約數</span><span class="kpi-val num">16<small> /
+                    18</small></span></div>
+              <div class="track"><i style="width:88.9%"></i></div>
+              <div class="kpi-foot"><span>達成率</span><b class="num">88.9%</b></div>
+            </div>
+            <div class="kpi">
+              <div class="kpi-top"><span class="kpi-name">通路營收貢獻</span><span class="kpi-val num">259M<small> /
+                    276M</small></span></div>
+              <div class="track"><i style="width:93.8%"></i></div>
+              <div class="kpi-foot"><span>達成率</span><b class="num">93.8%</b></div>
+            </div>
+          </div>
+        </div>
+        <div class="dept">
+          <div class="dept-head"><span class="dot" style="background:var(--accent)"></span>
+            <h4>數位行銷</h4><span class="owner">Triad · 行銷總監</span>
+          </div>
+          <div class="dept-body">
+            <div class="kpi">
+              <div class="kpi-top"><span class="kpi-name">官網直訂佔比</span><span class="kpi-val num">44.3%</span></div>
+              <div class="track"><i style="width:100%;background:var(--accent)"></i></div>
+              <div class="kpi-foot"><span>目標 42.0%</span><b class="num up">+2.3pt</b></div>
+            </div>
+            <div class="kpi">
+              <div class="kpi-top"><span class="kpi-name">官網轉換率</span><span class="kpi-val num">3.5%</span></div>
+              <div class="track"><i style="width:100%;background:var(--accent)"></i></div>
+              <div class="kpi-foot"><span>目標 3.2%</span><b class="num up">+0.3pt</b></div>
+            </div>
+            <div class="kpi">
+              <div class="kpi-top"><span class="kpi-name">獲客成本 CAC</span><span class="kpi-val num">1,640</span></div>
+              <div class="track"><i style="width:78%;background:var(--accent)"></i></div>
+              <div class="kpi-foot"><span>目標 ≤ 2,100</span><b class="num up">優於 22%</b></div>
+            </div>
+          </div>
+        </div>
+        <div class="dept">
+          <div class="dept-head"><span class="dot" style="background:var(--gold)"></span>
+            <h4>營收管理</h4><span class="owner">Triad · 營收總監</span>
+          </div>
+          <div class="dept-body">
+            <div class="kpi">
+              <div class="kpi-top"><span class="kpi-name">RevPAR 年成長</span><span class="kpi-val num">+9.4%</span></div>
+              <div class="track"><i style="width:100%;background:var(--gold)"></i></div>
+              <div class="kpi-foot"><span>目標 +8.0%</span><b class="num up">+1.4pt</b></div>
+            </div>
+            <div class="kpi">
+              <div class="kpi-top"><span class="kpi-name">綜合 ADR</span><span class="kpi-val num">11,380</span></div>
+              <div class="track"><i style="width:100%;background:var(--gold)"></i></div>
+              <div class="kpi-foot"><span>目標 11,200</span><b class="num up">+1.6%</b></div>
+            </div>
+            <div class="kpi">
+              <div class="kpi-top"><span class="kpi-name">綜合住房率</span><span class="kpi-val num">70.1%</span></div>
+              <div class="track"><i style="width:96%;background:var(--gold)"></i></div>
+              <div class="kpi-foot"><span>目標 73.0%</span><b class="num down">-2.9pt</b></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 03 ALLOCATION ===== -->
+    <section class="reveal" style="--i:4">
+      <div class="sec-head">
+        <span class="sec-no">03</span>
+        <h2>工作任務 ╱ 業績項目分配</h2>
+        <span class="sub">四大深度療癒通路的年度業績配額與當前達成（NT$ 百萬）</span>
+      </div>
+      <div class="alloc">
+        <div class="alloc-row">
+          <div class="alloc-name">高端療癒平台<span>Premium wellness platform 分銷</span></div>
+          <div class="alloc-bar"><i style="width:84%"></i><span class="tgt" style="left:80%"></span></div>
+          <div class="alloc-fig">
+            <div class="a">67.0 / 64.0</div>
+            <div class="p up">104.7% 超標</div>
+          </div>
+        </div>
+        <div class="alloc-row">
+          <div class="alloc-name">企業福祉計畫<span>Corporate Wellness 長約</span></div>
+          <div class="alloc-bar"><i style="width:82%"></i><span class="tgt" style="left:88%"></span></div>
+          <div class="alloc-fig">
+            <div class="a">82.0 / 88.0</div>
+            <div class="p" style="color:var(--warning)">93.2%</div>
+          </div>
+        </div>
+        <div class="alloc-row">
+          <div class="alloc-name">身心靈導師通路<span>導師聯盟轉介與聯名活動</span></div>
+          <div class="alloc-bar"><i style="width:71%"></i><span class="tgt" style="left:78%"></span></div>
+          <div class="alloc-fig">
+            <div class="a">71.0 / 78.0</div>
+            <div class="p" style="color:var(--warning)">91.0%</div>
+          </div>
+        </div>
+        <div class="alloc-row">
+          <div class="alloc-name">商學院 EMBA 合作<span>企業領袖修復課程</span></div>
+          <div class="alloc-bar"><i style="width:39%"></i><span class="tgt" style="left:46%"></span></div>
+          <div class="alloc-fig">
+            <div class="a">39.0 / 46.0</div>
+            <div class="p down">84.8% 待補</div>
+          </div>
+        </div>
+        <div class="alloc-row"
+          style="border-top:1.5px solid var(--ink); border-bottom:none; padding-top:var(--space-4)">
+          <div class="alloc-name" style="font-family:'Noto Serif TC';font-weight:600">通路配額合計</div>
+          <div class="alloc-bar"><i style="width:93%"></i><span class="tgt" style="left:100%"></span></div>
+          <div class="alloc-fig">
+            <div class="a" style="font-size:1.15rem;color:var(--primary)">259.0 / 276.0</div>
+            <div class="p" style="color:var(--ink-soft)">93.8% 達成</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 04 TARGET ACHIEVEMENT ===== -->
+    <section class="reveal" style="--i:5">
+      <div class="sec-head">
+        <span class="sec-no">04</span>
+        <h2>業績目標達成</h2>
+        <span class="sub">季度營收目標 vs 實際 ╱ 預估，上半年已封帳 Q1、Q2 結算中</span>
+      </div>
+      <div class="q-wrap">
+        <div class="panel">
+          <h4>季度營收達成 <span>NT$ 百萬 · 目標 vs 實際</span></h4>
+          <div class="chart-box"><canvas id="qChart"></canvas></div>
+        </div>
+        <div class="ytd-card">
+          <div class="eyebrow">上半年累計達成率</div>
+          <div class="ytd-big num">101.2%</div>
+          <div class="lab">H1 實際 ╱ 預估 486.2M，目標 480.5M，超標 5.7M</div>
+          <div class="ytd-rows">
+            <div class="ytd-line"><span>Q1 實際達成</span><b class="num up">103.2%</b></div>
+            <div class="ytd-line"><span>Q2 結算預估</span><b class="num">99.3%</b></div>
+            <div class="ytd-line"><span>全年目標</span><b class="num">1,008.3M</b></div>
+            <div class="ytd-line"><span>下半年待達成</span><b class="num">522.1M</b></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 05 FINANCIAL & OPERATING ANALYSIS ===== -->
+    <section class="reveal" style="--i:6">
+      <div class="sec-head">
+        <span class="sec-no">05</span>
+        <h2>財務及營業分析</h2>
+        <span class="sub">RevPAR 走勢、營收結構與關鍵營運指標</span>
+      </div>
+      <div class="analysis">
+        <div class="panel">
+          <h4>綜合 RevPAR 月走勢 <span>NT$ · 12 個月預估</span></h4>
+          <div class="chart-box"><canvas id="revparChart"></canvas></div>
+        </div>
+        <div class="panel">
+          <h4>營收結構 <span>客房 vs 療癒收入</span></h4>
+          <div class="chart-box sm"><canvas id="mixChart"></canvas></div>
+        </div>
+      </div>
+      <div class="opmetrics">
+        <div class="opm">
+          <div class="v num">7,978</div>
+          <div class="l">綜合 RevPAR (NT$)</div>
+          <div class="d up">▲ 9.4% YoY</div>
+        </div>
+        <div class="opm">
+          <div class="v num">59,615</div>
+          <div class="l">全年售出房晚數</div>
+          <div class="d up">▲ 3.1% YoY</div>
+        </div>
+        <div class="opm">
+          <div class="v num">32.7%</div>
+          <div class="l">非客房營收佔比</div>
+          <div class="d up">▲ 2.4pt YoY</div>
+        </div>
+        <div class="opm">
+          <div class="v num">18.9%</div>
+          <div class="l">EBITDA 利潤率</div>
+          <div class="d up">▲ 1.1pt YoY</div>
+        </div>
+        <div class="opm">
+          <div class="v num">34.0%</div>
+          <div class="l">修復週末回購率</div>
+          <div class="d up">▲ 5.0pt YoY</div>
+        </div>
+        <div class="opm">
+          <div class="v num">72</div>
+          <div class="l">AVATA 方案 NPS</div>
+          <div class="d up">▲ 6 pts YoY</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 06 SIGNATURE PROGRAMS ===== -->
+    <section class="reveal" style="--i:7">
+      <div class="sec-head">
+        <span class="sec-no">06</span>
+        <h2>主導療癒活動</h2>
+        <span class="sub">三大旗艦療癒方案的商務推廣成果</span>
+      </div>
+      <div class="programs">
+        <div class="prog">
+          <div class="prog-banner p1"><span class="tag">山形閣</span>
+            <h4>深眠餐飲</h4>
+            <div class="brand-of">Deep Sleep Dining</div>
+          </div>
+          <div class="prog-body">
+            <div class="prog-stat"><span class="l">全年來客人次</span><span class="v num">14,440</span></div>
+            <div class="prog-stat"><span class="l">平均客單價</span><span class="v num">NT$ 6,800</span></div>
+            <div class="prog-stat"><span class="l">席次滿座率</span><span class="v num">88%</span></div>
+          </div>
+          <div class="prog-rev"><span class="l">年度營收</span><span class="v num">NT$ 98.2M</span></div>
+        </div>
+        <div class="prog">
+          <div class="prog-banner p2"><span class="tag">兩館聯名</span>
+            <h4>修復週末</h4>
+            <div class="brand-of">Restoration Weekend</div>
+          </div>
+          <div class="prog-body">
+            <div class="prog-stat"><span class="l">售出套裝數</span><span class="v num">1,840</span></div>
+            <div class="prog-stat"><span class="l">平均套裝價</span><span class="v num">NT$ 33,900</span></div>
+            <div class="prog-stat"><span class="l">客戶回購率</span><span class="v num">34%</span></div>
+          </div>
+          <div class="prog-rev"><span class="l">年度營收</span><span class="v num">NT$ 62.4M</span></div>
+        </div>
+        <div class="prog">
+          <div class="prog-banner p3"><span class="tag">AVATA</span>
+            <h4>AVATA 療癒方案</h4>
+            <div class="brand-of">AVATA Healing Program</div>
+          </div>
+          <div class="prog-body">
+            <div class="prog-stat"><span class="l">全年參與人次</span><span class="v num">4,260</span></div>
+            <div class="prog-stat"><span class="l">平均方案價</span><span class="v num">NT$ 12,700</span></div>
+            <div class="prog-stat"><span class="l">淨推薦分數 NPS</span><span class="v num">72</span></div>
+          </div>
+          <div class="prog-rev"><span class="l">年度營收</span><span class="v num">NT$ 54.1M</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 07 BUDGET REVIEW ===== -->
+    <section class="reveal" style="--i:8">
+      <div class="sec-head">
+        <span class="sec-no">07</span>
+        <h2>審核年度預算</h2>
+        <span class="sub">FY2026 各項預算核閱狀態與待決資本支出</span>
+      </div>
+      <div class="approval">
+        <div class="flow">
+          <div class="flow-row">
+            <div class="flow-ic"><i data-lucide="bed-double"></i></div>
+            <div class="flow-name">客房營收預算<span>兩館合計 678.5M</span></div>
+            <div class="flow-amt">678.5M</div>
+            <span class="badge ok">已核准</span>
+          </div>
+          <div class="flow-row">
+            <div class="flow-ic"><i data-lucide="sparkles"></i></div>
+            <div class="flow-name">療癒活動預算<span>深眠餐飲 ╱ 修復週末 ╱ AVATA</span></div>
+            <div class="flow-amt">214.7M</div>
+            <span class="badge ok">已核准</span>
+          </div>
+          <div class="flow-row">
+            <div class="flow-ic"><i data-lucide="megaphone"></i></div>
+            <div class="flow-name">行銷與通路預算<span>數位行銷 Triad 提報</span></div>
+            <div class="flow-amt">84.7M</div>
+            <span class="badge rev">審核中</span>
+          </div>
+          <div class="flow-row">
+            <div class="flow-ic"><i data-lucide="users"></i></div>
+            <div class="flow-name">人事擴編預算<span>療癒導師與業務團隊 +14 人</span></div>
+            <div class="flow-amt">31.2M</div>
+            <span class="badge ok">已核准</span>
+          </div>
+          <div class="flow-row">
+            <div class="flow-ic"><i data-lucide="hammer"></i></div>
+            <div class="flow-name">資本支出 CapEx<span>山形閣深眠客房改造</span></div>
+            <div class="flow-amt">48.5M</div>
+            <span class="badge pend">待提報</span>
+          </div>
+        </div>
+        <div class="capex-note">
+          <p class="eyebrow">待決事項 · 董事會核示</p>
+          <h4>深眠客房改造案</h4>
+          <p>山形閣 38 間客房升級為深眠房型，導入隔音、調光與寢具系統。預估改造後該房型 ADR 提升 18%，投資回收期 2.7 年。</p>
+          <div class="big num">NT$ 48.5M</div>
+          <p style="margin-top:var(--space-2)">預期年增營收 <b class="num">+26.4M</b> · 內部報酬率 IRR <b class="num">31%</b></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 08 FINANCIAL REPORT ===== -->
+    <section class="reveal" style="--i:9">
+      <div class="sec-head">
+        <span class="sec-no">08</span>
+        <h2>編制財務報告</h2>
+        <span class="sub">FY2026 損益彙總 P&amp;L · 合併兩館（NT$ 百萬）</span>
+      </div>
+      <table class="pl">
+        <thead>
+          <tr>
+            <th>損益科目</th>
+            <th class="r">本年 FY2026</th>
+            <th class="r">去年 FY2025</th>
+            <th class="r">YoY</th>
+            <th class="r">營收佔比</th>
+          </tr>
+        </thead>
         <tbody>
-          <tr><td>客房營收 兩館合計</td><td class="bar-cell"><div class="minibar"><i style="width:100%;background:var(--primary)"></i></div></td><td class="r amt">678.5</td><td class="r pct">67.3%</td></tr>
-          <tr><td>深眠餐飲 山形閣</td><td class="bar-cell"><div class="minibar"><i style="width:14.5%;background:var(--accent)"></i></div></td><td class="r amt">98.2</td><td class="r pct">9.7%</td></tr>
-          <tr><td>療癒 SPA 與療程</td><td class="bar-cell"><div class="minibar"><i style="width:10.5%;background:var(--accent)"></i></div></td><td class="r amt">71.3</td><td class="r pct">7.1%</td></tr>
-          <tr><td>修復週末套裝</td><td class="bar-cell"><div class="minibar"><i style="width:9.2%;background:var(--accent)"></i></div></td><td class="r amt">62.4</td><td class="r pct">6.2%</td></tr>
-          <tr><td>AVATA 療癒方案</td><td class="bar-cell"><div class="minibar"><i style="width:8.0%;background:var(--accent)"></i></div></td><td class="r amt">54.1</td><td class="r pct">5.4%</td></tr>
-          <tr><td>企業福祉合約</td><td class="bar-cell"><div class="minibar"><i style="width:6.5%;background:var(--gold)"></i></div></td><td class="r amt">43.8</td><td class="r pct">4.3%</td></tr>
+          <tr>
+            <td class="label"><b>營業收入</b><small>客房 + 療癒收入</small></td>
+            <td class="r amt">1,008.3</td>
+            <td class="r">906.8</td>
+            <td class="r up">+11.2%</td>
+            <td class="r margin">100%</td>
+          </tr>
+          <tr>
+            <td class="label">營業成本與費用</td>
+            <td class="r amt">(721.5)</td>
+            <td class="r">(657.1)</td>
+            <td class="r down">+9.8%</td>
+            <td class="r margin">71.6%</td>
+          </tr>
+          <tr class="total">
+            <td class="label"><b>毛營業利益 GOP</b></td>
+            <td class="r amt"><b>286.8</b></td>
+            <td class="r">249.7</td>
+            <td class="r up">+15.0%</td>
+            <td class="r margin">28.4%</td>
+          </tr>
+          <tr>
+            <td class="label">固定費用<small>租金 ╱ 保險 ╱ 房屋稅</small></td>
+            <td class="r amt">(96.4)</td>
+            <td class="r">(91.2)</td>
+            <td class="r down">+5.7%</td>
+            <td class="r margin">9.6%</td>
+          </tr>
+          <tr class="total">
+            <td class="label"><b>稅息折舊前獲利 EBITDA</b></td>
+            <td class="r amt"><b>190.4</b></td>
+            <td class="r">158.5</td>
+            <td class="r up">+20.1%</td>
+            <td class="r margin">18.9%</td>
+          </tr>
+          <tr>
+            <td class="label">折舊與攤提 D&amp;A</td>
+            <td class="r amt">(78.6)</td>
+            <td class="r">(74.3)</td>
+            <td class="r down">+5.8%</td>
+            <td class="r margin">7.8%</td>
+          </tr>
+          <tr class="grand">
+            <td class="label"><b>營業淨利 EBIT</b></td>
+            <td class="r amt"><b>111.8</b></td>
+            <td class="r">84.2</td>
+            <td class="r up">+32.8%</td>
+            <td class="r margin">11.1%</td>
+          </tr>
         </tbody>
-        <tfoot><tr><td>營收合計</td><td></td><td class="r">1,008.3</td><td class="r">100%</td></tr></tfoot>
       </table>
+    </section>
 
-      <table class="ledger">
-        <caption>成本與費用預算 <span>佔營收比 · NT$ 百萬</span></caption>
-        <thead><tr><th>成本科目</th><th class="bar-cell"></th><th class="r">金額</th><th class="r">佔比</th></tr></thead>
-        <tbody>
-          <tr><td>人事成本</td><td class="bar-cell"><div class="minibar"><i style="width:100%;background:var(--primary)"></i></div></td><td class="r amt">292.4</td><td class="r pct">29.0%</td></tr>
-          <tr><td>餐飲與療癒物料</td><td class="bar-cell"><div class="minibar"><i style="width:40.5%;background:var(--primary-2)"></i></div></td><td class="r amt">118.5</td><td class="r pct">11.8%</td></tr>
-          <tr><td>行銷與通路推廣</td><td class="bar-cell"><div class="minibar"><i style="width:29%;background:var(--primary-2)"></i></div></td><td class="r amt">84.7</td><td class="r pct">8.4%</td></tr>
-          <tr><td>物業與能源</td><td class="bar-cell"><div class="minibar"><i style="width:26%;background:var(--primary-2)"></i></div></td><td class="r amt">76.2</td><td class="r pct">7.6%</td></tr>
-          <tr><td>夥伴佣金與分潤</td><td class="bar-cell"><div class="minibar"><i style="width:20%;background:var(--accent)"></i></div></td><td class="r amt">58.3</td><td class="r pct">5.8%</td></tr>
-          <tr><td>管理與行政 G&A</td><td class="bar-cell"><div class="minibar"><i style="width:17%;background:var(--accent)"></i></div></td><td class="r amt">49.8</td><td class="r pct">4.9%</td></tr>
-          <tr><td>導師與課程外包</td><td class="bar-cell"><div class="minibar"><i style="width:14.2%;background:var(--accent)"></i></div></td><td class="r amt">41.6</td><td class="r pct">4.1%</td></tr>
-        </tbody>
-        <tfoot><tr><td>成本合計</td><td></td><td class="r">721.5</td><td class="r">71.6%</td></tr></tfoot>
-      </table>
+    <!-- ===== FOOTER ===== -->
+    <footer class="foot">
+      <div class="legend">
+        <span><i class="dotlg" style="background:var(--primary)"></i> 客房營收</span>
+        <span><i class="dotlg" style="background:var(--accent)"></i> 療癒活動收入</span>
+        <span><i class="dotlg" style="background:var(--gold)"></i> 企業福祉 ╱ 通路</span>
+        <span><i class="dotlg" style="background:var(--positive)"></i> 達標 ╱ 正成長</span>
+      </div>
+      <div>· 營運報表管理系統 · 數據為展示用模型，全數經內部勾稽一致 提報：商務總監 翁培修 - Hugo · 2026/06/28</div>
+    </footer>
 
-      <div class="gop-band">
-        <div class="item"><div class="v num">1,008.3</div><div class="l">營收合計 NT$ 百萬</div><div class="d up">▲ 11.2% YoY</div></div>
-        <div class="item"><div class="v num">721.5</div><div class="l">成本合計 NT$ 百萬</div><div class="d down">▲ 9.8% YoY</div></div>
-        <div class="item"><div class="v good num">286.8</div><div class="l">毛營業利益 GOP</div><div class="d up">▲ 15.0% YoY</div></div>
-        <div class="item"><div class="v num">28.4%</div><div class="l">GOP 利潤率</div><div class="d up">▲ 0.9pt YoY</div></div>
-      </div>
-    </div>
-  </section>
+  </div>
 
-  <!-- ===== 02 DEPT KPI / TRIAD ===== -->
-  <section class="reveal" style="--i:3">
-    <div class="sec-head">
-      <span class="sec-no">02</span>
-      <h2>部門績效目標管理</h2>
-      <span class="sub">商務三角組合 Triad：業務、數位行銷、營收管理共擔 233 房營收</span>
-    </div>
-    <div class="triad">
-      <div class="dept">
-        <div class="dept-head"><span class="dot" style="background:var(--primary)"></span><h4>療癒業務</h4><span class="owner">本職 · 業務總監</span></div>
-        <div class="dept-body">
-          <div class="kpi">
-            <div class="kpi-top"><span class="kpi-name">新增通路夥伴</span><span class="kpi-val num">21<small> / 24</small></span></div>
-            <div class="track"><i style="width:87.5%"></i></div>
-            <div class="kpi-foot"><span>達成率</span><b class="num">87.5%</b></div>
-          </div>
-          <div class="kpi">
-            <div class="kpi-top"><span class="kpi-name">企業福祉簽約數</span><span class="kpi-val num">16<small> / 18</small></span></div>
-            <div class="track"><i style="width:88.9%"></i></div>
-            <div class="kpi-foot"><span>達成率</span><b class="num">88.9%</b></div>
-          </div>
-          <div class="kpi">
-            <div class="kpi-top"><span class="kpi-name">通路營收貢獻</span><span class="kpi-val num">259M<small> / 276M</small></span></div>
-            <div class="track"><i style="width:93.8%"></i></div>
-            <div class="kpi-foot"><span>達成率</span><b class="num">93.8%</b></div>
-          </div>
-        </div>
-      </div>
-      <div class="dept">
-        <div class="dept-head"><span class="dot" style="background:var(--accent)"></span><h4>數位行銷</h4><span class="owner">Triad · 行銷總監</span></div>
-        <div class="dept-body">
-          <div class="kpi">
-            <div class="kpi-top"><span class="kpi-name">官網直訂佔比</span><span class="kpi-val num">44.3%</span></div>
-            <div class="track"><i style="width:100%;background:var(--accent)"></i></div>
-            <div class="kpi-foot"><span>目標 42.0%</span><b class="num up">+2.3pt</b></div>
-          </div>
-          <div class="kpi">
-            <div class="kpi-top"><span class="kpi-name">官網轉換率</span><span class="kpi-val num">3.5%</span></div>
-            <div class="track"><i style="width:100%;background:var(--accent)"></i></div>
-            <div class="kpi-foot"><span>目標 3.2%</span><b class="num up">+0.3pt</b></div>
-          </div>
-          <div class="kpi">
-            <div class="kpi-top"><span class="kpi-name">獲客成本 CAC</span><span class="kpi-val num">1,640</span></div>
-            <div class="track"><i style="width:78%;background:var(--accent)"></i></div>
-            <div class="kpi-foot"><span>目標 ≤ 2,100</span><b class="num up">優於 22%</b></div>
-          </div>
-        </div>
-      </div>
-      <div class="dept">
-        <div class="dept-head"><span class="dot" style="background:var(--gold)"></span><h4>營收管理</h4><span class="owner">Triad · 營收總監</span></div>
-        <div class="dept-body">
-          <div class="kpi">
-            <div class="kpi-top"><span class="kpi-name">RevPAR 年成長</span><span class="kpi-val num">+9.4%</span></div>
-            <div class="track"><i style="width:100%;background:var(--gold)"></i></div>
-            <div class="kpi-foot"><span>目標 +8.0%</span><b class="num up">+1.4pt</b></div>
-          </div>
-          <div class="kpi">
-            <div class="kpi-top"><span class="kpi-name">綜合 ADR</span><span class="kpi-val num">11,380</span></div>
-            <div class="track"><i style="width:100%;background:var(--gold)"></i></div>
-            <div class="kpi-foot"><span>目標 11,200</span><b class="num up">+1.6%</b></div>
-          </div>
-          <div class="kpi">
-            <div class="kpi-top"><span class="kpi-name">綜合住房率</span><span class="kpi-val num">70.1%</span></div>
-            <div class="track"><i style="width:96%;background:var(--gold)"></i></div>
-            <div class="kpi-foot"><span>目標 73.0%</span><b class="num down">-2.9pt</b></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <script>
+    lucide.createIcons();
 
-  <!-- ===== 03 ALLOCATION ===== -->
-  <section class="reveal" style="--i:4">
-    <div class="sec-head">
-      <span class="sec-no">03</span>
-      <h2>工作任務 ╱ 業績項目分配</h2>
-      <span class="sub">四大深度療癒通路的年度業績配額與當前達成（NT$ 百萬）</span>
-    </div>
-    <div class="alloc">
-      <div class="alloc-row">
-        <div class="alloc-name">高端療癒平台<span>Premium wellness platform 分銷</span></div>
-        <div class="alloc-bar"><i style="width:84%"></i><span class="tgt" style="left:80%"></span></div>
-        <div class="alloc-fig"><div class="a">67.0 / 64.0</div><div class="p up">104.7% 超標</div></div>
-      </div>
-      <div class="alloc-row">
-        <div class="alloc-name">企業福祉計畫<span>Corporate Wellness 長約</span></div>
-        <div class="alloc-bar"><i style="width:82%"></i><span class="tgt" style="left:88%"></span></div>
-        <div class="alloc-fig"><div class="a">82.0 / 88.0</div><div class="p" style="color:var(--warning)">93.2%</div></div>
-      </div>
-      <div class="alloc-row">
-        <div class="alloc-name">身心靈導師通路<span>導師聯盟轉介與聯名活動</span></div>
-        <div class="alloc-bar"><i style="width:71%"></i><span class="tgt" style="left:78%"></span></div>
-        <div class="alloc-fig"><div class="a">71.0 / 78.0</div><div class="p" style="color:var(--warning)">91.0%</div></div>
-      </div>
-      <div class="alloc-row">
-        <div class="alloc-name">商學院 EMBA 合作<span>企業領袖修復課程</span></div>
-        <div class="alloc-bar"><i style="width:39%"></i><span class="tgt" style="left:46%"></span></div>
-        <div class="alloc-fig"><div class="a">39.0 / 46.0</div><div class="p down">84.8% 待補</div></div>
-      </div>
-      <div class="alloc-row" style="border-top:1.5px solid var(--ink); border-bottom:none; padding-top:var(--space-4)">
-        <div class="alloc-name" style="font-family:'Noto Serif TC';font-weight:600">通路配額合計</div>
-        <div class="alloc-bar"><i style="width:93%"></i><span class="tgt" style="left:100%"></span></div>
-        <div class="alloc-fig"><div class="a" style="font-size:1.15rem;color:var(--primary)">259.0 / 276.0</div><div class="p" style="color:var(--ink-soft)">93.8% 達成</div></div>
-      </div>
-    </div>
-  </section>
+    const ink = '#3c2733', mute = '#9a8a90', line = '#e7ddd9';
+    const primary = '#7a2e48', accent = '#c1764a', gold = '#c79a5b', positive = '#4f9171', primary2 = '#a8466a';
+    Chart.defaults.font.family = "'Noto Sans TC', sans-serif";
+    Chart.defaults.font.size = 12;
+    Chart.defaults.color = mute;
 
-  <!-- ===== 04 TARGET ACHIEVEMENT ===== -->
-  <section class="reveal" style="--i:5">
-    <div class="sec-head">
-      <span class="sec-no">04</span>
-      <h2>業績目標達成</h2>
-      <span class="sub">季度營收目標 vs 實際 ╱ 預估，上半年已封帳 Q1、Q2 結算中</span>
-    </div>
-    <div class="q-wrap">
-      <div class="panel">
-        <h4>季度營收達成 <span>NT$ 百萬 · 目標 vs 實際</span></h4>
-        <div class="chart-box"><canvas id="qChart"></canvas></div>
-      </div>
-      <div class="ytd-card">
-        <div class="eyebrow">上半年累計達成率</div>
-        <div class="ytd-big num">101.2%</div>
-        <div class="lab">H1 實際 ╱ 預估 486.2M，目標 480.5M，超標 5.7M</div>
-        <div class="ytd-rows">
-          <div class="ytd-line"><span>Q1 實際達成</span><b class="num up">103.2%</b></div>
-          <div class="ytd-line"><span>Q2 結算預估</span><b class="num">99.3%</b></div>
-          <div class="ytd-line"><span>全年目標</span><b class="num">1,008.3M</b></div>
-          <div class="ytd-line"><span>下半年待達成</span><b class="num">522.1M</b></div>
-        </div>
-      </div>
-    </div>
-  </section>
+    // Quarterly target vs actual
+    new Chart(document.getElementById('qChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Q1 已封帳', 'Q2 結算中', 'Q3 預估', 'Q4 預估'],
+        datasets: [
+          { label: '目標', data: [232.0, 248.5, 261.4, 266.4], backgroundColor: 'rgba(122,46,72,0.18)', borderColor: primary, borderWidth: 1, borderRadius: 3, barPercentage: 0.62, categoryPercentage: 0.7 },
+          { label: '實際 ╱ 預估', data: [239.4, 246.8, 261.4, 266.4], backgroundColor: primary, borderRadius: 3, barPercentage: 0.62, categoryPercentage: 0.7 }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'bottom', labels: { boxWidth: 10, boxHeight: 10, padding: 16, usePointStyle: true } },
+          tooltip: { callbacks: { label: c => c.dataset.label + ': NT$ ' + c.parsed.y + 'M' } }
+        },
+        scales: { y: { beginAtZero: false, min: 200, grid: { color: line }, ticks: { callback: v => v + 'M' } }, x: { grid: { display: false } } }
+      }
+    });
 
-  <!-- ===== 05 FINANCIAL & OPERATING ANALYSIS ===== -->
-  <section class="reveal" style="--i:6">
-    <div class="sec-head">
-      <span class="sec-no">05</span>
-      <h2>財務及營業分析</h2>
-      <span class="sub">RevPAR 走勢、營收結構與關鍵營運指標</span>
-    </div>
-    <div class="analysis">
-      <div class="panel">
-        <h4>綜合 RevPAR 月走勢 <span>NT$ · 12 個月預估</span></h4>
-        <div class="chart-box"><canvas id="revparChart"></canvas></div>
-      </div>
-      <div class="panel">
-        <h4>營收結構 <span>客房 vs 療癒收入</span></h4>
-        <div class="chart-box sm"><canvas id="mixChart"></canvas></div>
-      </div>
-    </div>
-    <div class="opmetrics">
-      <div class="opm"><div class="v num">7,978</div><div class="l">綜合 RevPAR (NT$)</div><div class="d up">▲ 9.4% YoY</div></div>
-      <div class="opm"><div class="v num">59,615</div><div class="l">全年售出房晚數</div><div class="d up">▲ 3.1% YoY</div></div>
-      <div class="opm"><div class="v num">32.7%</div><div class="l">非客房營收佔比</div><div class="d up">▲ 2.4pt YoY</div></div>
-      <div class="opm"><div class="v num">18.9%</div><div class="l">EBITDA 利潤率</div><div class="d up">▲ 1.1pt YoY</div></div>
-      <div class="opm"><div class="v num">34.0%</div><div class="l">修復週末回購率</div><div class="d up">▲ 5.0pt YoY</div></div>
-      <div class="opm"><div class="v num">72</div><div class="l">AVATA 方案 NPS</div><div class="d up">▲ 6 pts YoY</div></div>
-    </div>
-  </section>
+    // RevPAR trend
+    new Chart(document.getElementById('revparChart'), {
+      type: 'line',
+      data: {
+        labels: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+        datasets: [{
+          data: [8650, 8820, 7940, 7510, 7680, 7420, 7890, 8340, 7760, 8210, 8480, 9020],
+          borderColor: primary, borderWidth: 2.5, tension: 0.4, fill: true,
+          backgroundColor: (ctx) => { const g = ctx.chart.ctx.createLinearGradient(0, 0, 0, 240); g.addColorStop(0, 'rgba(122,46,72,0.20)'); g.addColorStop(1, 'rgba(122,46,72,0)'); return g; },
+          pointRadius: 0, pointHoverRadius: 5, pointHoverBackgroundColor: primary
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => 'RevPAR NT$ ' + c.parsed.y.toLocaleString() } } },
+        scales: { y: { grid: { color: line }, ticks: { callback: v => (v / 1000) + 'k' } }, x: { grid: { display: false } } }
+      }
+    });
 
-  <!-- ===== 06 SIGNATURE PROGRAMS ===== -->
-  <section class="reveal" style="--i:7">
-    <div class="sec-head">
-      <span class="sec-no">06</span>
-      <h2>主導療癒活動</h2>
-      <span class="sub">三大旗艦療癒方案的商務推廣成果</span>
-    </div>
-    <div class="programs">
-      <div class="prog">
-        <div class="prog-banner p1"><span class="tag">山形閣</span><h4>深眠餐飲</h4><div class="brand-of">Deep Sleep Dining</div></div>
-        <div class="prog-body">
-          <div class="prog-stat"><span class="l">全年來客人次</span><span class="v num">14,440</span></div>
-          <div class="prog-stat"><span class="l">平均客單價</span><span class="v num">NT$ 6,800</span></div>
-          <div class="prog-stat"><span class="l">席次滿座率</span><span class="v num">88%</span></div>
-        </div>
-        <div class="prog-rev"><span class="l">年度營收</span><span class="v num">NT$ 98.2M</span></div>
-      </div>
-      <div class="prog">
-        <div class="prog-banner p2"><span class="tag">兩館聯名</span><h4>修復週末</h4><div class="brand-of">Restoration Weekend</div></div>
-        <div class="prog-body">
-          <div class="prog-stat"><span class="l">售出套裝數</span><span class="v num">1,840</span></div>
-          <div class="prog-stat"><span class="l">平均套裝價</span><span class="v num">NT$ 33,900</span></div>
-          <div class="prog-stat"><span class="l">客戶回購率</span><span class="v num">34%</span></div>
-        </div>
-        <div class="prog-rev"><span class="l">年度營收</span><span class="v num">NT$ 62.4M</span></div>
-      </div>
-      <div class="prog">
-        <div class="prog-banner p3"><span class="tag">AVATA</span><h4>AVATA 療癒方案</h4><div class="brand-of">AVATA Healing Program</div></div>
-        <div class="prog-body">
-          <div class="prog-stat"><span class="l">全年參與人次</span><span class="v num">4,260</span></div>
-          <div class="prog-stat"><span class="l">平均方案價</span><span class="v num">NT$ 12,700</span></div>
-          <div class="prog-stat"><span class="l">淨推薦分數 NPS</span><span class="v num">72</span></div>
-        </div>
-        <div class="prog-rev"><span class="l">年度營收</span><span class="v num">NT$ 54.1M</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== 07 BUDGET REVIEW ===== -->
-  <section class="reveal" style="--i:8">
-    <div class="sec-head">
-      <span class="sec-no">07</span>
-      <h2>審核年度預算</h2>
-      <span class="sub">FY2026 各項預算核閱狀態與待決資本支出</span>
-    </div>
-    <div class="approval">
-      <div class="flow">
-        <div class="flow-row">
-          <div class="flow-ic"><i data-lucide="bed-double"></i></div>
-          <div class="flow-name">客房營收預算<span>兩館合計 678.5M</span></div>
-          <div class="flow-amt">678.5M</div>
-          <span class="badge ok">已核准</span>
-        </div>
-        <div class="flow-row">
-          <div class="flow-ic"><i data-lucide="sparkles"></i></div>
-          <div class="flow-name">療癒活動預算<span>深眠餐飲 ╱ 修復週末 ╱ AVATA</span></div>
-          <div class="flow-amt">214.7M</div>
-          <span class="badge ok">已核准</span>
-        </div>
-        <div class="flow-row">
-          <div class="flow-ic"><i data-lucide="megaphone"></i></div>
-          <div class="flow-name">行銷與通路預算<span>數位行銷 Triad 提報</span></div>
-          <div class="flow-amt">84.7M</div>
-          <span class="badge rev">審核中</span>
-        </div>
-        <div class="flow-row">
-          <div class="flow-ic"><i data-lucide="users"></i></div>
-          <div class="flow-name">人事擴編預算<span>療癒導師與業務團隊 +14 人</span></div>
-          <div class="flow-amt">31.2M</div>
-          <span class="badge ok">已核准</span>
-        </div>
-        <div class="flow-row">
-          <div class="flow-ic"><i data-lucide="hammer"></i></div>
-          <div class="flow-name">資本支出 CapEx<span>山形閣深眠客房改造</span></div>
-          <div class="flow-amt">48.5M</div>
-          <span class="badge pend">待提報</span>
-        </div>
-      </div>
-      <div class="capex-note">
-        <p class="eyebrow">待決事項 · 董事會核示</p>
-        <h4>深眠客房改造案</h4>
-        <p>山形閣 38 間客房升級為深眠房型，導入隔音、調光與寢具系統。預估改造後該房型 ADR 提升 18%，投資回收期 2.7 年。</p>
-        <div class="big num">NT$ 48.5M</div>
-        <p style="margin-top:var(--space-2)">預期年增營收 <b class="num">+26.4M</b> · 內部報酬率 IRR <b class="num">31%</b></p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== 08 FINANCIAL REPORT ===== -->
-  <section class="reveal" style="--i:9">
-    <div class="sec-head">
-      <span class="sec-no">08</span>
-      <h2>編制財務報告</h2>
-      <span class="sub">FY2026 損益彙總 P&amp;L · 合併兩館（NT$ 百萬）</span>
-    </div>
-    <table class="pl">
-      <thead><tr><th>損益科目</th><th class="r">本年 FY2026</th><th class="r">去年 FY2025</th><th class="r">YoY</th><th class="r">營收佔比</th></tr></thead>
-      <tbody>
-        <tr><td class="label"><b>營業收入</b><small>客房 + 療癒收入</small></td><td class="r amt">1,008.3</td><td class="r">906.8</td><td class="r up">+11.2%</td><td class="r margin">100%</td></tr>
-        <tr><td class="label">營業成本與費用</td><td class="r amt">(721.5)</td><td class="r">(657.1)</td><td class="r down">+9.8%</td><td class="r margin">71.6%</td></tr>
-        <tr class="total"><td class="label"><b>毛營業利益 GOP</b></td><td class="r amt"><b>286.8</b></td><td class="r">249.7</td><td class="r up">+15.0%</td><td class="r margin">28.4%</td></tr>
-        <tr><td class="label">固定費用<small>租金 ╱ 保險 ╱ 房屋稅</small></td><td class="r amt">(96.4)</td><td class="r">(91.2)</td><td class="r down">+5.7%</td><td class="r margin">9.6%</td></tr>
-        <tr class="total"><td class="label"><b>稅息折舊前獲利 EBITDA</b></td><td class="r amt"><b>190.4</b></td><td class="r">158.5</td><td class="r up">+20.1%</td><td class="r margin">18.9%</td></tr>
-        <tr><td class="label">折舊與攤提 D&amp;A</td><td class="r amt">(78.6)</td><td class="r">(74.3)</td><td class="r down">+5.8%</td><td class="r margin">7.8%</td></tr>
-        <tr class="grand"><td class="label"><b>營業淨利 EBIT</b></td><td class="r amt"><b>111.8</b></td><td class="r">84.2</td><td class="r up">+32.8%</td><td class="r margin">11.1%</td></tr>
-      </tbody>
-    </table>
-  </section>
-
-  <!-- ===== FOOTER ===== -->
-  <footer class="foot">
-    <div class="legend">
-      <span><i class="dotlg" style="background:var(--primary)"></i> 客房營收</span>
-      <span><i class="dotlg" style="background:var(--accent)"></i> 療癒活動收入</span>
-      <span><i class="dotlg" style="background:var(--gold)"></i> 企業福祉 ╱ 通路</span>
-      <span><i class="dotlg" style="background:var(--positive)"></i> 達標 ╱ 正成長</span>
-    </div>
-    <div>SANARA HEALING COLLECTION · 營運報表管理系統 · 數據為展示用模型，全數經內部勾稽一致</div>
-  </footer>
-
-</div>
-
-<script>
-lucide.createIcons();
-
-const ink='#3c2733', mute='#9a8a90', line='#e7ddd9';
-const primary='#7a2e48', accent='#c1764a', gold='#c79a5b', positive='#4f9171', primary2='#a8466a';
-Chart.defaults.font.family="'Noto Sans TC', sans-serif";
-Chart.defaults.font.size=12;
-Chart.defaults.color=mute;
-
-// Quarterly target vs actual
-new Chart(document.getElementById('qChart'),{
-  type:'bar',
-  data:{
-    labels:['Q1 已封帳','Q2 結算中','Q3 預估','Q4 預估'],
-    datasets:[
-      {label:'目標',data:[232.0,248.5,261.4,266.4],backgroundColor:'rgba(122,46,72,0.18)',borderColor:primary,borderWidth:1,borderRadius:3,barPercentage:0.62,categoryPercentage:0.7},
-      {label:'實際 ╱ 預估',data:[239.4,246.8,261.4,266.4],backgroundColor:primary,borderRadius:3,barPercentage:0.62,categoryPercentage:0.7}
-    ]
-  },
-  options:{responsive:true,maintainAspectRatio:false,
-    plugins:{legend:{position:'bottom',labels:{boxWidth:10,boxHeight:10,padding:16,usePointStyle:true}},
-      tooltip:{callbacks:{label:c=>c.dataset.label+': NT$ '+c.parsed.y+'M'}}},
-    scales:{y:{beginAtZero:false,min:200,grid:{color:line},ticks:{callback:v=>v+'M'}},x:{grid:{display:false}}}}
-});
-
-// RevPAR trend
-new Chart(document.getElementById('revparChart'),{
-  type:'line',
-  data:{labels:['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
-    datasets:[{data:[8650,8820,7940,7510,7680,7420,7890,8340,7760,8210,8480,9020],
-      borderColor:primary,borderWidth:2.5,tension:0.4,fill:true,
-      backgroundColor:(ctx)=>{const g=ctx.chart.ctx.createLinearGradient(0,0,0,240);g.addColorStop(0,'rgba(122,46,72,0.20)');g.addColorStop(1,'rgba(122,46,72,0)');return g;},
-      pointRadius:0,pointHoverRadius:5,pointHoverBackgroundColor:primary}]},
-  options:{responsive:true,maintainAspectRatio:false,
-    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'RevPAR NT$ '+c.parsed.y.toLocaleString()}}},
-    scales:{y:{grid:{color:line},ticks:{callback:v=>(v/1000)+'k'}},x:{grid:{display:false}}}}
-});
-
-// Revenue mix donut
-new Chart(document.getElementById('mixChart'),{
-  type:'doughnut',
-  data:{labels:['客房 67.3%','深眠餐飲 9.7%','療癒 SPA 7.1%','修復週末 6.2%','AVATA 方案 5.4%','企業福祉 4.3%'],
-    datasets:[{data:[678.5,98.2,71.3,62.4,54.1,43.8],
-      backgroundColor:[primary,accent,'#d18f63',gold,'#5b8fa8',positive],borderColor:'#fdfbfa',borderWidth:2}]},
-  options:{responsive:true,maintainAspectRatio:false,cutout:'62%',
-    plugins:{legend:{position:'right',labels:{boxWidth:9,boxHeight:9,padding:9,usePointStyle:true,font:{size:11}}},
-      tooltip:{callbacks:{label:c=>c.label.split(' ')[0]+': NT$ '+c.parsed+'M'}}}}
-});
-</script>
+    // Revenue mix donut
+    new Chart(document.getElementById('mixChart'), {
+      type: 'doughnut',
+      data: {
+        labels: ['客房 67.3%', '深眠餐飲 9.7%', '療癒 SPA 7.1%', '修復週末 6.2%', 'AVATA 方案 5.4%', '企業福祉 4.3%'],
+        datasets: [{
+          data: [678.5, 98.2, 71.3, 62.4, 54.1, 43.8],
+          backgroundColor: [primary, accent, '#d18f63', gold, '#5b8fa8', positive], borderColor: '#fdfbfa', borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false, cutout: '62%',
+        plugins: {
+          legend: { position: 'right', labels: { boxWidth: 9, boxHeight: 9, padding: 9, usePointStyle: true, font: { size: 11 } } },
+          tooltip: { callbacks: { label: c => c.label.split(' ')[0] + ': NT$ ' + c.parsed + 'M' } }
+        }
+      }
+    });
+  </script>
 </body>
+
 </html>
