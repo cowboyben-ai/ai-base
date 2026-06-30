@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<!-- skill:chrome -->
+<style>
+/* Credit line — bottom-right */
+.design-ui-credit {
+  position: fixed;
+  bottom: 12px;
+  right: 12px;
+  font: 11px/1 system-ui, sans-serif;
+  color: rgba(128,128,128,0.5);
+  pointer-events: none;
+  z-index: 2147483647;
+  transition: opacity 0.4s ease;
+  user-select: none;
+  letter-spacing: 0.02em;
+}
+
+/* Hide chrome on touch devices */
+@media (hover: none) {
+  .design-ui-credit { display: none; }
+}
+
+/* Print fixes */
+@media print {
+  * {
+    transition: none !important;
+    animation: none !important;
+    box-shadow: none !important;
+  }
+  body {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  .design-ui-credit { display: none !important; }
+}
+
+</style>
+<script>
+(function () {
+    // Chrome UI (hover devices only): credit badge with idle-fade.
+    // Deferred until body exists since the script may run in <head>.
+    function initChromeUI() {
+        if (!matchMedia('(hover: hover)').matches) return;
+
+        var credit = document.createElement('div');
+        credit.className = 'design-ui-credit';
+        credit.setAttribute('aria-hidden', 'true');
+        credit.innerHTML = '\u{1F49C} by ClickUp Brain';
+        document.body.appendChild(credit);
+
+        var timer = null;
+        var fade = function (out) { credit.style.opacity = out ? '0' : ''; };
+        fade(true);
+        var show = function () {
+            fade(false);
+            clearTimeout(timer);
+            timer = setTimeout(function () { fade(true); }, 3000);
+        };
+        document.addEventListener('mousemove', show);
+        show();
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initChromeUI);
+    } else {
+        initChromeUI();
+    }
+})();
+
+</script>
+<!-- /skill:chrome -->
+<!-- skill:libraries -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js" integrity="sha384-XcdcwHqIPULERb2yDEM4R0XaQKU3YnDsrTmjACBZyfdVVqjh6xQ4/DCMd7XLcA6Y" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.383.0/dist/umd/lucide.min.js" integrity="sha384-wHFvAtjmgnkA2PJcMsDaCgdipf7X7YV44X/igbLHpvGiq6T5/PvFKl93grpvtbQT" crossorigin="anonymous"></script>
+<script>document.addEventListener("DOMContentLoaded",()=>lucide.createIcons())</script>
+<!-- /skill:libraries -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>鐵芯健身工作室 · 經營管理報告 2026 H1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: oklch(98.2% 0.006 70);
+    --surface: oklch(99.5% 0.004 70);
+    --surface-2: oklch(96.6% 0.008 70);
+    --border: oklch(89% 0.009 65);
+    --border-strong: oklch(82% 0.012 62);
+    --ink: oklch(27% 0.013 55);
+    --ink-soft: oklch(43% 0.012 58);
+    --ink-mute: oklch(57% 0.01 62);
+    --ink-faint: oklch(70% 0.008 64);
+
+    --clay: oklch(54% 0.118 42);
+    --clay-deep: oklch(43% 0.10 42);
+    --clay-soft: oklch(93% 0.03 50);
+    --amber: oklch(73% 0.11 72);
+    --gold: oklch(82% 0.075 92);
+    --sage: oklch(60% 0.062 152);
+    --slate: oklch(54% 0.05 222);
+
+    --pos: oklch(50% 0.09 152);
+    --pos-bg: oklch(94.5% 0.035 152);
+    --neg: oklch(54% 0.16 28);
+    --neg-bg: oklch(95% 0.035 30);
+
+    --space-2: 2px; --space-4: 4px; --space-8: 8px; --space-12: 12px;
+    --space-16: 16px; --space-20: 20px; --space-24: 24px; --space-32: 32px;
+    --space-40: 40px; --space-48: 48px; --space-64: 64px; --space-96: 96px;
+
+    --r-sm: 6px; --r-md: 10px; --r-lg: 16px;
+    --shadow-sm: 0 1px 2px oklch(40% 0.02 60 / 0.05), 0 1px 1px oklch(40% 0.02 60 / 0.04);
+    --shadow-md: 0 4px 16px oklch(40% 0.03 60 / 0.06), 0 1px 3px oklch(40% 0.02 60 / 0.05);
+    --ease-out: cubic-bezier(0.16,1,0.3,1);
+    --ease-out-quint: cubic-bezier(0.22,1,0.36,1);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Noto Sans TC",system-ui,sans-serif;
+    font-weight:400;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    font-optical-sizing:auto;
+  }
+  h1,h2,h3,h4{font-family:"Noto Serif TC",serif;line-height:1.25;text-wrap:balance;color:var(--ink);font-weight:600}
+  .tnum{font-variant-numeric:tabular-nums}
+  .eyebrow{
+    font-family:"Noto Sans TC",sans-serif;
+    font-size:0.72rem;font-weight:600;letter-spacing:0.16em;
+    text-transform:uppercase;color:var(--clay);
+  }
+
+  /* ===== Top bar ===== */
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    background:oklch(98.2% 0.006 70 / 0.86);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border);
+  }
+  .topbar-inner{
+    max-width:1240px;margin:0 auto;padding:14px var(--space-32);
+    display:flex;align-items:center;justify-content:space-between;gap:var(--space-24);
+  }
+  .brand{display:flex;align-items:center;gap:var(--space-12)}
+  .brand-mark{
+    width:34px;height:34px;border-radius:9px;background:var(--clay);
+    display:grid;place-items:center;color:var(--paper);
+    font-family:"Noto Serif TC",serif;font-weight:700;font-size:1.05rem;
+    box-shadow:inset 0 0 0 1px oklch(40% 0.10 42 / 0.5);
+  }
+  .brand-name{font-family:"Noto Serif TC",serif;font-weight:600;font-size:1.02rem;letter-spacing:0.01em}
+  .brand-sub{font-size:0.7rem;color:var(--ink-mute);letter-spacing:0.04em}
+  .topnav{display:flex;gap:var(--space-4);font-size:0.82rem}
+  .topnav a{
+    color:var(--ink-soft);text-decoration:none;padding:6px 12px;border-radius:var(--r-sm);
+    transition:background .2s var(--ease-out),color .2s var(--ease-out);
+  }
+  .topnav a:hover{background:var(--surface-2);color:var(--ink)}
+  .topbar-meta{display:flex;align-items:center;gap:var(--space-16);font-size:0.8rem}
+  .period-chip{
+    display:inline-flex;align-items:center;gap:6px;padding:6px 12px;
+    border:1px solid var(--border-strong);border-radius:999px;
+    color:var(--ink-soft);font-weight:500;background:var(--surface);
+  }
+  .period-chip i{width:14px;height:14px;color:var(--clay)}
+
+  .wrap{max-width:1240px;margin:0 auto;padding:0 var(--space-32)}
+
+  /* ===== Report head ===== */
+  .report-head{padding:var(--space-64) 0 var(--space-40)}
+  .report-head .eyebrow{margin-bottom:var(--space-16)}
+  .report-head h1{font-size:clamp(2.1rem,4.4vw,3.3rem);font-weight:700;letter-spacing:-0.01em}
+  .report-head .lede{
+    margin-top:var(--space-16);max-width:60ch;color:var(--ink-soft);
+    font-size:1.06rem;line-height:1.7;
+  }
+  .head-row{display:flex;flex-wrap:wrap;gap:var(--space-32);align-items:flex-end;justify-content:space-between}
+  .head-by{display:flex;gap:var(--space-24);flex-wrap:wrap;font-size:0.85rem}
+  .head-by .by-item{display:flex;flex-direction:column;gap:2px}
+  .head-by .by-k{color:var(--ink-mute);font-size:0.74rem;letter-spacing:0.06em}
+  .head-by .by-v{color:var(--ink);font-weight:500}
+
+  /* ===== KPI strip ===== */
+  .kpi-strip{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+    border-top:2px solid var(--ink);border-bottom:1px solid var(--border);
+    margin-top:var(--space-32);
+  }
+  .kpi{
+    padding:var(--space-24) var(--space-24) var(--space-24) 0;
+    border-right:1px solid var(--border);
+  }
+  .kpi:last-child{border-right:none}
+  .kpi .k-label{font-size:0.78rem;color:var(--ink-mute);letter-spacing:0.04em;margin-bottom:var(--space-8)}
+  .kpi .k-val{font-family:"Noto Serif TC",serif;font-size:1.92rem;font-weight:600;letter-spacing:-0.01em;line-height:1.1}
+  .kpi .k-val .unit{font-size:0.95rem;color:var(--ink-mute);font-family:"Noto Sans TC";font-weight:400;margin-left:3px}
+  .kpi .k-foot{margin-top:var(--space-8);font-size:0.78rem;display:flex;align-items:center;gap:6px;color:var(--ink-mute)}
+  .delta{display:inline-flex;align-items:center;gap:3px;font-weight:600;padding:1px 7px;border-radius:999px;font-size:0.74rem}
+  .delta.up{color:var(--pos);background:var(--pos-bg)}
+  .delta.down{color:var(--neg);background:var(--neg-bg)}
+  .delta i{width:12px;height:12px}
+
+  /* ===== Section ===== */
+  section.block{padding:var(--space-64) 0;border-bottom:1px solid var(--border)}
+  .sec-head{display:flex;align-items:baseline;gap:var(--space-16);margin-bottom:var(--space-32);flex-wrap:wrap}
+  .sec-no{
+    font-family:"Noto Serif TC",serif;font-size:0.95rem;color:var(--clay);
+    font-weight:600;border:1px solid var(--clay-soft);background:var(--clay-soft);
+    width:38px;height:38px;border-radius:9px;display:grid;place-items:center;flex:none;
+  }
+  .sec-titles h2{font-size:clamp(1.4rem,2.6vw,1.85rem);font-weight:600}
+  .sec-titles .sec-sub{color:var(--ink-mute);font-size:0.9rem;margin-top:3px}
+
+  .grid{display:grid;gap:var(--space-24)}
+  .g-2{grid-template-columns:1.5fr 1fr}
+  .g-58{grid-template-columns:1.35fr 1fr}
+  .panel{
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);
+    padding:var(--space-24);box-shadow:var(--shadow-sm);
+  }
+  .panel.flush{padding:var(--space-24) var(--space-24) var(--space-20)}
+  .panel-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-20);gap:var(--space-12)}
+  .panel-head h3{font-size:1.04rem;font-weight:600}
+  .panel-head .ph-sub{font-size:0.78rem;color:var(--ink-mute)}
+
+  .toggle{display:inline-flex;border:1px solid var(--border-strong);border-radius:999px;padding:2px;background:var(--surface-2)}
+  .toggle button{
+    border:none;background:transparent;font-family:inherit;font-size:0.76rem;font-weight:500;
+    color:var(--ink-mute);padding:4px 13px;border-radius:999px;cursor:pointer;transition:.2s var(--ease-out);
+  }
+  .toggle button.on{background:var(--surface);color:var(--ink);box-shadow:var(--shadow-sm)}
+
+  .chart-box{position:relative;height:280px}
+  .chart-box.tall{height:320px}
+  .chart-box.short{height:150px}
+
+  /* ===== Revenue mix bars ===== */
+  .mix-row{display:flex;align-items:center;gap:var(--space-12);padding:11px 0;border-bottom:1px dashed var(--border)}
+  .mix-row:last-child{border-bottom:none}
+  .mix-name{flex:none;width:104px;font-size:0.86rem;font-weight:500}
+  .mix-track{flex:1;height:9px;background:var(--surface-2);border-radius:999px;overflow:hidden}
+  .mix-fill{height:100%;border-radius:999px;transform-origin:left;transform:scaleX(0);transition:transform 1s var(--ease-out-quint)}
+  .mix-val{flex:none;width:118px;text-align:right;font-size:0.85rem;color:var(--ink-soft)}
+  .mix-val b{color:var(--ink);font-weight:600}
+  .mix-pct{flex:none;width:48px;text-align:right;font-size:0.78rem;color:var(--ink-mute)}
+
+  /* ===== Attainment ring ===== */
+  .ring-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--space-12);height:100%}
+  .ring{position:relative;width:172px;height:172px}
+  .ring svg{transform:rotate(-90deg)}
+  .ring-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .ring-center .rc-val{font-family:"Noto Serif TC",serif;font-size:2.4rem;font-weight:700;line-height:1}
+  .ring-center .rc-lbl{font-size:0.74rem;color:var(--ink-mute);margin-top:4px;letter-spacing:0.04em}
+  .ring-legend{font-size:0.82rem;color:var(--ink-soft);text-align:center}
+  .ring-legend b{color:var(--ink);font-weight:600}
+
+  /* ===== Tables ===== */
+  table{width:100%;border-collapse:collapse;font-size:0.875rem}
+  thead th{
+    text-align:right;font-weight:600;color:var(--ink-mute);font-size:0.74rem;
+    letter-spacing:0.05em;padding:0 var(--space-12) var(--space-12);border-bottom:1px solid var(--border-strong);
+    white-space:nowrap;
+  }
+  thead th.l{text-align:left}
+  tbody td{padding:13px var(--space-12);border-bottom:1px solid var(--border);text-align:right;color:var(--ink-soft)}
+  tbody td.l{text-align:left;color:var(--ink);font-weight:500}
+  tbody tr:hover{background:var(--surface-2)}
+  tbody tr.total td{font-weight:700;color:var(--ink);border-top:2px solid var(--ink);border-bottom:none;background:transparent}
+  .var-pos{color:var(--pos);font-weight:600}
+  .var-neg{color:var(--neg);font-weight:600}
+  .micro-track{display:inline-block;width:62px;height:6px;background:var(--surface-2);border-radius:999px;overflow:hidden;vertical-align:middle;margin-left:8px}
+  .micro-fill{display:block;height:100%;border-radius:999px}
+  .pill{display:inline-block;font-size:0.72rem;font-weight:600;padding:2px 9px;border-radius:999px}
+  .pill.ok{color:var(--pos);background:var(--pos-bg)}
+  .pill.warn{color:oklch(50% 0.11 75);background:oklch(94% 0.05 80)}
+  .pill.miss{color:var(--neg);background:var(--neg-bg)}
+
+  /* ===== Dept scorecard ===== */
+  .dept-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));gap:var(--space-16)}
+  .dept{border:1px solid var(--border);border-radius:var(--r-md);padding:var(--space-20);background:var(--surface)}
+  .dept-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-16)}
+  .dept-name{font-weight:600;font-size:0.96rem;display:flex;align-items:center;gap:8px}
+  .dept-name i{width:17px;height:17px;color:var(--clay)}
+  .dept-score{font-family:"Noto Serif TC",serif;font-weight:700;font-size:1.25rem}
+  .dept-kpi{display:flex;justify-content:space-between;align-items:center;font-size:0.83rem;padding:6px 0;border-top:1px dashed var(--border)}
+  .dept-kpi .dk-k{color:var(--ink-mute)}
+  .dept-kpi .dk-v{font-weight:600;font-variant-numeric:tabular-nums}
+
+  /* ===== Two-col financial ===== */
+  .fin-statement td.l{font-weight:400;color:var(--ink-soft)}
+  .fin-statement tr.major td.l{font-weight:600;color:var(--ink)}
+  .fin-statement tr.indent td.l{padding-left:var(--space-24);color:var(--ink-mute)}
+
+  .ratio-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--space-16)}
+  .ratio{padding:var(--space-16);border:1px solid var(--border);border-radius:var(--r-md);background:var(--surface)}
+  .ratio .r-k{font-size:0.78rem;color:var(--ink-mute);margin-bottom:6px}
+  .ratio .r-v{font-family:"Noto Serif TC",serif;font-size:1.5rem;font-weight:600;line-height:1}
+  .ratio .r-note{font-size:0.74rem;color:var(--ink-faint);margin-top:5px}
+
+  /* ===== Budget review workflow ===== */
+  .flow{display:flex;gap:var(--space-8);flex-wrap:wrap;margin-bottom:var(--space-24)}
+  .flow-step{
+    flex:1;min-width:150px;border:1px solid var(--border);border-radius:var(--r-md);
+    padding:var(--space-16);position:relative;background:var(--surface);
+  }
+  .flow-step.done{border-color:var(--pos);background:var(--pos-bg)}
+  .flow-step.active{border-color:var(--clay);background:var(--clay-soft);box-shadow:var(--shadow-sm)}
+  .flow-step .fs-no{font-size:0.72rem;font-weight:600;letter-spacing:0.06em;color:var(--ink-mute);display:flex;align-items:center;gap:6px}
+  .flow-step.done .fs-no{color:var(--pos)}
+  .flow-step.active .fs-no{color:var(--clay-deep)}
+  .flow-step .fs-no i{width:14px;height:14px}
+  .flow-step .fs-name{font-weight:600;font-size:0.92rem;margin-top:6px}
+  .flow-step .fs-meta{font-size:0.75rem;color:var(--ink-mute);margin-top:3px}
+
+  .assume{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--space-12);margin-top:var(--space-8)}
+  .assume-item{display:flex;gap:var(--space-12);align-items:flex-start;padding:var(--space-12);background:var(--surface-2);border-radius:var(--r-md)}
+  .assume-item i{width:18px;height:18px;color:var(--clay);flex:none;margin-top:2px}
+  .assume-item .ai-k{font-size:0.74rem;color:var(--ink-mute)}
+  .assume-item .ai-v{font-weight:600;font-size:0.9rem}
+
+  .callout{
+    margin-top:var(--space-24);padding:var(--space-20) var(--space-24);
+    background:var(--clay-soft);border:1px solid oklch(86% 0.04 50);border-radius:var(--r-md);
+    font-size:0.9rem;color:var(--clay-deep);line-height:1.65;
+  }
+  .callout b{font-weight:700}
+
+  /* ===== Footer ===== */
+  footer{padding:var(--space-48) 0 var(--space-64);color:var(--ink-mute);font-size:0.8rem}
+  footer .f-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:var(--space-16);align-items:center}
+  .unit-note{font-size:0.76rem;color:var(--ink-faint);margin-bottom:var(--space-16)}
+
+  .reveal{opacity:0;transform:translateY(18px)}
+  .reveal.in{opacity:1;transform:none;transition:opacity .7s var(--ease-out),transform .7s var(--ease-out)}
+
+  @media (max-width:900px){
+    .g-2,.g-58{grid-template-columns:1fr}
+    .topnav{display:none}
+    .wrap{padding:0 var(--space-20)}
+    .ratio-grid{grid-template-columns:repeat(2,1fr)}
+  }
+  @media (max-width:560px){
+    .topbar-meta .period-chip{display:none}
+    .kpi{padding-right:var(--space-16)}
+    .report-head{padding-top:var(--space-40)}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none}
+    *{scroll-behavior:auto}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== TOP BAR ===== -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="brand-mark">芯</div>
+      <div>
+        <div class="brand-name">鐵芯健身工作室</div>
+        <div class="brand-sub">IRONCORE FITNESS STUDIO</div>
+      </div>
+    </div>
+    <nav class="topnav">
+      <a href="#s1">業績達成</a>
+      <a href="#s2">預算控管</a>
+      <a href="#s3">部門績效</a>
+      <a href="#s4">任務分配</a>
+      <a href="#s5">營運分析</a>
+      <a href="#s6">財務報告</a>
+      <a href="#s7">年度預算</a>
+    </nav>
+    <div class="topbar-meta">
+      <span class="period-chip"><i data-lucide="calendar-range"></i>2026 上半年</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- ===== REPORT HEAD ===== -->
+  <div class="report-head">
+    <div class="head-row">
+      <div>
+        <div class="eyebrow">經營管理報告 · Management Report</div>
+        <h1>2026 上半年<br>營運成果與財務檢視</h1>
+        <p class="lede">截至 6 月底，全店營收達成年度目標進度 101.2%，營業利益率維持 21.2%。各部門配額與成本控管整體優於預算，下半年聚焦會員留存與私教產值。</p>
+      </div>
+      <div class="head-by">
+        <div class="by-item"><span class="by-k">提報人</span><span class="by-v">商務總監 · 黃培修</span></div>
+        <div class="by-item"><span class="by-k">期間</span><span class="by-v">2026/01 – 2026/06</span></div>
+        <div class="by-item"><span class="by-k">提報日</span><span class="by-v">2026/06/22</span></div>
+        <div class="by-item"><span class="by-k">狀態</span><span class="by-v">總監複核中</span></div>
+      </div>
+    </div>
+
+    <!-- KPI strip -->
+    <div class="kpi-strip">
+      <div class="kpi">
+        <div class="k-label">上半年營收</div>
+        <div class="k-val tnum">NT$ 12.75<span class="unit">M</span></div>
+        <div class="k-foot"><span class="delta up"><i data-lucide="arrow-up-right"></i>+1.2%</span>對比預算 12.60M</div>
+      </div>
+      <div class="kpi">
+        <div class="k-label">營業利益率</div>
+        <div class="k-val tnum" data-count="21.2" data-suffix="%">21.2%</div>
+        <div class="k-foot"><span class="delta up"><i data-lucide="arrow-up-right"></i>+1.8pt</span>對比去年同期</div>
+      </div>
+      <div class="kpi">
+        <div class="k-label">活躍會員數</div>
+        <div class="k-val tnum" data-count="624">624</div>
+        <div class="k-foot"><span class="delta up"><i data-lucide="arrow-up-right"></i>+88</span>淨增（YTD）</div>
+      </div>
+      <div class="kpi">
+        <div class="k-label">會員留存率</div>
+        <div class="k-val tnum" data-count="88" data-suffix="%">88%</div>
+        <div class="k-foot"><span class="delta up"><i data-lucide="arrow-up-right"></i>+2pt</span>優於目標 86%</div>
+      </div>
+      <div class="kpi">
+        <div class="k-label">每會員月均產值（ARPU）</div>
+        <div class="k-val tnum">NT$ 3,400</div>
+        <div class="k-foot"><span class="delta up"><i data-lucide="arrow-up-right"></i>+3.4%</span>客單價提升</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== S1 · 業績目標達成 ===== -->
+  <section class="block reveal" id="s1">
+    <div class="sec-head">
+      <div class="sec-no">01</div>
+      <div class="sec-titles">
+        <h2>業績目標達成</h2>
+        <div class="sec-sub">月別實際 vs 目標、收入結構與整體達成率</div>
+      </div>
+    </div>
+
+    <div class="grid g-2">
+      <div class="panel flush">
+        <div class="panel-head">
+          <h3>月別營收 · 實際對比目標</h3>
+          <div class="toggle" id="revToggle">
+            <button class="on" data-mode="monthly">月別</button>
+            <button data-mode="cumulative">累計</button>
+          </div>
+        </div>
+        <div class="chart-box"><canvas id="revenueChart"></canvas></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head"><h3>整體達成率</h3><span class="ph-sub">YTD</span></div>
+        <div class="ring-wrap">
+          <div class="ring">
+            <svg width="172" height="172" viewBox="0 0 172 172">
+              <circle cx="86" cy="86" r="74" fill="none" stroke="var(--surface-2)" stroke-width="14"/>
+              <circle id="ringFill" cx="86" cy="86" r="74" fill="none" stroke="var(--clay)" stroke-width="14"
+                      stroke-linecap="round" stroke-dasharray="464.96" stroke-dashoffset="464.96"/>
+            </svg>
+            <div class="ring-center">
+              <div class="rc-val tnum" data-count="101.2" data-suffix="%">101.2%</div>
+              <div class="rc-lbl">目標達成</div>
+            </div>
+          </div>
+          <div class="ring-legend">實際 <b>NT$12.75M</b> / 目標 <b>NT$12.60M</b><br>超標 <b style="color:var(--pos)">+NT$150K</b></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:var(--space-24)">
+      <div class="panel-head"><h3>收入結構 · 各業務線貢獻</h3><span class="ph-sub">單位：新台幣千元</span></div>
+      <div id="mixBars">
+        <div class="mix-row"><span class="mix-name">會員月/年費</span><div class="mix-track"><span class="mix-fill" style="background:var(--clay)" data-w="100"></span></div><span class="mix-val">NT$ <b>6,420</b></span><span class="mix-pct">50.4%</span></div>
+        <div class="mix-row"><span class="mix-name">私人教練課</span><div class="mix-track"><span class="mix-fill" style="background:var(--amber)" data-w="60"></span></div><span class="mix-val">NT$ <b>3,880</b></span><span class="mix-pct">30.4%</span></div>
+        <div class="mix-row"><span class="mix-name">團體課程</span><div class="mix-track"><span class="mix-fill" style="background:var(--sage)" data-w="20"></span></div><span class="mix-val">NT$ <b>1,290</b></span><span class="mix-pct">10.1%</span></div>
+        <div class="mix-row"><span class="mix-name">商品零售</span><div class="mix-track"><span class="mix-fill" style="background:var(--gold)" data-w="10.7"></span></div><span class="mix-val">NT$ <b>690</b></span><span class="mix-pct">5.4%</span></div>
+        <div class="mix-row"><span class="mix-name">場地租借</span><div class="mix-track"><span class="mix-fill" style="background:var(--slate)" data-w="7.3"></span></div><span class="mix-val">NT$ <b>470</b></span><span class="mix-pct">3.7%</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== S2 · 預算編製與成本控管 ===== -->
+  <section class="block reveal" id="s2">
+    <div class="sec-head">
+      <div class="sec-no">02</div>
+      <div class="sec-titles">
+        <h2>預算編製與成本控管</h2>
+        <div class="sec-sub">上半年費用預算 vs 實際支出、差異分析與成本結構</div>
+      </div>
+    </div>
+
+    <div class="grid g-58">
+      <div class="panel">
+        <div class="panel-head"><h3>費用預算執行表</h3><span class="ph-sub">單位：新台幣千元</span></div>
+        <table class="tnum">
+          <thead><tr><th class="l">費用科目</th><th>預算</th><th>實際</th><th>差異</th><th>使用率</th></tr></thead>
+          <tbody>
+            <tr><td class="l">人事費（薪資＋勞健保）</td><td>4,536</td><td>4,520</td><td class="var-pos">-16</td><td>99.6%</td></tr>
+            <tr><td class="l">場地租金</td><td>2,268</td><td>2,268</td><td>0</td><td>100.0%</td></tr>
+            <tr><td class="l">設備折舊與維護</td><td>1,008</td><td>1,010</td><td class="var-neg">+2</td><td>100.2%</td></tr>
+            <tr><td class="l">水電瓦斯</td><td>630</td><td>612</td><td class="var-pos">-18</td><td>97.1%</td></tr>
+            <tr><td class="l">行銷推廣</td><td>756</td><td>690</td><td class="var-pos">-66</td><td>91.3%</td></tr>
+            <tr><td class="l">商品銷貨成本</td><td>454</td><td>452</td><td class="var-pos">-2</td><td>99.6%</td></tr>
+            <tr><td class="l">系統與雜支</td><td>504</td><td>498</td><td class="var-pos">-6</td><td>98.8%</td></tr>
+            <tr class="total"><td class="l">合計</td><td>10,156</td><td>10,050</td><td class="var-pos">-106</td><td>99.0%</td></tr>
+          </tbody>
+        </table>
+        <div class="callout"><b>控管結論：</b>整體費用較預算節省 NT$106K（-1.0%），主因行銷投放效率提升與淡季水電下降。人事與租金為主要剛性支出，下半年續約租金預估上調 5%，已納入年度預算重編。</div>
+      </div>
+
+      <div class="panel flush">
+        <div class="panel-head"><h3>成本結構</h3><span class="ph-sub">佔總費用比</span></div>
+        <div class="chart-box tall"><canvas id="costDonut"></canvas></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== S3 · 部門績效目標管理 ===== -->
+  <section class="block reveal" id="s3">
+    <div class="sec-head">
+      <div class="sec-no">03</div>
+      <div class="sec-titles">
+        <h2>部門績效目標管理</h2>
+        <div class="sec-sub">五大職能單位 KPI 達成評分（上半年）</div>
+      </div>
+    </div>
+
+    <div class="dept-grid">
+      <div class="dept">
+        <div class="dept-top"><div class="dept-name"><i data-lucide="badge-check"></i>會籍部</div><div class="dept-score" style="color:var(--pos)">A</div></div>
+        <div class="dept-kpi"><span class="dk-k">營收目標達成</span><span class="dk-v">102%</span></div>
+        <div class="dept-kpi"><span class="dk-k">新增會員</span><span class="dk-v">120 / 125</span></div>
+        <div class="dept-kpi"><span class="dk-k">續約率</span><span class="dk-v">84%</span></div>
+      </div>
+      <div class="dept">
+        <div class="dept-top"><div class="dept-name"><i data-lucide="dumbbell"></i>私教部</div><div class="dept-score" style="color:var(--pos)">A</div></div>
+        <div class="dept-kpi"><span class="dk-k">課程營收達成</span><span class="dk-v">103%</span></div>
+        <div class="dept-kpi"><span class="dk-k">教練人均產值/月</span><span class="dk-v">NT$215K</span></div>
+        <div class="dept-kpi"><span class="dk-k">課包再購率</span><span class="dk-v">61%</span></div>
+      </div>
+      <div class="dept">
+        <div class="dept-top"><div class="dept-name"><i data-lucide="users"></i>團課部</div><div class="dept-score" style="color:var(--pos)">A</div></div>
+        <div class="dept-kpi"><span class="dk-k">上課人次</span><span class="dk-v">9,540</span></div>
+        <div class="dept-kpi"><span class="dk-k">滿課率</span><span class="dk-v">82%</span></div>
+        <div class="dept-kpi"><span class="dk-k">會員滿意度</span><span class="dk-v">4.6 / 5</span></div>
+      </div>
+      <div class="dept">
+        <div class="dept-top"><div class="dept-name"><i data-lucide="megaphone"></i>行銷部</div><div class="dept-score" style="color:oklch(50% 0.11 75)">B+</div></div>
+        <div class="dept-kpi"><span class="dk-k">試訓轉換率</span><span class="dk-v">38%</span></div>
+        <div class="dept-kpi"><span class="dk-k">獲客成本 CAC</span><span class="dk-v">NT$5,750</span></div>
+        <div class="dept-kpi"><span class="dk-k">名單量達成</span><span class="dk-v">94%</span></div>
+      </div>
+      <div class="dept">
+        <div class="dept-top"><div class="dept-name"><i data-lucide="clipboard-check"></i>營運行政</div><div class="dept-score" style="color:var(--pos)">A-</div></div>
+        <div class="dept-kpi"><span class="dk-k">會員留存率</span><span class="dk-v">88%</span></div>
+        <div class="dept-kpi"><span class="dk-k">NPS 淨推薦</span><span class="dk-v">52</span></div>
+        <div class="dept-kpi"><span class="dk-k">費用控管達標</span><span class="dk-v">99%</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== S4 · 工作任務／業績項目分配 ===== -->
+  <section class="block reveal" id="s4">
+    <div class="sec-head">
+      <div class="sec-no">04</div>
+      <div class="sec-titles">
+        <h2>工作任務與業績項目分配</h2>
+        <div class="sec-sub">本季（Q2）業績配額分派與達成進度 · 截至 06/22（季度進度 91%）</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <table class="tnum">
+        <thead><tr><th class="l">負責人</th><th class="l">負責項目</th><th>Q2 配額</th><th>已達成</th><th class="l" style="width:170px">進度</th><th>狀態</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="l">林書豪</td><td class="l">會籍新簽</td><td>NT$ 1,200K</td><td>NT$ 1,116K</td>
+            <td class="l">93%<span class="micro-track"><span class="micro-fill" style="width:93%;background:var(--sage)"></span></span></td>
+            <td><span class="pill ok">領先</span></td>
+          </tr>
+          <tr>
+            <td class="l">陳怡君</td><td class="l">私教課包</td><td>NT$ 960K</td><td>NT$ 902K</td>
+            <td class="l">94%<span class="micro-track"><span class="micro-fill" style="width:94%;background:var(--sage)"></span></span></td>
+            <td><span class="pill ok">領先</span></td>
+          </tr>
+          <tr>
+            <td class="l">王大明</td><td class="l">團課與活動</td><td>NT$ 540K</td><td>NT$ 497K</td>
+            <td class="l">92%<span class="micro-track"><span class="micro-fill" style="width:92%;background:var(--sage)"></span></span></td>
+            <td><span class="pill ok">領先</span></td>
+          </tr>
+          <tr>
+            <td class="l">張庭瑜</td><td class="l">企業合作</td><td>NT$ 720K</td><td>NT$ 590K</td>
+            <td class="l">82%<span class="micro-track"><span class="micro-fill" style="width:82%;background:var(--amber)"></span></span></td>
+            <td><span class="pill warn">追蹤</span></td>
+          </tr>
+          <tr>
+            <td class="l">李宗翰</td><td class="l">商品零售</td><td>NT$ 300K</td><td>NT$ 240K</td>
+            <td class="l">80%<span class="micro-track"><span class="micro-fill" style="width:80%;background:var(--amber)"></span></span></td>
+            <td><span class="pill warn">追蹤</span></td>
+          </tr>
+          <tr class="total">
+            <td class="l">團隊合計</td><td class="l">—</td><td>NT$ 3,720K</td><td>NT$ 3,345K</td>
+            <td class="l">90%<span class="micro-track"><span class="micro-fill" style="width:90%;background:var(--clay)"></span></span></td>
+            <td><span class="pill ok">達標中</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="callout"><b>分配原則：</b>配額依各業務線歷史轉換率與市場潛量加權分派。季末倒數一週，企業合作與商品零售進度落後（82%／80%），已調整：李宗翰加配補給品聯名活動、張庭瑜獲行銷部 2 組企業名單支援，目標季末補回缺口。</div>
+    </div>
+  </section>
+
+  <!-- ===== S5 · 財務及營業分析 ===== -->
+  <section class="block reveal" id="s5">
+    <div class="sec-head">
+      <div class="sec-no">05</div>
+      <div class="sec-titles">
+        <h2>財務及營業分析</h2>
+        <div class="sec-sub">損益瀑布、關鍵比率與損益兩平檢視</div>
+      </div>
+    </div>
+
+    <div class="grid g-58">
+      <div class="panel flush">
+        <div class="panel-head"><h3>上半年損益結構</h3><span class="ph-sub">營收至營業利益（千元）</span></div>
+        <div class="chart-box tall"><canvas id="waterfall"></canvas></div>
+      </div>
+
+      <div>
+        <div class="ratio-grid">
+          <div class="ratio"><div class="r-k">毛利率</div><div class="r-v tnum">78.2%</div><div class="r-note">扣除直接變動成本後</div></div>
+          <div class="ratio"><div class="r-k">營業利益率</div><div class="r-v tnum">21.2%</div><div class="r-note">優於業界 15-18%</div></div>
+          <div class="ratio"><div class="r-k">EBITDA 利潤率</div><div class="r-v tnum">26.8%</div><div class="r-note">含折舊回加</div></div>
+          <div class="ratio"><div class="r-k">人事費佔比</div><div class="r-v tnum">35.5%</div><div class="r-note">營收佔比，穩定</div></div>
+          <div class="ratio"><div class="r-k">損益兩平月營收</div><div class="r-v tnum">1.68M</div><div class="r-note">當前月均 2.13M</div></div>
+          <div class="ratio"><div class="r-k">安全邊際</div><div class="r-v tnum">21%</div><div class="r-note">營收下滑容忍度</div></div>
+        </div>
+        <div class="panel flush" style="margin-top:var(--space-24)">
+          <div class="panel-head"><h3>營業利益率趨勢</h3><span class="ph-sub">月別 %</span></div>
+          <div class="chart-box short"><canvas id="marginTrend"></canvas></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== S6 · 編制財務報告 ===== -->
+  <section class="block reveal" id="s6">
+    <div class="sec-head">
+      <div class="sec-no">06</div>
+      <div class="sec-titles">
+        <h2>財務報告編制</h2>
+        <div class="sec-sub">上半年簡明損益表與現金重點</div>
+      </div>
+    </div>
+
+    <div class="grid g-58">
+      <div class="panel">
+        <div class="panel-head"><h3>簡明損益表</h3><span class="ph-sub">2026 H1 · 千元</span></div>
+        <table class="fin-statement tnum">
+          <thead><tr><th class="l">項目</th><th>金額</th><th>佔營收</th></tr></thead>
+          <tbody>
+            <tr class="major"><td class="l">營業收入</td><td>12,750</td><td>100.0%</td></tr>
+            <tr class="indent"><td class="l">減：營業成本與費用</td><td>(10,050)</td><td>78.8%</td></tr>
+            <tr class="major"><td class="l">營業利益</td><td>2,700</td><td>21.2%</td></tr>
+            <tr class="indent"><td class="l">加：營業外收入</td><td>35</td><td>0.3%</td></tr>
+            <tr class="indent"><td class="l">減：利息及營業外支出</td><td>(120)</td><td>0.9%</td></tr>
+            <tr class="major"><td class="l">稅前淨利</td><td>2,615</td><td>20.5%</td></tr>
+            <tr class="indent"><td class="l">減：所得稅（20%）</td><td>(523)</td><td>4.1%</td></tr>
+            <tr class="total"><td class="l">本期淨利</td><td>2,092</td><td>16.4%</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head"><h3>現金與財務重點</h3></div>
+        <div class="dept-kpi" style="border-top:none"><span class="dk-k">期末現金餘額</span><span class="dk-v">NT$ 4,860K</span></div>
+        <div class="dept-kpi"><span class="dk-k">營業活動現金流</span><span class="dk-v" style="color:var(--pos)">+NT$ 2,980K</span></div>
+        <div class="dept-kpi"><span class="dk-k">投資活動（設備更新）</span><span class="dk-v" style="color:var(--neg)">-NT$ 640K</span></div>
+        <div class="dept-kpi"><span class="dk-k">應收／預收會費</span><span class="dk-v">NT$ 3,420K</span></div>
+        <div class="dept-kpi"><span class="dk-k">流動比率</span><span class="dk-v">2.4x</span></div>
+        <div class="dept-kpi"><span class="dk-k">負債比率</span><span class="dk-v">28%</span></div>
+        <div class="callout" style="margin-top:var(--space-20)"><b>財務長附註：</b>預收會費為重要遞延收入來源，現金部位健康足以支應 Q3 設備擴充。建議保留 3 個月營運準備金（約 NT$3.4M），其餘評估投入第二據點選址。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== S7 · 審核年度預算 ===== -->
+  <section class="block reveal" id="s7">
+    <div class="sec-head">
+      <div class="sec-no">07</div>
+      <div class="sec-titles">
+        <h2>年度預算審核</h2>
+        <div class="sec-sub">2027 年度預算編製進度、核心假設與簽核流程</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><h3>簽核流程</h3><span class="ph-sub">2027 年度預算</span></div>
+      <div class="flow">
+        <div class="flow-step done"><div class="fs-no"><i data-lucide="check-circle-2"></i>步驟一</div><div class="fs-name">部門提案</div><div class="fs-meta">已完成 · 06/10</div></div>
+        <div class="flow-step done"><div class="fs-no"><i data-lucide="check-circle-2"></i>步驟二</div><div class="fs-name">財務複核</div><div class="fs-meta">已完成 · 06/18</div></div>
+        <div class="flow-step active"><div class="fs-no"><i data-lucide="loader"></i>步驟三</div><div class="fs-name">總監審核</div><div class="fs-meta">進行中 · 預計 06/26</div></div>
+        <div class="flow-step"><div class="fs-no"><i data-lucide="circle"></i>步驟四</div><div class="fs-name">董事會核定</div><div class="fs-meta">待辦 · 預計 07/05</div></div>
+      </div>
+
+      <div class="panel-head" style="margin-top:var(--space-32)"><h3>核心編製假設</h3></div>
+      <div class="assume">
+        <div class="assume-item"><i data-lucide="trending-up"></i><div><div class="ai-k">會員數成長</div><div class="ai-v">+8%（624 → 674）</div></div></div>
+        <div class="assume-item"><i data-lucide="dollar-sign"></i><div><div class="ai-k">平均月費調漲</div><div class="ai-v">+3%</div></div></div>
+        <div class="assume-item"><i data-lucide="home"></i><div><div class="ai-k">租約續約租金</div><div class="ai-v">+5%</div></div></div>
+        <div class="assume-item"><i data-lucide="user-plus"></i><div><div class="ai-k">人事擴編</div><div class="ai-v">+1 名專任教練</div></div></div>
+      </div>
+
+      <div class="panel-head" style="margin-top:var(--space-32)"><h3>年度預算對照</h3><span class="ph-sub">單位：新台幣千元</span></div>
+      <table class="tnum">
+        <thead><tr><th class="l">項目</th><th>2026 預算</th><th>2027 提案</th><th>增減</th><th class="l">備註</th></tr></thead>
+        <tbody>
+          <tr><td class="l">營業收入</td><td>25,200</td><td>28,000</td><td class="var-pos">+11.1%</td><td class="l" style="color:var(--ink-mute);font-size:0.8rem">會員與客單價同步成長</td></tr>
+          <tr><td class="l">人事費</td><td>9,072</td><td>9,800</td><td class="var-neg">+8.0%</td><td class="l" style="color:var(--ink-mute);font-size:0.8rem">擴編 1 名教練</td></tr>
+          <tr><td class="l">租金</td><td>4,536</td><td>4,763</td><td class="var-neg">+5.0%</td><td class="l" style="color:var(--ink-mute);font-size:0.8rem">續約調漲</td></tr>
+          <tr><td class="l">行銷推廣</td><td>1,512</td><td>1,820</td><td class="var-neg">+20.4%</td><td class="l" style="color:var(--ink-mute);font-size:0.8rem">第二據點前期曝光</td></tr>
+          <tr><td class="l">其他營運費用</td><td>5,191</td><td>5,617</td><td class="var-neg">+8.2%</td><td class="l" style="color:var(--ink-mute);font-size:0.8rem">隨營收規模成長</td></tr>
+          <tr class="total"><td class="l">營業利益</td><td>4,889</td><td>6,000</td><td class="var-pos">+22.7%</td><td class="l" style="color:var(--pos);font-size:0.8rem">利益率 19.4% → 21.4%</td></tr>
+        </tbody>
+      </table>
+      <div class="callout"><b>總監審核意見：</b>營收成長假設合理，惟行銷費用增幅 20% 需綁定第二據點選址時程，建議分階段釋放預算並設里程碑門檻。其餘科目核准進入董事會核定階段。</div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="unit-note">本報告為示範用途，所有數據為虛構情境（小型健身房，年營業額約 NT$25M 級距）。單位除標示外均為新台幣千元；上半年數字截至 06/22 為概估。</div>
+    <div class="f-top">
+      <div>鐵芯健身工作室 · 經營管理報告系統 · 2026 上半年</div>
+      <div>提報：商務總監 黃培修 · 生成於 2026/06/22</div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+/* ---------- Chart.js global theme ---------- */
+const C = {
+  clay:'#a8553a', clayLine:'#8a4530', amber:'#d49a3e', gold:'#d8be78',
+  sage:'#6f9466', slate:'#5e7b94', ink:'#403a32', mute:'#8a8276',
+  grid:'#e7e0d5', surface:'#f4efe6'
+};
+if (window.Chart){
+  Chart.defaults.font.family = "'Noto Sans TC', system-ui, sans-serif";
+  Chart.defaults.font.size = 12;
+  Chart.defaults.color = C.mute;
+  Chart.defaults.plugins.legend.labels.usePointStyle = true;
+  Chart.defaults.plugins.legend.labels.boxWidth = 8;
+  Chart.defaults.plugins.legend.labels.padding = 16;
+  Chart.defaults.plugins.tooltip.backgroundColor = 'rgba(40,36,30,0.94)';
+  Chart.defaults.plugins.tooltip.padding = 11;
+  Chart.defaults.plugins.tooltip.cornerRadius = 8;
+  Chart.defaults.plugins.tooltip.titleFont = {weight:'600'};
+  Chart.defaults.plugins.tooltip.boxPadding = 5;
+}
+const fmtK = v => 'NT$ ' + v.toLocaleString() + 'K';
+
+/* ---------- Revenue combo ---------- */
+const months = ['1月','2月','3月','4月','5月','6月'];
+const actMonthly = [1980,1890,2150,2240,2310,2180];
+const tgtMonthly = [2100,2100,2100,2100,2100,2100];
+const actCum = [1980,3870,6020,8260,10570,12750];
+const tgtCum = [2100,4200,6300,8400,10500,12600];
+
+const revCtx = document.getElementById('revenueChart');
+const revChart = new Chart(revCtx,{
+  data:{
+    labels:months,
+    datasets:[
+      {type:'bar',label:'實際營收',data:actMonthly,backgroundColor:C.clay,borderRadius:5,maxBarThickness:34,order:2},
+      {type:'line',label:'目標',data:tgtMonthly,borderColor:C.ink,borderWidth:2,borderDash:[5,4],
+       pointBackgroundColor:C.ink,pointRadius:3,tension:0.2,order:1}
+    ]
+  },
+  options:{
+    maintainAspectRatio:false,responsive:true,
+    interaction:{mode:'index',intersect:false},
+    plugins:{
+      legend:{position:'top',align:'end'},
+      tooltip:{callbacks:{label:c=>c.dataset.label+': '+fmtK(c.parsed.y)}}
+    },
+    scales:{
+      x:{grid:{display:false},border:{color:C.grid}},
+      y:{grid:{color:C.grid},border:{display:false},
+         ticks:{callback:v=>'NT$'+(v/1000).toFixed(1)+'M'}}
+    }
+  }
+});
+
+document.getElementById('revToggle').addEventListener('click',e=>{
+  const btn = e.target.closest('button'); if(!btn) return;
+  document.querySelectorAll('#revToggle button').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  const mode = btn.dataset.mode;
+  if(mode==='cumulative'){
+    revChart.data.datasets[0].data = actCum;
+    revChart.data.datasets[1].data = tgtCum;
+  } else {
+    revChart.data.datasets[0].data = actMonthly;
+    revChart.data.datasets[1].data = tgtMonthly;
+  }
+  revChart.update();
+});
+
+/* ---------- Cost donut ---------- */
+new Chart(document.getElementById('costDonut'),{
+  type:'doughnut',
+  data:{
+    labels:['人事費','租金','設備折舊維護','水電瓦斯','行銷推廣','商品成本','系統雜支'],
+    datasets:[{
+      data:[4520,2268,1010,612,690,452,498],
+      backgroundColor:[C.clay,C.slate,C.sage,C.gold,C.amber,'#b98a6a','#c9beac'],
+      borderColor:C.surface,borderWidth:2,hoverOffset:6
+    }]
+  },
+  options:{
+    maintainAspectRatio:false,cutout:'58%',
+    plugins:{
+      legend:{position:'right',labels:{padding:11,font:{size:11.5}}},
+      tooltip:{callbacks:{label:c=>c.label+': '+fmtK(c.parsed)+' ('+(c.parsed/10050*100).toFixed(1)+'%)'}}
+    }
+  }
+});
+
+/* ---------- Waterfall ---------- */
+new Chart(document.getElementById('waterfall'),{
+  type:'bar',
+  data:{
+    labels:['營收','人事','租金','折舊維護','水電','行銷','商品成本','系統雜支','營業利益'],
+    datasets:[{
+      data:[[0,12750],[8230,12750],[5962,8230],[4952,5962],[4340,4952],[3650,4340],[3198,3650],[2700,3198],[0,2700]],
+      backgroundColor:[C.sage,C.clay,C.clay,C.clay,C.clay,C.clay,C.clay,C.clay,C.slate],
+      borderRadius:4,maxBarThickness:42
+    }]
+  },
+  options:{
+    maintainAspectRatio:false,
+    plugins:{
+      legend:{display:false},
+      tooltip:{callbacks:{label:c=>{const v=c.raw;return fmtK(Math.abs(v[1]-v[0]));}}}
+    },
+    scales:{
+      x:{grid:{display:false},border:{color:C.grid},ticks:{font:{size:10.5},maxRotation:0,minRotation:0}},
+      y:{grid:{color:C.grid},border:{display:false},ticks:{callback:v=>(v/1000).toFixed(0)+'M'}}
+    }
+  }
+});
+
+/* ---------- Margin trend (weighted avg ties to 21.2%) ---------- */
+new Chart(document.getElementById('marginTrend'),{
+  type:'line',
+  data:{
+    labels:months,
+    datasets:[{
+      data:[18.5,17.2,20.6,23.0,23.8,23.0],
+      borderColor:C.clay,borderWidth:2.5,tension:0.4,fill:true,
+      backgroundColor:ctx=>{
+        const {chart}=ctx; const {ctx:c,chartArea}=chart;
+        if(!chartArea) return 'rgba(168,85,58,0.08)';
+        const g=c.createLinearGradient(0,chartArea.top,0,chartArea.bottom);
+        g.addColorStop(0,'rgba(168,85,58,0.22)');g.addColorStop(1,'rgba(168,85,58,0)');return g;
+      },
+      pointRadius:0,pointHoverRadius:4,pointBackgroundColor:C.clay
+    }]
+  },
+  options:{
+    maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y+'%'}}},
+    scales:{
+      x:{grid:{display:false},border:{display:false},ticks:{font:{size:10}}},
+      y:{grid:{color:C.grid},border:{display:false},min:14,max:26,ticks:{callback:v=>v+'%',font:{size:10},stepSize:4}}
+    }
+  }
+});
+
+/* ---------- Lucide ---------- */
+if(window.lucide) lucide.createIcons();
+
+/* ---------- Count-up + reveal + bar fills ---------- */
+function countUp(el){
+  const target = parseFloat(el.dataset.count);
+  const suffix = el.dataset.suffix || '';
+  const dec = (target % 1 !== 0) ? 1 : 0;
+  const dur = 1100; const start = performance.now();
+  function step(now){
+    const p = Math.min((now-start)/dur,1);
+    const eased = 1-Math.pow(1-p,4);
+    const val = (target*eased).toFixed(dec);
+    el.textContent = Number(val).toLocaleString() + suffix;
+    if(p<1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+function fillRing(){
+  const r=74, circ=2*Math.PI*r;
+  const pct=Math.min(101.2,100)/100; // cap visual arc at 100%
+  const ring=document.getElementById('ringFill');
+  if(ring){
+    ring.style.transition='stroke-dashoffset 1.4s cubic-bezier(0.22,1,0.36,1)';
+    ring.style.strokeDashoffset = circ*(1-pct);
+  }
+}
+
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(en=>{
+    if(en.isIntersecting){
+      en.target.classList.add('in');
+      en.target.querySelectorAll('[data-count]').forEach(countUp);
+      en.target.querySelectorAll('.mix-fill').forEach(f=>{f.style.transform=`scaleX(${(f.dataset.w/100)})`;});
+      io.unobserve(en.target);
+    }
+  });
+},{threshold:0.15});
+document.querySelectorAll('.reveal').forEach(s=>io.observe(s));
+
+// head KPIs + ring fire on load
+window.addEventListener('load',()=>{
+  document.querySelectorAll('.report-head [data-count]').forEach(countUp);
+  fillRing();
+});
+</script>
+</body>
+</html>
