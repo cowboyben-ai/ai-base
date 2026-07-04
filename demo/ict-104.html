@@ -1,0 +1,2038 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>台灣立訊精密 — 職缺分析報告</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+/* =============================================
+   LUXSHARE REPORT — STYLE SYSTEM
+   Design: Industrial Precision + Clean Data
+   Palette: Deep navy, electric blue, warm white, accent amber
+   ============================================= */
+
+:root {
+  --navy: #0a1628;
+  --navy-mid: #0f2040;
+  --navy-light: #1a3a5c;
+  --blue: #1e6fff;
+  --blue-light: #4d8fff;
+  --amber: #f5a623;
+  --amber-light: #ffc85a;
+  --white: #f8f9fc;
+  --off-white: #eef1f7;
+  --text: #1a2540;
+  --text-mid: #4a5568;
+  --text-light: #8a9ab5;
+  --border: #dde3ef;
+  --green: #22c55e;
+  --red: #ef4444;
+  --card-bg: #ffffff;
+  --shadow: 0 4px 24px rgba(10,22,40,0.08);
+  --shadow-lg: 0 12px 48px rgba(10,22,40,0.14);
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font-display: 'Space Grotesk', 'Noto Sans TC', sans-serif;
+  --font-body: 'Noto Sans TC', 'Space Grotesk', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--white);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ---- NAV ---- */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(10,22,40,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  transition: background 0.3s;
+}
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.logo-mark {
+  background: var(--blue);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+.logo-text {
+  color: rgba(255,255,255,0.85);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 0.25rem;
+  margin-left: auto;
+}
+.nav-links a {
+  color: rgba(255,255,255,0.65);
+  text-decoration: none;
+  font-size: 0.875rem;
+  padding: 6px 14px;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+.nav-links a:hover {
+  color: #fff;
+  background: rgba(255,255,255,0.08);
+}
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  margin-left: auto;
+}
+.nav-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: rgba(255,255,255,0.8);
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+
+/* ---- HERO ---- */
+.hero {
+  min-height: 100vh;
+  background: var(--navy);
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 80px 2rem 4rem;
+}
+.hero-bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(30,111,255,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(30,111,255,0.06) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+}
+.hero-bg-grid::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 60% 40%, rgba(30,111,255,0.12) 0%, transparent 70%);
+}
+.hero-content {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+.hero-eyebrow {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--blue-light);
+  margin-bottom: 1.25rem;
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.15;
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.02em;
+}
+.hero-accent {
+  color: var(--amber);
+}
+.hero-sub {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 3rem;
+  letter-spacing: 0.02em;
+}
+.hero-stats {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 2.5rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius);
+  padding: 1.5rem 2rem;
+  flex-wrap: wrap;
+}
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  min-width: 120px;
+  padding: 0.5rem;
+}
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--amber);
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+.stat-label {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.5);
+  text-align: center;
+  letter-spacing: 0.03em;
+}
+.stat-divider {
+  width: 1px;
+  height: 48px;
+  background: rgba(255,255,255,0.1);
+  flex-shrink: 0;
+}
+.hero-cta {
+  display: inline-block;
+  background: var(--blue);
+  color: #fff;
+  text-decoration: none;
+  padding: 0.85rem 2rem;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
+  transition: all 0.2s;
+}
+.hero-cta:hover {
+  background: var(--blue-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(30,111,255,0.35);
+}
+
+/* ---- SECTIONS ---- */
+.section {
+  padding: 6rem 2rem;
+}
+.section-dark {
+  background: var(--navy);
+  color: #fff;
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.section-header {
+  margin-bottom: 3rem;
+}
+.section-eyebrow {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 0.75rem;
+}
+.section-dark .section-eyebrow {
+  color: var(--amber);
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+.section-dark .section-title {
+  color: #fff;
+}
+.section-desc {
+  margin-top: 0.75rem;
+  color: var(--text-mid);
+  font-size: 1rem;
+}
+.section-dark .section-desc {
+  color: rgba(255,255,255,0.55);
+}
+
+/* ---- COMPANY GRID ---- */
+.company-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+.company-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 2rem;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.company-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+.card-icon {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+}
+.company-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  color: var(--text);
+}
+.card-sub {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  margin-bottom: 1.25rem;
+}
+.info-list { display: flex; flex-direction: column; gap: 0.6rem; }
+.info-row { display: flex; gap: 0.75rem; align-items: flex-start; font-size: 0.875rem; }
+.info-label {
+  font-weight: 600;
+  color: var(--text-mid);
+  min-width: 80px;
+  flex-shrink: 0;
+}
+.info-val { color: var(--text); }
+
+.tag-cloud { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+.tag {
+  background: var(--off-white);
+  color: var(--navy-light);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border: 1px solid var(--border);
+}
+.card-note { font-size: 0.85rem; color: var(--text-mid); }
+
+.client-logos { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem; }
+.client-name {
+  background: var(--off-white);
+  color: var(--text-mid);
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border: 1px solid var(--border);
+}
+.client-name.highlight {
+  background: var(--navy);
+  color: #fff;
+  border-color: var(--navy);
+}
+
+.benefit-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+.benefit-list li {
+  font-size: 0.875rem;
+  color: var(--text-mid);
+  padding-left: 1.25rem;
+  position: relative;
+}
+.benefit-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--green);
+  font-weight: 700;
+}
+
+/* ---- FILTER BAR ---- */
+.filter-bar {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+.filter-btn {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.65);
+  padding: 8px 18px;
+  border-radius: 24px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: var(--font-body);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.filter-btn:hover, .filter-btn.active {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: #fff;
+}
+.filter-count {
+  background: rgba(255,255,255,0.15);
+  padding: 1px 7px;
+  border-radius: 10px;
+  font-size: 0.75rem;
+}
+.filter-btn.active .filter-count {
+  background: rgba(255,255,255,0.25);
+}
+
+/* ---- SALARY BANNER ---- */
+.salary-banner {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+.salary-banner-item {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+  min-width: 280px;
+}
+.salary-badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.salary-badge.high {
+  background: rgba(34,197,94,0.15);
+  color: #4ade80;
+  border: 1px solid rgba(34,197,94,0.3);
+}
+.salary-badge.low {
+  background: rgba(245,166,35,0.15);
+  color: var(--amber-light);
+  border: 1px solid rgba(245,166,35,0.3);
+}
+.salary-job {
+  color: rgba(255,255,255,0.9);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.salary-note {
+  color: rgba(255,255,255,0.45);
+  font-size: 0.8rem;
+  margin-left: auto;
+}
+
+/* ---- ACCORDION ---- */
+.accordion-container { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 3rem; }
+.accordion-item {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.accordion-item.hidden { display: none; }
+.accordion-item:hover { border-color: rgba(255,255,255,0.2); }
+.accordion-header {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  text-align: left;
+  color: rgba(255,255,255,0.9);
+  transition: background 0.2s;
+}
+.accordion-header:hover { background: rgba(255,255,255,0.04); }
+.acc-icon { font-size: 1.1rem; flex-shrink: 0; }
+.acc-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  flex: 1;
+  font-family: var(--font-body);
+}
+.acc-count {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.06);
+  padding: 2px 10px;
+  border-radius: 12px;
+}
+.acc-arrow {
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.4);
+  transition: transform 0.3s;
+  flex-shrink: 0;
+}
+.accordion-item.open .acc-arrow { transform: rotate(180deg); }
+.accordion-body {
+  display: none;
+  padding: 0 1.5rem 1.5rem;
+  overflow-x: auto;
+}
+.accordion-item.open .accordion-body { display: block; }
+
+/* ---- JOB TABLE ---- */
+.job-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  min-width: 600px;
+}
+.job-table thead tr {
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.job-table th {
+  padding: 0.6rem 0.75rem;
+  text-align: left;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.4);
+  font-weight: 600;
+}
+.job-table td {
+  padding: 0.65rem 0.75rem;
+  color: rgba(255,255,255,0.75);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  vertical-align: middle;
+}
+.job-table tr:last-child td { border-bottom: none; }
+.job-table tr:hover td { background: rgba(255,255,255,0.03); }
+.job-table a {
+  color: var(--blue-light);
+  text-decoration: none;
+}
+.job-table a:hover { text-decoration: underline; }
+.salary-neg { color: rgba(255,255,255,0.4); font-style: italic; }
+.salary-fixed {
+  color: #4ade80;
+  font-weight: 700;
+}
+.highlight-row td { background: rgba(34,197,94,0.06); }
+
+/* ---- LOCATION BARS ---- */
+.chart-section {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius);
+  padding: 2rem;
+}
+.chart-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.9);
+  margin-bottom: 1.5rem;
+}
+.location-bars { display: flex; flex-direction: column; gap: 1rem; }
+.loc-bar-item { display: flex; align-items: center; gap: 1rem; }
+.loc-name {
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.65);
+  min-width: 160px;
+  flex-shrink: 0;
+}
+.loc-bar-wrap { flex: 1; background: rgba(255,255,255,0.06); border-radius: 4px; height: 28px; }
+.loc-bar {
+  height: 100%;
+  background: var(--blue);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  padding-right: 0.75rem;
+  justify-content: flex-end;
+  min-width: 60px;
+  transition: width 1s ease;
+}
+.loc-bar.loc-bar-accent { background: var(--amber); }
+.loc-bar span {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.9);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ---- INDUSTRY GRID ---- */
+.industry-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+.industry-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 2rem;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+.industry-card-wide {
+  grid-column: 1 / -1;
+}
+.industry-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+.ind-icon { font-size: 1.5rem; }
+.industry-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+.ind-note {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.market-stats { display: flex; flex-direction: column; gap: 1rem; }
+.market-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.market-num {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--blue);
+}
+.market-desc { font-size: 0.85rem; color: var(--text-mid); }
+
+.competitor-list { display: flex; flex-direction: column; gap: 0.6rem; }
+.comp-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-sm);
+  background: var(--off-white);
+  border: 1px solid var(--border);
+}
+.rank {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: var(--border);
+  color: var(--text-mid);
+}
+.rank-1 .rank { background: #ffd700; color: #7a5c00; }
+.rank-2 .rank { background: #c0c0c0; color: #555; }
+.rank-3 .rank { background: #cd7f32; color: #fff; }
+.rank-4 .rank { background: var(--blue); color: #fff; }
+.comp-name { flex: 1; font-size: 0.875rem; font-weight: 500; color: var(--text); }
+.comp-rev { font-size: 0.8rem; color: var(--text-light); }
+.highlight-text { color: var(--blue); font-weight: 700; }
+
+.trend-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+.trend-item {
+  display: flex;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+}
+.trend-up { background: rgba(34,197,94,0.04); border-color: rgba(34,197,94,0.2); }
+.trend-down { background: rgba(239,68,68,0.04); border-color: rgba(239,68,68,0.15); }
+.trend-arrow {
+  font-size: 1.2rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  line-height: 1;
+  margin-top: 2px;
+}
+.trend-up .trend-arrow { color: var(--green); }
+.trend-down .trend-arrow { color: var(--red); }
+.trend-item strong { display: block; font-size: 0.875rem; color: var(--text); margin-bottom: 0.3rem; }
+.trend-item p { font-size: 0.8rem; color: var(--text-mid); line-height: 1.5; }
+
+.salary-ref-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+.salary-ref-table th {
+  text-align: left;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-light);
+  border-bottom: 2px solid var(--border);
+}
+.salary-ref-table td {
+  padding: 0.65rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-mid);
+}
+.salary-ref-table tr:last-child td { border-bottom: none; }
+.salary-range { font-weight: 700; color: var(--blue); }
+.salary-ref-table .highlight-row td { background: rgba(34,197,94,0.05); }
+.salary-ref-table .salary-fixed { color: var(--green); }
+
+/* ---- RECOMMENDATION ---- */
+.profile-card {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: var(--radius);
+  padding: 1.5rem 2rem;
+  margin-bottom: 2.5rem;
+}
+.profile-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+.profile-info h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.25rem;
+}
+.profile-sub { font-size: 0.875rem; color: rgba(255,255,255,0.5); margin-bottom: 0.75rem; }
+.profile-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.ptag {
+  background: rgba(30,111,255,0.15);
+  color: var(--blue-light);
+  border: 1px solid rgba(30,111,255,0.25);
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+.rec-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+.rec-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+  position: relative;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.rec-card:hover {
+  border-color: rgba(255,255,255,0.2);
+  transform: translateY(-2px);
+}
+.rec-top { border-color: rgba(30,111,255,0.3); }
+.rec-badge {
+  position: absolute;
+  top: -1px;
+  right: 1.5rem;
+  background: var(--blue);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 0 0 8px 8px;
+  letter-spacing: 0.05em;
+}
+.rec-badge-mid { background: var(--amber); color: var(--navy); }
+.rec-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  margin-top: 0.5rem;
+}
+.rec-stars { color: var(--amber); font-size: 1rem; flex-shrink: 0; }
+.rec-card h3 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.95);
+  line-height: 1.3;
+}
+.rec-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+.rec-meta span {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.45);
+  background: rgba(255,255,255,0.06);
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+.rec-link {
+  color: var(--blue-light);
+  font-size: 0.8rem;
+  text-decoration: none;
+  margin-left: auto;
+}
+.rec-link:hover { text-decoration: underline; }
+.rec-match h4 {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 0.6rem;
+}
+.rec-match ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.rec-match li {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.7);
+  padding-left: 1.25rem;
+  position: relative;
+  line-height: 1.5;
+}
+.rec-match li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--blue-light);
+  font-size: 0.8rem;
+}
+
+/* ---- TIPS ---- */
+.tips-section {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius);
+  padding: 2rem;
+}
+.tips-title {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.9);
+  margin-bottom: 1.5rem;
+}
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+.tip-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-sm);
+  padding: 1.25rem;
+}
+.tip-num {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: rgba(30,111,255,0.4);
+  display: block;
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
+.tip-card h4 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 0.5rem;
+}
+.tip-card p {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.6;
+}
+
+/* ---- FOOTER ---- */
+.footer {
+  background: var(--navy);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 2rem;
+}
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: rgba(255,255,255,0.65);
+  font-size: 0.875rem;
+}
+.footer-note, .footer-date {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.3);
+  margin-left: auto;
+}
+.footer-date { margin-left: 0; }
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 900px) {
+  .company-grid { grid-template-columns: 1fr; }
+  .industry-grid { grid-template-columns: 1fr; }
+  .industry-card-wide { grid-column: 1; }
+  .trend-grid { grid-template-columns: repeat(2, 1fr); }
+  .rec-grid { grid-template-columns: 1fr; }
+  .tips-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .nav-links { display: none; }
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    left: 0; right: 0;
+    background: var(--navy);
+    padding: 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .nav-toggle { display: flex; }
+  .hero-stats { flex-direction: column; }
+  .stat-divider { width: 100%; height: 1px; }
+  .trend-grid { grid-template-columns: 1fr; }
+  .tips-grid { grid-template-columns: 1fr; }
+  .salary-banner { flex-direction: column; }
+  .loc-name { min-width: 120px; font-size: 0.8rem; }
+  .footer-inner { flex-direction: column; align-items: flex-start; }
+  .footer-note { margin-left: 0; }
+}
+
+/* ---- ANIMATIONS ---- */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-content > * {
+  animation: fadeInUp 0.6s ease both;
+}
+.hero-eyebrow { animation-delay: 0.1s; }
+.hero-title { animation-delay: 0.2s; }
+.hero-sub { animation-delay: 0.3s; }
+.hero-stats { animation-delay: 0.4s; }
+.hero-cta { animation-delay: 0.5s; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+</style>
+  </head>
+  <body>
+
+    <!-- NAV -->
+    <nav class="nav" id="mainNav">
+      <div class="nav-inner">
+        <div class="nav-logo">
+          <span class="logo-mark">LX</span>
+          <span class="logo-text">台灣立訊精密 職缺報告</span>
+        </div>
+        <ul class="nav-links">
+          <li><a href="#company">公司概況</a></li>
+          <li><a href="#jobs">職缺總覽</a></li>
+          <li><a href="#industry">產業分析</a></li>
+          <li><a href="#recommendation">職缺建議</a></li>
+        </ul>
+        <button class="nav-toggle" id="navToggle" aria-label="選單">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="hero" id="top">
+      <div class="hero-bg-grid"></div>
+      <div class="hero-content">
+        <div class="hero-eyebrow">2026 · 職缺分析報告</div>
+        <h1 class="hero-title">
+          台灣立訊精密<br>
+          <span class="hero-accent">86 個職缺</span>完整解析
+        </h1>
+        <p class="hero-sub">蘋果供應鏈核心企業 · 電子零組件產業趨勢 · 個人化職缺建議</p>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-num" data-target="86">0</span>
+            <span class="stat-label">開放職缺</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-num" data-target="19">0</span>
+            <span class="stat-label">職缺類別</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-num" data-target="500">0</span>
+            <span class="stat-label">員工人數</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-num">3,323</span>
+            <span class="stat-label">母公司億元營收</span>
+          </div>
+        </div>
+        <a href="#company" class="hero-cta">開始瀏覽 ↓</a>
+      </div>
+    </header>
+
+    <!-- COMPANY SECTION -->
+    <section class="section" id="company">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">COMPANY PROFILE</span>
+          <h2 class="section-title">公司概況</h2>
+        </div>
+
+        <div class="company-grid">
+          <div class="company-card card-main">
+            <div class="card-icon">🏢</div>
+            <h3>台灣立訊精密有限公司</h3>
+            <p class="card-sub">Luxshare-ICT Taiwan</p>
+            <div class="info-list">
+              <div class="info-row"><span class="info-label">母公司</span><span class="info-val">立訊精密工業（深交所：002475）</span></div>
+              <div class="info-row"><span class="info-label">產業類別</span><span class="info-val">其他電子零組件相關業</span></div>
+              <div class="info-row"><span class="info-label">員工人數</span><span class="info-val">約 500 人</span></div>
+              <div class="info-row"><span class="info-label">資本額</span><span class="info-val">新台幣 6 億 1,800 萬元</span></div>
+              <div class="info-row"><span class="info-label">地址</span><span class="info-val">台北市內湖區民權東路六段 15 巷 12 號</span></div>
+            </div>
+          </div>
+
+          <div class="company-card card-products">
+            <div class="card-icon">⚡</div>
+            <h3>核心產品</h3>
+            <div class="tag-cloud">
+              <span class="tag">連接線</span>
+              <span class="tag">連接器</span>
+              <span class="tag">馬達</span>
+              <span class="tag">無線充電</span>
+              <span class="tag">FPC</span>
+              <span class="tag">天線</span>
+              <span class="tag">聲學模組</span>
+              <span class="tag">電子模塊</span>
+            </div>
+            <p class="card-note">廣泛應用於消費電子、通訊、汽車及醫療領域</p>
+          </div>
+
+          <div class="company-card card-clients">
+            <div class="card-icon">🤝</div>
+            <h3>主要客戶</h3>
+            <div class="client-logos">
+              <span class="client-name highlight">Apple</span>
+              <span class="client-name">聯想</span>
+              <span class="client-name">華為</span>
+              <span class="client-name">惠普</span>
+              <span class="client-name">戴爾</span>
+              <span class="client-name">微軟</span>
+              <span class="client-name">Google</span>
+              <span class="client-name">Amazon</span>
+              <span class="client-name">Bosch</span>
+              <span class="client-name">Belkin</span>
+            </div>
+          </div>
+
+          <div class="company-card card-benefits">
+            <div class="card-icon">🎁</div>
+            <h3>福利制度亮點</h3>
+            <ul class="benefit-list">
+              <li>年終獎金 + 彈性工時</li>
+              <li>員工每週舒壓按摩</li>
+              <li>年度健檢補助 NT$6,000～20,000</li>
+              <li>員工團體保險（壽險/意外/醫療/癌症）</li>
+              <li>社團補助 + 旅遊補助</li>
+              <li>健身房 + 咖啡吧</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- JOBS SECTION -->
+    <section class="section section-dark" id="jobs">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">JOB LISTINGS</span>
+          <h2 class="section-title">職缺總覽</h2>
+          <p class="section-desc">依薪資分類，共 86 筆職缺</p>
+        </div>
+
+        <!-- Salary Filter Tabs -->
+        <div class="filter-bar">
+          <button class="filter-btn active" data-filter="all">全部 <span class="filter-count">86</span></button>
+          <button class="filter-btn" data-filter="negotiable">待遇面議 <span class="filter-count">84</span></button>
+          <button class="filter-btn" data-filter="fixed">明確薪資 <span class="filter-count">2</span></button>
+        </div>
+
+        <!-- Salary Highlight Banner -->
+        <div class="salary-banner">
+          <div class="salary-banner-item">
+            <span class="salary-badge high">月薪 50,000～70,000</span>
+            <span class="salary-job">電子硬件工程師（派駐越南）</span>
+            <span class="salary-note">大學 · 3年以上 · 越南</span>
+          </div>
+          <div class="salary-banner-item">
+            <span class="salary-badge low">時薪 230 元</span>
+            <span class="salary-job">【短期工讀】產品測試專員</span>
+            <span class="salary-note">學歷不拘 · 短期兼職 6/23～7/30</span>
+          </div>
+        </div>
+
+        <!-- Category Accordion -->
+        <div class="accordion-container">
+
+          <!-- 業務行銷 -->
+          <div class="accordion-item" data-category="negotiable">
+            <button class="accordion-header">
+              <span class="acc-icon">📊</span>
+              <span class="acc-title">業務行銷與客戶服務類</span>
+              <span class="acc-count">7 個職缺</span>
+              <span class="acc-arrow">▼</span>
+            </button>
+            <div class="accordion-body">
+              <table class="job-table">
+                <thead><tr><th>職缺名稱</th><th>工作地點</th><th>薪資</th><th>學歷</th><th>經驗</th></tr></thead>
+                <tbody>
+                  <tr><td><a href="https://www.104.com.tw/job/8jtu9" target="_blank">業務行銷經理 (Sales & Marketing Manager)</a></td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>5年以上</td></tr>
+                  <tr><td><a href="https://www.104.com.tw/job/8kd87" target="_blank">國外業務專員</a></td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>1年以上</td></tr>
+                  <tr><td><a href="https://www.104.com.tw/job/7kix2" target="_blank">銷售高級工程師／銷售工程師</a></td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>8年以上</td></tr>
+                  <tr><td><a href="https://www.104.com.tw/job/922p9" target="_blank">銷售高級工程師</a></td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學</td><td>3年以上</td></tr>
+                  <tr><td>銷售助理工程師 (Inside sales)</td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>不拘</td></tr>
+                  <tr><td>業務開發專案管理師</td><td>桃園龜山</td><td class="salary-neg">待遇面議</td><td>大學</td><td>1年以上</td></tr>
+                  <tr><td>FAE 工程師／高級工程師</td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>2年以上</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- 專案管理 -->
+          <div class="accordion-item" data-category="negotiable">
+            <button class="accordion-header">
+              <span class="acc-icon">🗂️</span>
+              <span class="acc-title">專案管理類 (PM / DM / EPM / TPM)</span>
+              <span class="acc-count">4 個職缺</span>
+              <span class="acc-arrow">▼</span>
+            </button>
+            <div class="accordion-body">
+              <table class="job-table">
+                <thead><tr><th>職缺名稱</th><th>工作地點</th><th>薪資</th><th>學歷</th><th>經驗</th></tr></thead>
+                <tbody>
+                  <tr><td><a href="https://www.104.com.tw/job/74kto" target="_blank">產品開發項目管理高級工程師</a></td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學</td><td>10年以上</td></tr>
+                  <tr><td><a href="https://www.104.com.tw/job/8pcft" target="_blank">DM (Design Manager)</a></td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學</td><td>10年以上</td></tr>
+                  <tr><td><a href="https://www.104.com.tw/job/8tlkz" target="_blank">技術專案管理工程師／主管</a></td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學</td><td>5年以上</td></tr>
+                  <tr><td>項目經理</td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學</td><td>5年以上</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- 人資法務財務 -->
+          <div class="accordion-item" data-category="negotiable">
+            <button class="accordion-header">
+              <span class="acc-icon">⚖️</span>
+              <span class="acc-title">人資、法務、財務會計類</span>
+              <span class="acc-count">9 個職缺</span>
+              <span class="acc-arrow">▼</span>
+            </button>
+            <div class="accordion-body">
+              <table class="job-table">
+                <thead><tr><th>職缺名稱</th><th>工作地點</th><th>薪資</th><th>學歷</th><th>經驗</th></tr></thead>
+                <tbody>
+                  <tr><td><a href="https://www.104.com.tw/job/8cqkk" target="_blank">法務高級專員</a></td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>碩士以上</td><td>3年以上</td></tr>
+                  <tr><td>涉外法務專員</td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>碩士以上</td><td>3年以上</td></tr>
+                  <tr><td>專利工程師（專利申請組）</td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>2年以上</td></tr>
+                  <tr><td>專利工程師（專利調查組）</td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>2年以上</td></tr>
+                  <tr><td>專利工程師（國際智財爭端）</td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>2年以上</td></tr>
+                  <tr><td><a href="https://www.104.com.tw/job/7996p" target="_blank">人事（資深）專員</a></td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>2年以上</td></tr>
+                  <tr><td>稅務經理</td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>6年以上</td></tr>
+                  <tr><td>會計專員</td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>不拘</td></tr>
+                  <tr><td>IT 專案經理</td><td>越南</td><td class="salary-neg">待遇面議</td><td>大學</td><td>5年以上</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- 機構設計 -->
+          <div class="accordion-item" data-category="negotiable">
+            <button class="accordion-header">
+              <span class="acc-icon">🔧</span>
+              <span class="acc-title">機構設計、包裝與外觀設計類</span>
+              <span class="acc-count">9 個職缺</span>
+              <span class="acc-arrow">▼</span>
+            </button>
+            <div class="accordion-body">
+              <table class="job-table">
+                <thead><tr><th>職缺名稱</th><th>工作地點</th><th>薪資</th><th>學歷</th><th>經驗</th></tr></thead>
+                <tbody>
+                  <tr><td><a href="https://www.104.com.tw/job/9039y" target="_blank">結構工程師</a></td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學</td><td>6年以上</td></tr>
+                  <tr><td>產品設計工程師</td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>8年以上</td></tr>
+                  <tr><td>產品設計機構高級工程師</td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>不拘</td></tr>
+                  <tr><td>穿戴式裝置包裝設計工程師</td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>2年以上</td></tr>
+                  <tr><td>機構設計工程師</td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>9年以上</td></tr>
+                  <tr><td>機構工程師（桃園/龜山）</td><td>桃園龜山</td><td class="salary-neg">待遇面議</td><td>專科</td><td>3年以上</td></tr>
+                  <tr><td>網通機構設計工程師</td><td>桃園龜山</td><td class="salary-neg">待遇面議</td><td>大學</td><td>1年以上</td></tr>
+                  <tr><td>機構專案管理工程師 (PD EPM)</td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>不拘</td></tr>
+                  <tr><td>ID 工程師</td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學</td><td>4年以上</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- 電子硬體 -->
+          <div class="accordion-item" data-category="negotiable">
+            <button class="accordion-header">
+              <span class="acc-icon">💡</span>
+              <span class="acc-title">電子硬體設計與 PCB 類</span>
+              <span class="acc-count">10 個職缺</span>
+              <span class="acc-arrow">▼</span>
+            </button>
+            <div class="accordion-body">
+              <table class="job-table">
+                <thead><tr><th>職缺名稱</th><th>工作地點</th><th>薪資</th><th>學歷</th><th>經驗</th></tr></thead>
+                <tbody>
+                  <tr><td>電子工程師</td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>3年以上</td></tr>
+                  <tr><td>網通硬體開發工程師／高級工程師</td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>專科以上</td><td>3年以上</td></tr>
+                  <tr><td>硬件開發工程師（龜山）</td><td>桃園龜山</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>3年以上</td></tr>
+                  <tr><td>硬體工程師</td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學</td><td>6年以上</td></tr>
+                  <tr><td>硬體工程師（10年以上）</td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>專科</td><td>10年以上</td></tr>
+                  <tr><td>硬體設計工程師（內湖）</td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>5年以上</td></tr>
+                  <tr class="highlight-row"><td>電子硬件工程師（派駐越南）</td><td>越南</td><td class="salary-fixed">月薪 50,000～70,000</td><td>大學</td><td>3年以上</td></tr>
+                  <tr><td>EE 工程師</td><td>桃園楊梅</td><td class="salary-neg">待遇面議</td><td>大學</td><td>3年以上</td></tr>
+                  <tr><td>PCB Layout 工程師（龜山）</td><td>桃園龜山</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>2年以上</td></tr>
+                  <tr><td>PCB Layout 高級工程師（內湖）</td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>5年以上</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- 天線射頻 -->
+          <div class="accordion-item" data-category="negotiable">
+            <button class="accordion-header">
+              <span class="acc-icon">📡</span>
+              <span class="acc-title">天線、射頻 (RF) 類</span>
+              <span class="acc-count">6 個職缺</span>
+              <span class="acc-arrow">▼</span>
+            </button>
+            <div class="accordion-body">
+              <table class="job-table">
+                <thead><tr><th>職缺名稱</th><th>工作地點</th><th>薪資</th><th>學歷</th><th>經驗</th></tr></thead>
+                <tbody>
+                  <tr><td>天線設計工程師</td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>5年以上</td></tr>
+                  <tr><td>RF 射頻工程師（派駐越南）</td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>2年以上</td></tr>
+                  <tr><td>射頻/天線高級工程師</td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>5年以上</td></tr>
+                  <tr><td>資深天線工程師</td><td>桃園龜山</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>3年以上</td></tr>
+                  <tr><td>網通射頻工程師</td><td>桃園龜山</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>4年以上</td></tr>
+                  <tr><td>網通資深 RF 工程師</td><td>桃園龜山</td><td class="salary-neg">待遇面議</td><td>大學</td><td>5年以上</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- 軟韌體 -->
+          <div class="accordion-item" data-category="negotiable">
+            <button class="accordion-header">
+              <span class="acc-icon">💻</span>
+              <span class="acc-title">軟體、韌體開發類</span>
+              <span class="acc-count">12 個職缺</span>
+              <span class="acc-arrow">▼</span>
+            </button>
+            <div class="accordion-body">
+              <table class="job-table">
+                <thead><tr><th>職缺名稱</th><th>工作地點</th><th>薪資</th><th>學歷</th><th>經驗</th></tr></thead>
+                <tbody>
+                  <tr><td>軟體研發工程師／主管</td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學</td><td>3年以上</td></tr>
+                  <tr><td>軟硬體測試開發工程師／主管</td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學</td><td>3年以上</td></tr>
+                  <tr><td>軟體測試開發工程師</td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>3年以上</td></tr>
+                  <tr><td>軟體開發工程師</td><td>桃園龜山</td><td class="salary-neg">待遇面議</td><td>專科以上</td><td>2年以上</td></tr>
+                  <tr><td>軟體工程師（藍牙耳機相關）</td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學</td><td>4年以上</td></tr>
+                  <tr><td>軟體工程師（嵌入式 Linux）</td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學</td><td>2年以上</td></tr>
+                  <tr><td>軟體架構工程師</td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>8年以上</td></tr>
+                  <tr><td>韌體工程師</td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>專科</td><td>2年以上</td></tr>
+                  <tr><td>Firmware 工程師</td><td>桃園楊梅</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>3年以上</td></tr>
+                  <tr><td>軟件開發高級工程師 (Embedded Linux)</td><td>新竹竹北</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>5年以上</td></tr>
+                  <tr><td>硬件測試開發工程師（派駐越南）</td><td>越南</td><td class="salary-neg">待遇面議</td><td>大學</td><td>不拘</td></tr>
+                  <tr><td>測試軟體工程師</td><td>桃園楊梅</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>3年以上</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- 聲學 -->
+          <div class="accordion-item" data-category="negotiable">
+            <button class="accordion-header">
+              <span class="acc-icon">🎵</span>
+              <span class="acc-title">聲學、音頻類</span>
+              <span class="acc-count">3 個職缺</span>
+              <span class="acc-arrow">▼</span>
+            </button>
+            <div class="accordion-body">
+              <table class="job-table">
+                <thead><tr><th>職缺名稱</th><th>工作地點</th><th>薪資</th><th>學歷</th><th>經驗</th></tr></thead>
+                <tbody>
+                  <tr><td>聲學工程師</td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>5年以上</td></tr>
+                  <tr><td>音頻與聲學設計工程師</td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學</td><td>5年以上</td></tr>
+                  <tr><td>聲學 CAE 工程師</td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>碩士以上</td><td>不拘</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- CAE -->
+          <div class="accordion-item" data-category="negotiable">
+            <button class="accordion-header">
+              <span class="acc-icon">🔬</span>
+              <span class="acc-title">CAE 模擬與結構分析類</span>
+              <span class="acc-count">5 個職缺</span>
+              <span class="acc-arrow">▼</span>
+            </button>
+            <div class="accordion-body">
+              <table class="job-table">
+                <thead><tr><th>職缺名稱</th><th>工作地點</th><th>薪資</th><th>學歷</th><th>經驗</th></tr></thead>
+                <tbody>
+                  <tr><td>CAE 結構、熱流、電磁模擬分析工程師</td><td>桃園楊梅</td><td class="salary-neg">待遇面議</td><td>碩士</td><td>不拘</td></tr>
+                  <tr><td>結構分析高級工程師</td><td>桃園龜山</td><td class="salary-neg">待遇面議</td><td>碩士</td><td>5年以上</td></tr>
+                  <tr><td>SI/PI 模擬工程師</td><td>桃園龜山</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>不拘</td></tr>
+                  <tr><td>連接器模擬工程師</td><td>桃園龜山</td><td class="salary-neg">待遇面議</td><td>碩士</td><td>1年以上</td></tr>
+                  <tr><td>熱流工程師／資深熱流工程師</td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>3年以上</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- 馬達 -->
+          <div class="accordion-item" data-category="negotiable">
+            <button class="accordion-header">
+              <span class="acc-icon">⚙️</span>
+              <span class="acc-title">馬達設計類</span>
+              <span class="acc-count">3 個職缺</span>
+              <span class="acc-arrow">▼</span>
+            </button>
+            <div class="accordion-body">
+              <table class="job-table">
+                <thead><tr><th>職缺名稱</th><th>工作地點</th><th>薪資</th><th>學歷</th><th>經驗</th></tr></thead>
+                <tbody>
+                  <tr><td>馬達機構研發工程師</td><td>桃園楊梅</td><td class="salary-neg">待遇面議</td><td>大學</td><td>1年以上</td></tr>
+                  <tr><td>馬達設計工程師 – 電磁設計</td><td>桃園楊梅</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>1年以上</td></tr>
+                  <tr><td>旋轉馬達工程師</td><td>桃園楊梅</td><td class="salary-neg">待遇面議</td><td>大學</td><td>1年以上</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- 品保 -->
+          <div class="accordion-item" data-category="negotiable">
+            <button class="accordion-header">
+              <span class="acc-icon">✅</span>
+              <span class="acc-title">品保與品管類</span>
+              <span class="acc-count">2 個職缺</span>
+              <span class="acc-arrow">▼</span>
+            </button>
+            <div class="accordion-body">
+              <table class="job-table">
+                <thead><tr><th>職缺名稱</th><th>工作地點</th><th>薪資</th><th>學歷</th><th>經驗</th></tr></thead>
+                <tbody>
+                  <tr><td>CQE Engineer（客戶品質工程師）</td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>3年以上</td></tr>
+                  <tr><td>項目管理高級工程師（越南）</td><td>越南</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>5年以上</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- 製程 -->
+          <div class="accordion-item" data-category="negotiable">
+            <button class="accordion-header">
+              <span class="acc-icon">🏭</span>
+              <span class="acc-title">製程工程 / 研發助理類</span>
+              <span class="acc-count">3 個職缺</span>
+              <span class="acc-arrow">▼</span>
+            </button>
+            <div class="accordion-body">
+              <table class="job-table">
+                <thead><tr><th>職缺名稱</th><th>工作地點</th><th>薪資</th><th>學歷</th><th>經驗</th></tr></thead>
+                <tbody>
+                  <tr><td>PE 工程師</td><td>桃園龜山</td><td class="salary-neg">待遇面議</td><td>大學</td><td>4年以上</td></tr>
+                  <tr><td>研發助理工程師</td><td>桃園龜山</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>不拘</td></tr>
+                  <tr><td>項目管理工程師（成本分析）</td><td>桃園龜山</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>1年以上</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- 測試設備 -->
+          <div class="accordion-item" data-category="negotiable">
+            <button class="accordion-header">
+              <span class="acc-icon">🧪</span>
+              <span class="acc-title">測試設備研發類</span>
+              <span class="acc-count">2 個職缺</span>
+              <span class="acc-arrow">▼</span>
+            </button>
+            <div class="accordion-body">
+              <table class="job-table">
+                <thead><tr><th>職缺名稱</th><th>工作地點</th><th>薪資</th><th>學歷</th><th>經驗</th></tr></thead>
+                <tbody>
+                  <tr><td><a href="https://www.104.com.tw/job/92cd5" target="_blank">測試設備專案管理工程師 (Testing EPM)</a></td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>不拘</td></tr>
+                  <tr><td>穿戴式裝置測試設備研發工程師</td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>3年以上</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- 產品經理/PM -->
+          <div class="accordion-item" data-category="negotiable">
+            <button class="accordion-header">
+              <span class="acc-icon">🚀</span>
+              <span class="acc-title">產品經理 / EPM / TPM 類</span>
+              <span class="acc-count">6 個職缺</span>
+              <span class="acc-arrow">▼</span>
+            </button>
+            <div class="accordion-body">
+              <table class="job-table">
+                <thead><tr><th>職缺名稱</th><th>工作地點</th><th>薪資</th><th>學歷</th><th>經驗</th></tr></thead>
+                <tbody>
+                  <tr><td><a href="https://www.104.com.tw/job/8udz7" target="_blank">產品經理／系統架構師</a></td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>8年以上</td></tr>
+                  <tr><td><a href="https://www.104.com.tw/job/8glvh" target="_blank">項目管理高級工程師（智能家居/網通）</a></td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學</td><td>5年以上</td></tr>
+                  <tr><td><a href="https://www.104.com.tw/job/8ue56" target="_blank">Technical PM（研發/技術類）</a></td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>8年以上</td></tr>
+                  <tr><td><a href="https://www.104.com.tw/job/91fo7" target="_blank">EPM 工程師</a></td><td>桃園龜山</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>1年以上</td></tr>
+                  <tr><td>Engineering Project Manager（派駐越南）</td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>2年以上</td></tr>
+                  <tr><td><a href="https://www.104.com.tw/job/7k26s" target="_blank">EPM / TPM</a></td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學</td><td>5年以上</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- 其他 -->
+          <div class="accordion-item" data-category="negotiable">
+            <button class="accordion-header">
+              <span class="acc-icon">📷</span>
+              <span class="acc-title">顯示器、攝像、材料研發類</span>
+              <span class="acc-count">4 個職缺</span>
+              <span class="acc-arrow">▼</span>
+            </button>
+            <div class="accordion-body">
+              <table class="job-table">
+                <thead><tr><th>職缺名稱</th><th>工作地點</th><th>薪資</th><th>學歷</th><th>經驗</th></tr></thead>
+                <tbody>
+                  <tr><td>顯示器工程師（派駐越南）</td><td>越南</td><td class="salary-neg">待遇面議</td><td>大學</td><td>5年以上</td></tr>
+                  <tr><td>攝像模組工程師（派駐越南）</td><td>越南</td><td class="salary-neg">待遇面議</td><td>大學</td><td>5年以上</td></tr>
+                  <tr><td>IP Camera 工程師</td><td>台北內湖</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>3年以上</td></tr>
+                  <tr><td>材料／膠水研發工程師</td><td>桃園楊梅</td><td class="salary-neg">待遇面議</td><td>大學以上</td><td>不拘</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- 工讀 -->
+          <div class="accordion-item" data-category="fixed">
+            <button class="accordion-header">
+              <span class="acc-icon">📋</span>
+              <span class="acc-title">短期工讀／兼職</span>
+              <span class="acc-count">1 個職缺</span>
+              <span class="acc-arrow">▼</span>
+            </button>
+            <div class="accordion-body">
+              <table class="job-table">
+                <thead><tr><th>職缺名稱</th><th>工作地點</th><th>薪資</th><th>學歷</th><th>工作類型</th></tr></thead>
+                <tbody>
+                  <tr class="highlight-row"><td>【短期工讀】產品測試專員</td><td>台北內湖</td><td class="salary-fixed">時薪 230 元</td><td>學歷不拘</td><td>短期兼職（6/23～7/30）</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Location Distribution Chart -->
+        <div class="chart-section">
+          <h3 class="chart-title">職缺地點分布</h3>
+          <div class="location-bars">
+            <div class="loc-bar-item">
+              <span class="loc-name">台北市內湖區</span>
+              <div class="loc-bar-wrap">
+                <div class="loc-bar" style="width:64%"><span>約 55 筆</span></div>
+              </div>
+            </div>
+            <div class="loc-bar-item">
+              <span class="loc-name">桃園市龜山區</span>
+              <div class="loc-bar-wrap">
+                <div class="loc-bar" style="width:17%"><span>約 15 筆</span></div>
+              </div>
+            </div>
+            <div class="loc-bar-item">
+              <span class="loc-name">桃園市楊梅區</span>
+              <div class="loc-bar-wrap">
+                <div class="loc-bar" style="width:9%"><span>約 8 筆</span></div>
+              </div>
+            </div>
+            <div class="loc-bar-item">
+              <span class="loc-name">越南（出差/派駐）</span>
+              <div class="loc-bar-wrap">
+                <div class="loc-bar loc-bar-accent" style="width:6%"><span>約 5 筆</span></div>
+              </div>
+            </div>
+            <div class="loc-bar-item">
+              <span class="loc-name">新竹縣竹北市</span>
+              <div class="loc-bar-wrap">
+                <div class="loc-bar" style="width:1%"><span>1 筆</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- INDUSTRY SECTION -->
+    <section class="section" id="industry">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">INDUSTRY ANALYSIS</span>
+          <h2 class="section-title">產業分析</h2>
+        </div>
+
+        <div class="industry-grid">
+
+          <!-- Market Size -->
+          <div class="industry-card">
+            <div class="industry-card-header">
+              <span class="ind-icon">📈</span>
+              <h3>市場規模</h3>
+            </div>
+            <div class="market-stats">
+              <div class="market-stat">
+                <span class="market-num">$88.3B</span>
+                <span class="market-desc">全球電子連接器市場規模（2025年）</span>
+              </div>
+              <div class="market-stat">
+                <span class="market-num">$152.6B</span>
+                <span class="market-desc">預計 2034 年規模（CAGR 約 6.2%）</span>
+              </div>
+              <div class="market-stat">
+                <span class="market-num">3,323億</span>
+                <span class="market-desc">立訊精密 2025 年全年營收（人民幣）</span>
+              </div>
+            </div>
+            <p class="ind-note">AI 伺服器帶動量價雙漲，2025 年台灣 PCB 產業上看 9,157 億元</p>
+          </div>
+
+          <!-- Competitors -->
+          <div class="industry-card">
+            <div class="industry-card-header">
+              <span class="ind-icon">🏆</span>
+              <h3>競爭格局</h3>
+            </div>
+            <div class="competitor-list">
+              <div class="comp-item rank-1">
+                <span class="rank">1</span>
+                <span class="comp-name">鴻海精密（富士康）</span>
+                <span class="comp-rev">8.1兆 NTD</span>
+              </div>
+              <div class="comp-item rank-2">
+                <span class="rank">2</span>
+                <span class="comp-name">緯創資通</span>
+                <span class="comp-rev">EMS 第二</span>
+              </div>
+              <div class="comp-item rank-3">
+                <span class="rank">3</span>
+                <span class="comp-name">廣達電腦</span>
+                <span class="comp-rev">EMS 第三</span>
+              </div>
+              <div class="comp-item rank-4">
+                <span class="rank">4</span>
+                <span class="comp-name">立訊精密</span>
+                <span class="comp-rev highlight-text">3,323億 RMB</span>
+              </div>
+              <div class="comp-item rank-5">
+                <span class="rank">5</span>
+                <span class="comp-name">和碩聯合科技</span>
+                <span class="comp-rev">EMS 第五</span>
+              </div>
+            </div>
+            <p class="ind-note">2025 年全球 EMS 大廠排名，立訊為蘋果供應鏈最強競爭者</p>
+          </div>
+
+          <!-- Trends -->
+          <div class="industry-card industry-card-wide">
+            <div class="industry-card-header">
+              <span class="ind-icon">🔮</span>
+              <h3>2025 產業趨勢</h3>
+            </div>
+            <div class="trend-grid">
+              <div class="trend-item trend-up">
+                <span class="trend-arrow">↑</span>
+                <div>
+                  <strong>AI 伺服器需求爆發</strong>
+                  <p>AI 效應擴大，電子零組件迎最大商機，被動元件上半年成長 9.6%</p>
+                </div>
+              </div>
+              <div class="trend-item trend-up">
+                <span class="trend-arrow">↑</span>
+                <div>
+                  <strong>穿戴式裝置持續成長</strong>
+                  <p>Apple Watch、AirPods 等產品帶動連接器、聲學、天線需求</p>
+                </div>
+              </div>
+              <div class="trend-item trend-up">
+                <span class="trend-arrow">↑</span>
+                <div>
+                  <strong>供應鏈多元化佈局</strong>
+                  <p>越南、印度、泰國、墨西哥製造基地擴張，台灣研發中心地位提升</p>
+                </div>
+              </div>
+              <div class="trend-item trend-down">
+                <span class="trend-arrow">↓</span>
+                <div>
+                  <strong>消費性電子需求疲軟</strong>
+                  <p>AI 獨強，傳統消費電子換機週期拉長，成長動能有限</p>
+                </div>
+              </div>
+              <div class="trend-item trend-down">
+                <span class="trend-arrow">↓</span>
+                <div>
+                  <strong>美中關稅衝擊</strong>
+                  <p>關稅政策影響供應鏈布局，企業加速分散生產基地</p>
+                </div>
+              </div>
+              <div class="trend-item trend-up">
+                <span class="trend-arrow">↑</span>
+                <div>
+                  <strong>汽車電子需求升溫</strong>
+                  <p>電動車與自駕車帶動車用連接器、感測器需求快速成長</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Salary -->
+          <div class="industry-card">
+            <div class="industry-card-header">
+              <span class="ind-icon">💰</span>
+              <h3>薪資水平參考</h3>
+            </div>
+            <div class="salary-table-wrap">
+              <table class="salary-ref-table">
+                <thead><tr><th>職位類型</th><th>月薪範圍</th></tr></thead>
+                <tbody>
+                  <tr><td>初階 PM（5年以下）</td><td class="salary-range">4～5.5 萬</td></tr>
+                  <tr><td>資深 PM（工程背景）</td><td class="salary-range">7～8.5 萬+</td></tr>
+                  <tr><td>軟體工程師（3-5年）</td><td class="salary-range">5～7 萬</td></tr>
+                  <tr><td>硬體工程師（3-5年）</td><td class="salary-range">5～7 萬</td></tr>
+                  <tr><td>資深工程師（8年+）</td><td class="salary-range">8～12 萬</td></tr>
+                  <tr><td>業務工程師（3-5年）</td><td class="salary-range">4～6 萬</td></tr>
+                  <tr class="highlight-row"><td>派駐越南（立訊公告）</td><td class="salary-range salary-fixed">5～7 萬</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- RECOMMENDATION SECTION -->
+    <section class="section section-dark" id="recommendation">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">PERSONALIZED ADVICE</span>
+          <h2 class="section-title">職缺建議</h2>
+          <p class="section-desc">針對 Hugo 翁培修的簡歷分析</p>
+        </div>
+
+        <!-- Profile Summary -->
+        <div class="profile-card">
+          <div class="profile-avatar">H</div>
+          <div class="profile-info">
+            <h3>翁培修 Hugo</h3>
+            <p class="profile-sub">Cleveland State University · Computer Science</p>
+            <div class="profile-tags">
+              <span class="ptag">15+ 年工作經歷</span>
+              <span class="ptag">產品管理 11 年</span>
+              <span class="ptag">iOS/Python 開發</span>
+              <span class="ptag">Garmin 前員工</span>
+              <span class="ptag">藍牙裝置開發</span>
+              <span class="ptag">AI 工具導入</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recommendation Cards -->
+        <div class="rec-grid">
+
+          <div class="rec-card rec-top">
+            <div class="rec-badge">強烈推薦</div>
+            <div class="rec-header">
+              <span class="rec-stars">★★★</span>
+              <h3>產品經理／系統架構師</h3>
+            </div>
+            <div class="rec-meta">
+              <span>大學以上</span>
+              <span>8 年以上</span>
+              <span>台北內湖</span>
+              <a href="https://www.104.com.tw/job/8udz7" target="_blank" class="rec-link">查看職缺 →</a>
+            </div>
+            <div class="rec-match">
+              <h4>匹配亮點</h4>
+              <ul>
+                <li>11 年以上產品管理實戰經驗（2014～2025）</li>
+                <li>完整產品生命週期管理：BRD、PRD、SRS 文件撰寫</li>
+                <li>CS 技術背景，能與工程師深度技術溝通</li>
+                <li>知名客戶合作：Wacom、Lenovo、Pantone（與立訊客戶群高度重疊）</li>
+                <li>Amazon 4.3/5.0 高評分產品，具市場驗證成果</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="rec-card rec-top">
+            <div class="rec-badge">強烈推薦</div>
+            <div class="rec-header">
+              <span class="rec-stars">★★★</span>
+              <h3>Technical PM（研發/技術類）</h3>
+            </div>
+            <div class="rec-meta">
+              <span>大學以上</span>
+              <span>8 年以上</span>
+              <span>台北內湖</span>
+              <a href="https://www.104.com.tw/job/8ue56" target="_blank" class="rec-link">查看職缺 →</a>
+            </div>
+            <div class="rec-match">
+              <h4>匹配亮點</h4>
+              <ul>
+                <li>工程師轉 PM 背景，理解技術可行性與工程語言</li>
+                <li>曾定義 RESTful API 規格，主導 UAT 測試流程</li>
+                <li>Scrum/Agile 敏捷開發方法論實戰經驗</li>
+                <li>同時管理 3-5 個並行專案的能力</li>
+                <li>BPMN 業務流程圖、Wireframe 設計能力</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="rec-card rec-mid">
+            <div class="rec-badge rec-badge-mid">值得考慮</div>
+            <div class="rec-header">
+              <span class="rec-stars">★★</span>
+              <h3>項目管理高級工程師（智能家居/網通）</h3>
+            </div>
+            <div class="rec-meta">
+              <span>大學</span>
+              <span>5 年以上</span>
+              <span>台北內湖</span>
+              <a href="https://www.104.com.tw/job/8glvh" target="_blank" class="rec-link">查看職缺 →</a>
+            </div>
+            <div class="rec-match">
+              <h4>匹配亮點</h4>
+              <ul>
+                <li>藍牙裝置開發背景與智能家居/IoT 領域高度相關</li>
+                <li>跨部門協作與專案管理實戰經驗豐富</li>
+                <li>曾主導藍牙產品線從需求到上市的完整流程</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="rec-card rec-mid">
+            <div class="rec-badge rec-badge-mid">值得考慮</div>
+            <div class="rec-header">
+              <span class="rec-stars">★★</span>
+              <h3>業務行銷經理</h3>
+            </div>
+            <div class="rec-meta">
+              <span>大學以上</span>
+              <span>5 年以上</span>
+              <span>台北內湖</span>
+              <a href="https://www.104.com.tw/job/8jtu9" target="_blank" class="rec-link">查看職缺 →</a>
+            </div>
+            <div class="rec-match">
+              <h4>匹配亮點</h4>
+              <ul>
+                <li>Lead generation、銷售技巧（Cross/Up/Down Sells）</li>
+                <li>Facebook & Google 付費廣告操作經驗</li>
+                <li>曾主導商業會議，開發 Wacom、Lenovo 等大廠客戶</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Resume Tips -->
+        <div class="tips-section">
+          <h3 class="tips-title">履歷優化建議</h3>
+          <div class="tips-grid">
+            <div class="tip-card">
+              <span class="tip-num">01</span>
+              <h4>突出藍牙/IoT 產品經驗</h4>
+              <p>立訊精密核心產品含藍牙耳機、穿戴裝置，Hugo 的藍牙取色筆開發經驗直接相關，應在履歷首段強調。</p>
+            </div>
+            <div class="tip-card">
+              <span class="tip-num">02</span>
+              <h4>量化成就數字</h4>
+              <p>Amazon 4.3/5.0、準確率 99%、效率提升 80% 等具體數字，應在每段工作經歷中清楚呈現。</p>
+            </div>
+            <div class="tip-card">
+              <span class="tip-num">03</span>
+              <h4>強調國際客戶合作</h4>
+              <p>Wacom、Lenovo、Pantone 等國際大廠合作經驗，與立訊客戶群（蘋果、聯想等）高度匹配，是重要加分項。</p>
+            </div>
+            <div class="tip-card">
+              <span class="tip-num">04</span>
+              <h4>AI 工具導入經驗</h4>
+              <p>強調 AI 數位化專案導入、AI 工具推廣與教育訓練，符合當前產業趨勢，是差異化競爭優勢。</p>
+            </div>
+            <div class="tip-card">
+              <span class="tip-num">05</span>
+              <h4>準備英文版履歷</h4>
+              <p>立訊為中資企業，需與中國母公司及國際客戶溝通。美國大學學歷加上英語能力是重要加分項。</p>
+            </div>
+            <div class="tip-card">
+              <span class="tip-num">06</span>
+              <h4>了解立訊核心產品</h4>
+              <p>面試前深入了解 AirPods、Apple Watch 等立訊代工產品，準備相關技術問題的回答策略。</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-inner">
+          <div class="footer-logo">
+            <span class="logo-mark">LX</span>
+            <span>台灣立訊精密 職缺分析報告</span>
+          </div>
+          <p class="footer-note">資料來源：104 人力銀行 · 立訊精密官網 · IEK 產業情報網 · Cake.me · 維基百科</p>
+          <p class="footer-date">報告日期：2026 年 7 月 3 日</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+// =============================================
+// LUXSHARE REPORT — INTERACTIVE BEHAVIOR
+// =============================================
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  // ---- NAV SCROLL EFFECT ----
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 60) {
+      nav.style.background = 'rgba(10,22,40,0.98)';
+    } else {
+      nav.style.background = 'rgba(10,22,40,0.92)';
+    }
+  });
+
+  // ---- MOBILE NAV TOGGLE ----
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.querySelector('.nav-links');
+  navToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+  });
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => navLinks.classList.remove('open'));
+  });
+
+  // ---- COUNTER ANIMATION ----
+  const counters = document.querySelectorAll('.stat-num[data-target]');
+  const animateCounter = (el) => {
+    const target = parseInt(el.getAttribute('data-target'));
+    const duration = 1500;
+    const step = target / (duration / 16);
+    let current = 0;
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= target) {
+        current = target;
+        clearInterval(timer);
+      }
+      el.textContent = Math.floor(current).toLocaleString();
+    }, 16);
+  };
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounter(entry.target);
+        counterObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(c => counterObserver.observe(c));
+
+  // ---- ACCORDION ----
+  const accordionHeaders = document.querySelectorAll('.accordion-header');
+  accordionHeaders.forEach(header => {
+    header.addEventListener('click', () => {
+      const item = header.closest('.accordion-item');
+      const isOpen = item.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.accordion-item.open').forEach(i => i.classList.remove('open'));
+      // Toggle current
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  // ---- FILTER BUTTONS ----
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.getAttribute('data-filter');
+      const items = document.querySelectorAll('.accordion-item');
+      items.forEach(item => {
+        if (filter === 'all') {
+          item.classList.remove('hidden');
+        } else {
+          const cat = item.getAttribute('data-category');
+          if (cat === filter) {
+            item.classList.remove('hidden');
+          } else {
+            item.classList.add('hidden');
+            item.classList.remove('open');
+          }
+        }
+      });
+    });
+  });
+
+  // ---- SCROLL REVEAL ----
+  const revealEls = document.querySelectorAll('.company-card, .industry-card, .rec-card, .tip-card, .trend-item');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  revealEls.forEach((el, i) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(16px)';
+    el.style.transition = `opacity 0.5s ease ${i * 0.05}s, transform 0.5s ease ${i * 0.05}s`;
+    revealObserver.observe(el);
+  });
+
+  // ---- LOCATION BAR ANIMATION ----
+  const locBars = document.querySelectorAll('.loc-bar');
+  const barObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // bars already have inline width set, just trigger transition
+        entry.target.style.opacity = '1';
+        barObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  locBars.forEach(bar => {
+    const targetWidth = bar.style.width;
+    bar.style.width = '0%';
+    bar.style.opacity = '0';
+    bar.style.transition = 'width 1.2s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease';
+    setTimeout(() => {
+      barObserver.observe(bar);
+      // Trigger width after a small delay to ensure transition fires
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            bar.style.width = targetWidth;
+            bar.style.opacity = '1';
+            obs.unobserve(bar);
+          }
+        });
+      }, { threshold: 0.3 });
+      obs.observe(bar);
+    }, 100);
+  });
+
+  // ---- SMOOTH ACTIVE NAV ----
+  const sections = document.querySelectorAll('section[id], header[id]');
+  const navAnchors = document.querySelectorAll('.nav-links a');
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        navAnchors.forEach(a => {
+          a.style.color = a.getAttribute('href') === `#${id}`
+            ? 'rgba(255,255,255,0.95)'
+            : 'rgba(255,255,255,0.65)';
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+  sections.forEach(s => sectionObserver.observe(s));
+
+});
+
+</script>
+  </body>
+</html>
